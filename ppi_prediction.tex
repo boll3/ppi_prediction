@@ -1,0 +1,302 @@
+\PassOptionsToPackage{round,authoryear}{natbib}
+\documentclass[preprint,3p,times,twocolumn]{elsarticle}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{rotating,capt-of}
+\usepackage[small]{caption}
+\usepackage{booktabs}
+\usepackage{fixltx2e} % two-column fig/tab float order
+\usepackage{float} % for placing figures where i want
+\usepackage{afterpage}
+\usepackage{soul}  % KR: added as it contains \st command
+\usepackage{epsfig, a4wide}
+\usepackage{floatflt}
+
+\newcommand{\myparagraph}[1]{
+  \paragraph*{\normalfont\itshape #1}\hspace{5pt}}
+
+% strange snos
+\definecolor{purple}{RGB}{180,90,200}
+\definecolor{dgreen}{RGB}{0,160,0}
+\definecolor{turquoise}{RGB}{0,180,140}
+\renewcommand\dblfloatpagefraction{0.03}
+\renewcommand\topfraction{.95}
+\renewcommand\bottomfraction{.95}
+\renewcommand\textfraction{.05}
+\renewcommand\floatpagefraction{.95}
+\renewcommand\dbltopfraction{.95}
+\renewcommand\dblfloatpagefraction{.95}
+\newcommand{\TODO}[1] {\begingroup\color{red}#1\endgroup}
+%\newcommand{\FINAL}[1]{\begingroup\color{dgreen}#1\endgroup}
+\newcommand{\ACC}[1]{\emph{\textbf{#1}}}
+\newcommand{\s}[1]{\begin{tiny}#1\end{tiny}}
+\newcommand{\url}[1]{\texttt{\small #1}}
+\newcommand{\maxentscan}{\texttt{MaxEntScan}}
+\newcommand{\NEW}[1]{\begingroup\color{black}#1\endgroup}
+
+% Sebastian (Diss)
+%% abbreviations
+\newcommand{\snos}{snoRNAs}
+\newcommand{\sno}{snoRNA}
+\newcommand{\cd}{box C/D snoRNA}
+\newcommand{\haca}{box H/ACA snoRNA}
+%% programs
+\newcommand{\blast}{\texttt{Blast}}
+\newcommand{\snostrip}{\texttt{snoStrip}}
+\newcommand{\epope}{\texttt{ePoPE}}
+\newcommand{\plexy}{\texttt{PLEXY}}
+\newcommand{\snoop}{\texttt{RNAsnoop}}
+\newcommand{\fold}{\texttt{RNAfold}}
+\newcommand{\alifold}{\texttt{RNAalifold}}
+\newcommand{\locarna}{\texttt{LocaRNA}}
+\newcommand{\infernal}{\texttt{Infernal}}
+
+%% databases
+\newcommand{\ncbi}{\texttt{NCBI}}
+\newcommand{\umass}{\texttt{UMass}}
+\newcommand{\rfam}{\texttt{Rfam}}
+
+
+
+
+%FUNGI
+\newcommand{\afu}{\emph{A.fumigatus}}
+\newcommand{\Afu}{\emph{Aspergillus fumigatus}}
+\newcommand{\nfi}{\emph{N.fischeri}}
+\newcommand{\Nfi}{\emph{Neosartorya fischeri}}
+\newcommand{\calb}{\emph{C.albicans}}
+\newcommand{\Calb}{\emph{Candida albicans}}
+\newcommand{\schizo}{\emph{Schizosaccharomyces}}
+\newcommand{\fusarium}{\emph{Fusarium}}
+\newcommand{\neurospora}{\emph{Neurospora}}
+\newcommand{\trichoderma}{\emph{Trichoderma}}
+\newcommand{\botrytis}{\emph{Botrytis}}
+\newcommand{\sclerotinia}{\emph{Sclerotinia}}
+\newcommand{\aspergillus}{\emph{Aspergillus}}
+\newcommand{\penicillium}{\emph{Penicillium}}
+\newcommand{\saccharomyces}{\emph{Saccharomyces}}
+\newcommand{\dothi}{Dothideomycetes}
+\newcommand{\tde}{\emph{T.deformans}}
+\newcommand{\Tde}{\emph{Taphrina deformans}}
+\newcommand{\Spo}{\emph{Schizosaccharomyces pombe}}
+\newcommand{\spo}{\emph{S.pombe}}
+\newcommand{\Sja}{\emph{Schizosaccharomyces japonicus}}
+\newcommand{\sja}{\emph{S.japonicus}}
+\newcommand{\scm}{\emph{S.complicata}}
+\newcommand{\Scm}{\emph{Saitoella complicata}}
+\newcommand{\Ssl}{\emph{Sclerotinia sclerotiorum}}
+\newcommand{\ssl}{\emph{S.sclerotiorum}}
+\newcommand{\Clo}{\emph{Chalara longipes}}
+\newcommand{\clo}{\emph{C.longipes}}
+\newcommand{\Pan}{\emph{Podospora anserina}}
+\newcommand{\pan}{\emph{P.anserina}}
+\newcommand{\Oma}{\emph{Oidoidendron maius}}
+\newcommand{\oma}{\emph{O.maius}}
+\newcommand{\Fgr}{\emph{Fusarium graminearum}}
+\newcommand{\fgr}{\emph{F.graminearum}}
+\newcommand{\fve}{\emph{F.verticillioides}}
+\newcommand{\Fve}{\emph{Fusarium verticillioides}}
+\newcommand{\Fox}{\emph{Fusarium oxysporum}}
+\newcommand{\fox}{\emph{F.oxysporum}}
+\newcommand{\alternaria}{\emph{Alternaria}}
+\newcommand{\Abr}{\emph{Alternaria brassicicola}}
+\newcommand{\abr}{\emph{A.brassicicola}}
+\newcommand{\mycosphaerella}{\emph{Mycosphaerella}}
+\newcommand{\Mpi}{\emph{Mycosphaerella pini}}
+\newcommand{\mpi}{\emph{M.pini}}
+\newcommand{\pex}{\emph{Penicillium expansum}}
+\newcommand{\pcy}{\emph{Penicillium chrysogenum}}
+\newcommand{\Rha}{\emph{Rhodotorula hasegawae}}
+\newcommand{\rha}{\emph{R.hasegawae}}
+\newcommand{\Rda}{\emph{Rhodosporidium dacryoidum}}
+\newcommand{\rda}{\emph{R.dacryoidum}}
+\newcommand{\Rgr}{\emph{Rhodotorula graminis}}
+\newcommand{\rgr}{\emph{R.graminis}}
+\newcommand{\Rmi}{\emph{Rhodotorula minuta}}
+\newcommand{\rmi}{\emph{R.minuta}}
+\newcommand{\Sli}{\emph{Sporobolomyces linderae}}
+\newcommand{\sli}{\emph{S.linderae}}
+\newcommand{\Cne}{\emph{Cryptococcus neoformans}}
+\newcommand{\cne}{\emph{C.neoformans}}
+\newcommand{\Ncr}{\emph{Neurospora crassa}}
+\newcommand{\ncr}{\emph{N.crassa}}
+\newcommand{\Nte}{\emph{Neurospora tetrasperma}}
+\newcommand{\nte}{\emph{N.tetrasperma}}
+\newcommand{\Andi}{\emph{Aspergillus nidulans}}
+\newcommand{\andi}{\emph{A.nidulans}}
+\newcommand{\Sce}{\emph{Saccharomyces cerevisiae}}
+\newcommand{\sce}{\emph{S.cerevisiae}}
+\newcommand{\Spa}{\emph{Saccharomyces paradoxus}}
+\newcommand{\spa}{\emph{S.paradoxus}}
+\newcommand{\Smi}{\emph{Saccharomyces mikatae}}
+\newcommand{\smi}{\emph{S.mikatae}}
+\newcommand{\Kpa}{\emph{Komagataella pastoris}}
+\newcommand{\kpa}{\emph{K.pastoris}}
+\newcommand{\Cpr}{\emph{Cryphonectria parasitica}}
+\newcommand{\cpr}{\emph{C.parasitica}}
+\newcommand{\Glo}{\emph{Glarea lozoyensis}}
+\newcommand{\glo}{\emph{G.lozoyensis}}
+\newcommand{\Yli}{\emph{Yarrowia lipolytica}}
+\newcommand{\yli}{\emph{Y.lipolytica}}
+\newcommand{\Ecu}{\emph{Encephalitozoon cuniculi}}
+\newcommand{\ecu}{\emph{E.cuniculi}}
+\newcommand{\Ror}{\emph{Rhizopus oryzae}}
+\newcommand{\ror}{\emph{R.oryzae}}
+\newcommand{\Tre}{\emph{Trichoderma reesei}}
+\newcommand{\tre}{\emph{T.reesei}}
+\newcommand{\Npa}{\emph{Nematocida parisii}}
+\newcommand{\npa}{\emph{N.parisii}}
+\newcommand{\Eae}{\emph{Edhazardia aedis}}
+\newcommand{\eae}{\emph{E.aedis}}
+\newcommand{\Vco}{\emph{Vittaforma corneae}}
+\newcommand{\vco}{\emph{V.corneae}}
+\newcommand{\Mbi}{\emph{Metschnikowia bicuspidata}}
+\newcommand{\mbi}{\emph{M.bicuspidata}}
+\newcommand{\Mva}{\emph{Meliniomyces variabilis}}
+\newcommand{\mva}{\emph{M.variabilis}}
+\newcommand{\Bci}{\emph{Botrytis cinerea}}
+\newcommand{\bci}{\emph{B.cinerea}}
+\newcommand{\Val}{\emph{Verticillium alfalfae}}
+\newcommand{\val}{\emph{V.alfalfae}}
+\newcommand{\Vda}{\emph{Verticillium dahliae}}
+\newcommand{\vda}{\emph{V.dahliae}}
+\newcommand{\Sal}{\emph{Sodiomyces alkalinus}}
+\newcommand{\sal}{\emph{S.alkalinus}}
+\newcommand{\Aac}{\emph{Acremonium alcalophilum}}
+\newcommand{\aac}{\emph{A.~alcalophilum}}
+\newcommand{\Nha}{\emph{Nectria haematococca}}
+\newcommand{\nha}{\emph{N.haematococca}}
+\newcommand{\Mth}{\emph{Myceliophthora thermophila}}
+\newcommand{\mth}{\emph{M.thermophila}}
+\newcommand{\Cgl}{\emph{Chaetomium globosum}}
+\newcommand{\cgl}{\emph{C.globosum}}
+\newcommand{\Tar}{\emph{Thielavia arenaria}}
+\newcommand{\tar}{\emph{T.arenaria}}
+\newcommand{\Tte}{\emph{Thielavia terrestris}}
+\newcommand{\tte}{\emph{T.terrestris}}
+\newcommand{\Ztr}{\emph{Zymoseptoria tritici}}
+\newcommand{\ztr}{\emph{Z.tritici}}
+\newcommand{\Tvi}{\emph{Trichoderma virens}}
+\newcommand{\tvi}{\emph{T.virens}}
+\newcommand{\Bco}{\emph{Baudoinia compniacensis}}
+\newcommand{\bco}{\emph{B.compniacensis}}
+\newcommand{\Kla}{\emph{Kluyveromyces lactis}}
+\newcommand{\kla}{\emph{K.lactis}}
+\newcommand{\Cga}{\emph{Candida glabrata}}
+\newcommand{\cga}{\emph{C.glabrata}}
+\newcommand{\Pme}{\emph{Pichia membranifaciens}}
+\newcommand{\pme}{\emph{P.membranifaciens}}
+\newcommand{\Ppl}{\emph{Postia placenta}}
+\newcommand{\ppl}{\emph{P.placenta}}
+\newcommand{\Nfu}{\emph{Nadsonia fulvescens}}
+\newcommand{\nfu}{\emph{N.fulvescens}}
+\newcommand{\Asp}{\emph{Atractiellales sp}}
+\newcommand{\asp}{\emph{A.sp}}
+\newcommand{\Bma}{\emph{Bipolaris maydis}}
+\newcommand{\bma}{\emph{B.maydis}}
+\newcommand{\Ptt}{\emph{Pyrenophora tritici-repentis}}
+\newcommand{\ptt}{\emph{P.tritici-repentis}}
+\newcommand{\Ana}{\emph{Aureobasidium namibiae}}
+\newcommand{\ana}{\emph{A.namibiae}}
+\newcommand{\Cbb}{\emph{Cucurberita berberidis}}
+\newcommand{\Pno}{\emph{Parastagonospora nodorum}}
+\newcommand{\wse}{\emph{W.sebi}}
+\newcommand{\Wse}{\emph{Wallemia sebi}}
+\newcommand{\opi}{\emph{O.piceae}}
+\newcommand{\Opi}{\emph{Ophiostoma piceae}}
+\newcommand{\cdu}{\emph{C.dubliniensis}}
+\newcommand{\Cdu}{\emph{Candida dubliniensis}}
+\newcommand{\ctr}{\emph{C.tropicalis}}
+\newcommand{\Ctr}{\emph{Candida tropicalis}}
+\newcommand{\Aca}{\emph{Ajellomyces capsulatus}}
+\newcommand{\aca}{\emph{A.capsulatus}}
+
+%Trennung verhindern
+\hyphenation{snoRNAs}
+\hyphenation{snoRNA}
+\hyphenation{microRNA}
+\hyphenation{microRNAs}
+\hyphenation{miRNA}
+\hyphenation{miRNAs}
+\hyphenation{lncRNA}
+\hyphenation{lncRNAs}
+\hyphenation{lincRNA}
+\hyphenation{lincRNAs}
+\hyphenation{di-nucleo-tide}
+
+
+\journal{Preprint}
+
+\DeclareCaptionLabelFormat{simplesupp}{#1~S#2} % new caption format with Sxx
+
+\begin{document}
+
+\begin{frontmatter}
+
+
+
+\title{Predicting Protein-Protein-Interactions based on Autocorrelation and Random Forests}
+
+\author[LEI]{Sebastian Canzler\corref{cor1}}
+\ead{sebastian@bioinf.uni-leipzig.de}
+\author[PHY]{Ren\'{e} Staritzbichler}
+\ead{rene.staritzbichler@medizin.uni-leipzig.de}
+
+
+\address[LEI]{Bioinformatics Group, Department of Computer Science,
+  Leipzig University,
+  H{\"a}rtelstra{\ss}e 16-18, D-04107 Leipzig, Germany
+}
+\address[PHY]{Institute of Medical Physics and Biophysics, University Leipzig,
+    H{\"ä}rtelstraße 16-18, D-04107 Leipzig, Germany.}
+
+%\cortext[jfa]{Joint first authors}
+\cortext[cor1]{Corresponding author}
+
+% --------------------------------------------------------------------------- %
+
+
+\begin{abstract}
+  
+\end{abstract}
+
+\begin{keyword}
+  protein-protein-interaction, machine learning, random forest
+\end{keyword}
+
+\end{frontmatter}
+
+% --------------------------------------------------------------------------- %
+
+\section{Introduction}
+This is the introduction \cite{Nawrocki:2009}.
+
+% --------------------------------------------------------------------------- %
+
+\section{Materials and Methods}
+
+
+% --------------------------------------------------------------------------- %
+
+\section{Results}
+%\input{results}
+% --------------------------------------------------------------------------- %
+
+\section{Discussion}
+%\input{discussion}
+
+% --------------------------------------------------------------------------- %
+
+\section*{Acknowledgments}
+
+This work was funded by the S\"achsische Aufbaubank (SAB)
+
+\bibliographystyle{abbrvnat}
+\bibliography{ppi_prediction}
+
+\end{document}
+
+
