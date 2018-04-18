@@ -1,4 +1,3 @@
-\PassOptionsToPackage{round,authoryear}{natbib}
 \documentclass[preprint,3p,times,twocolumn]{elsarticle}
 \usepackage{graphicx}
 \usepackage{color}
@@ -8,12 +7,9 @@
 \usepackage{rotating,capt-of}
 \usepackage[small]{caption}
 \usepackage{booktabs}
-\usepackage{fixltx2e} % two-column fig/tab float order
 \usepackage{float} % for placing figures where i want
 \usepackage{afterpage}
-\usepackage{soul}  % KR: added as it contains \st command
 \usepackage{epsfig, a4wide}
-\usepackage{floatflt}
 
 \newcommand{\myparagraph}[1]{
   \paragraph*{\normalfont\itshape #1}\hspace{5pt}}
@@ -37,182 +33,25 @@
 \newcommand{\maxentscan}{\texttt{MaxEntScan}}
 \newcommand{\NEW}[1]{\begingroup\color{black}#1\endgroup}
 
-% Sebastian (Diss)
 %% abbreviations
 \newcommand{\snos}{snoRNAs}
 \newcommand{\sno}{snoRNA}
 \newcommand{\cd}{box C/D snoRNA}
 \newcommand{\haca}{box H/ACA snoRNA}
 %% programs
-\newcommand{\blast}{\texttt{Blast}}
-\newcommand{\snostrip}{\texttt{snoStrip}}
-\newcommand{\epope}{\texttt{ePoPE}}
-\newcommand{\plexy}{\texttt{PLEXY}}
-\newcommand{\snoop}{\texttt{RNAsnoop}}
-\newcommand{\fold}{\texttt{RNAfold}}
-\newcommand{\alifold}{\texttt{RNAalifold}}
-\newcommand{\locarna}{\texttt{LocaRNA}}
-\newcommand{\infernal}{\texttt{Infernal}}
+\newcommand{\spps}{\texttt{SPPS}}
+\newcommand{\tri}{\texttt{TRI\_tool}}
+\newcommand{\lr}{\texttt{LR\_PPI}}
 
 %% databases
 \newcommand{\ncbi}{\texttt{NCBI}}
-\newcommand{\umass}{\texttt{UMass}}
-\newcommand{\rfam}{\texttt{Rfam}}
 
 
 
 
 %FUNGI
-\newcommand{\afu}{\emph{A.fumigatus}}
-\newcommand{\Afu}{\emph{Aspergillus fumigatus}}
-\newcommand{\nfi}{\emph{N.fischeri}}
-\newcommand{\Nfi}{\emph{Neosartorya fischeri}}
-\newcommand{\calb}{\emph{C.albicans}}
-\newcommand{\Calb}{\emph{Candida albicans}}
-\newcommand{\schizo}{\emph{Schizosaccharomyces}}
-\newcommand{\fusarium}{\emph{Fusarium}}
-\newcommand{\neurospora}{\emph{Neurospora}}
-\newcommand{\trichoderma}{\emph{Trichoderma}}
-\newcommand{\botrytis}{\emph{Botrytis}}
-\newcommand{\sclerotinia}{\emph{Sclerotinia}}
-\newcommand{\aspergillus}{\emph{Aspergillus}}
-\newcommand{\penicillium}{\emph{Penicillium}}
-\newcommand{\saccharomyces}{\emph{Saccharomyces}}
-\newcommand{\dothi}{Dothideomycetes}
-\newcommand{\tde}{\emph{T.deformans}}
-\newcommand{\Tde}{\emph{Taphrina deformans}}
-\newcommand{\Spo}{\emph{Schizosaccharomyces pombe}}
-\newcommand{\spo}{\emph{S.pombe}}
-\newcommand{\Sja}{\emph{Schizosaccharomyces japonicus}}
-\newcommand{\sja}{\emph{S.japonicus}}
-\newcommand{\scm}{\emph{S.complicata}}
-\newcommand{\Scm}{\emph{Saitoella complicata}}
-\newcommand{\Ssl}{\emph{Sclerotinia sclerotiorum}}
-\newcommand{\ssl}{\emph{S.sclerotiorum}}
-\newcommand{\Clo}{\emph{Chalara longipes}}
-\newcommand{\clo}{\emph{C.longipes}}
-\newcommand{\Pan}{\emph{Podospora anserina}}
-\newcommand{\pan}{\emph{P.anserina}}
-\newcommand{\Oma}{\emph{Oidoidendron maius}}
-\newcommand{\oma}{\emph{O.maius}}
-\newcommand{\Fgr}{\emph{Fusarium graminearum}}
-\newcommand{\fgr}{\emph{F.graminearum}}
-\newcommand{\fve}{\emph{F.verticillioides}}
-\newcommand{\Fve}{\emph{Fusarium verticillioides}}
-\newcommand{\Fox}{\emph{Fusarium oxysporum}}
-\newcommand{\fox}{\emph{F.oxysporum}}
-\newcommand{\alternaria}{\emph{Alternaria}}
-\newcommand{\Abr}{\emph{Alternaria brassicicola}}
-\newcommand{\abr}{\emph{A.brassicicola}}
-\newcommand{\mycosphaerella}{\emph{Mycosphaerella}}
-\newcommand{\Mpi}{\emph{Mycosphaerella pini}}
-\newcommand{\mpi}{\emph{M.pini}}
-\newcommand{\pex}{\emph{Penicillium expansum}}
-\newcommand{\pcy}{\emph{Penicillium chrysogenum}}
-\newcommand{\Rha}{\emph{Rhodotorula hasegawae}}
-\newcommand{\rha}{\emph{R.hasegawae}}
-\newcommand{\Rda}{\emph{Rhodosporidium dacryoidum}}
-\newcommand{\rda}{\emph{R.dacryoidum}}
-\newcommand{\Rgr}{\emph{Rhodotorula graminis}}
-\newcommand{\rgr}{\emph{R.graminis}}
-\newcommand{\Rmi}{\emph{Rhodotorula minuta}}
-\newcommand{\rmi}{\emph{R.minuta}}
-\newcommand{\Sli}{\emph{Sporobolomyces linderae}}
-\newcommand{\sli}{\emph{S.linderae}}
-\newcommand{\Cne}{\emph{Cryptococcus neoformans}}
-\newcommand{\cne}{\emph{C.neoformans}}
-\newcommand{\Ncr}{\emph{Neurospora crassa}}
-\newcommand{\ncr}{\emph{N.crassa}}
-\newcommand{\Nte}{\emph{Neurospora tetrasperma}}
-\newcommand{\nte}{\emph{N.tetrasperma}}
-\newcommand{\Andi}{\emph{Aspergillus nidulans}}
-\newcommand{\andi}{\emph{A.nidulans}}
-\newcommand{\Sce}{\emph{Saccharomyces cerevisiae}}
-\newcommand{\sce}{\emph{S.cerevisiae}}
-\newcommand{\Spa}{\emph{Saccharomyces paradoxus}}
-\newcommand{\spa}{\emph{S.paradoxus}}
-\newcommand{\Smi}{\emph{Saccharomyces mikatae}}
-\newcommand{\smi}{\emph{S.mikatae}}
-\newcommand{\Kpa}{\emph{Komagataella pastoris}}
-\newcommand{\kpa}{\emph{K.pastoris}}
-\newcommand{\Cpr}{\emph{Cryphonectria parasitica}}
-\newcommand{\cpr}{\emph{C.parasitica}}
-\newcommand{\Glo}{\emph{Glarea lozoyensis}}
-\newcommand{\glo}{\emph{G.lozoyensis}}
-\newcommand{\Yli}{\emph{Yarrowia lipolytica}}
-\newcommand{\yli}{\emph{Y.lipolytica}}
-\newcommand{\Ecu}{\emph{Encephalitozoon cuniculi}}
-\newcommand{\ecu}{\emph{E.cuniculi}}
-\newcommand{\Ror}{\emph{Rhizopus oryzae}}
-\newcommand{\ror}{\emph{R.oryzae}}
-\newcommand{\Tre}{\emph{Trichoderma reesei}}
-\newcommand{\tre}{\emph{T.reesei}}
-\newcommand{\Npa}{\emph{Nematocida parisii}}
-\newcommand{\npa}{\emph{N.parisii}}
-\newcommand{\Eae}{\emph{Edhazardia aedis}}
-\newcommand{\eae}{\emph{E.aedis}}
-\newcommand{\Vco}{\emph{Vittaforma corneae}}
-\newcommand{\vco}{\emph{V.corneae}}
-\newcommand{\Mbi}{\emph{Metschnikowia bicuspidata}}
-\newcommand{\mbi}{\emph{M.bicuspidata}}
-\newcommand{\Mva}{\emph{Meliniomyces variabilis}}
-\newcommand{\mva}{\emph{M.variabilis}}
-\newcommand{\Bci}{\emph{Botrytis cinerea}}
-\newcommand{\bci}{\emph{B.cinerea}}
-\newcommand{\Val}{\emph{Verticillium alfalfae}}
-\newcommand{\val}{\emph{V.alfalfae}}
-\newcommand{\Vda}{\emph{Verticillium dahliae}}
-\newcommand{\vda}{\emph{V.dahliae}}
-\newcommand{\Sal}{\emph{Sodiomyces alkalinus}}
-\newcommand{\sal}{\emph{S.alkalinus}}
-\newcommand{\Aac}{\emph{Acremonium alcalophilum}}
-\newcommand{\aac}{\emph{A.~alcalophilum}}
-\newcommand{\Nha}{\emph{Nectria haematococca}}
-\newcommand{\nha}{\emph{N.haematococca}}
-\newcommand{\Mth}{\emph{Myceliophthora thermophila}}
-\newcommand{\mth}{\emph{M.thermophila}}
-\newcommand{\Cgl}{\emph{Chaetomium globosum}}
-\newcommand{\cgl}{\emph{C.globosum}}
-\newcommand{\Tar}{\emph{Thielavia arenaria}}
-\newcommand{\tar}{\emph{T.arenaria}}
-\newcommand{\Tte}{\emph{Thielavia terrestris}}
-\newcommand{\tte}{\emph{T.terrestris}}
-\newcommand{\Ztr}{\emph{Zymoseptoria tritici}}
-\newcommand{\ztr}{\emph{Z.tritici}}
-\newcommand{\Tvi}{\emph{Trichoderma virens}}
-\newcommand{\tvi}{\emph{T.virens}}
-\newcommand{\Bco}{\emph{Baudoinia compniacensis}}
-\newcommand{\bco}{\emph{B.compniacensis}}
-\newcommand{\Kla}{\emph{Kluyveromyces lactis}}
-\newcommand{\kla}{\emph{K.lactis}}
-\newcommand{\Cga}{\emph{Candida glabrata}}
-\newcommand{\cga}{\emph{C.glabrata}}
-\newcommand{\Pme}{\emph{Pichia membranifaciens}}
-\newcommand{\pme}{\emph{P.membranifaciens}}
-\newcommand{\Ppl}{\emph{Postia placenta}}
-\newcommand{\ppl}{\emph{P.placenta}}
-\newcommand{\Nfu}{\emph{Nadsonia fulvescens}}
-\newcommand{\nfu}{\emph{N.fulvescens}}
-\newcommand{\Asp}{\emph{Atractiellales sp}}
-\newcommand{\asp}{\emph{A.sp}}
-\newcommand{\Bma}{\emph{Bipolaris maydis}}
-\newcommand{\bma}{\emph{B.maydis}}
-\newcommand{\Ptt}{\emph{Pyrenophora tritici-repentis}}
-\newcommand{\ptt}{\emph{P.tritici-repentis}}
-\newcommand{\Ana}{\emph{Aureobasidium namibiae}}
-\newcommand{\ana}{\emph{A.namibiae}}
-\newcommand{\Cbb}{\emph{Cucurberita berberidis}}
-\newcommand{\Pno}{\emph{Parastagonospora nodorum}}
-\newcommand{\wse}{\emph{W.sebi}}
-\newcommand{\Wse}{\emph{Wallemia sebi}}
-\newcommand{\opi}{\emph{O.piceae}}
-\newcommand{\Opi}{\emph{Ophiostoma piceae}}
-\newcommand{\cdu}{\emph{C.dubliniensis}}
-\newcommand{\Cdu}{\emph{Candida dubliniensis}}
-\newcommand{\ctr}{\emph{C.tropicalis}}
-\newcommand{\Ctr}{\emph{Candida tropicalis}}
-\newcommand{\Aca}{\emph{Ajellomyces capsulatus}}
-\newcommand{\aca}{\emph{A.capsulatus}}
+\newcommand{\Hsa}{\emph{Homo sapiens}}
+\newcommand{\hsa}{\emph{H.sapiens}}
 
 %Trennung verhindern
 \hyphenation{snoRNAs}
@@ -272,12 +111,37 @@
 % --------------------------------------------------------------------------- %
 
 \section{Introduction}
-This is the introduction \cite{Nawrocki:2009}.
+The driving force of molecular networks is based in protein
+interactions rather than single protein components accomplishing
+biological functions \cite{Pawson:2004}. Therein, proteins of various
+biological processes, such as cellular organization, regulation of
+transcription and translation, or immune response need to interact and
+work together to function appropriately. The experimental
+identification of interacting proteins is highly expensive and time
+consuming. A reliable \textit{in silico} prediction of protein-protein
+interactions (PPI), however, will therefore shed some more
+light in understanding biological and pharmacological responses and pathways. A
+computational approach of identifying potential PPIs is mostely based
+on an extensive set of known protein-protein interactions, information
+about cellular localizations, amino acid sequences, or secondary
+structures. Such methods may include phylogenetic trees
+\cite{Pazos:2001}, phylogenetic profiles \cite{Barker:2005},
+network-based methods \cite{Yook:2004, Clauset:2008}. In recent years,
+the more sophisticated approach of combining distinct prediction
+methods has been applied, e.g., \texttt{STRING} \cite{Szklarczyk:2011}
+or \texttt{PIPS} \cite{McDowall:2009}. Nevertheless, different proteome-wide prediction methods have shown
+that knowledge of the amino acid sequence alone may be sufficient to identify novel,
+functional protein-protein interactions \cite{Martin:2005,
+  Shen:2007}. Due to its prominent and major advantages like simplicity, rapidity,
+and generality, this kind or prediction method became increasingly
+widespread over the last years \cite{Ofran:2003, Betel:2007, Liu:2012, Perovic:2017, Pan:2010}.
 
 % --------------------------------------------------------------------------- %
 
 \section{Materials and Methods}
+\subsection{Feature vector calculation}
 
+\subsection{Collecting datapoints}
 
 % --------------------------------------------------------------------------- %
 
@@ -285,8 +149,16 @@ This is the introduction \cite{Nawrocki:2009}.
 %\input{results}
 % --------------------------------------------------------------------------- %
 
+\subsection{Comparison to other tools}
+To verify our achievements, we compared our program against publicly available tools such as \spps\ \cite{Liu:2012}, \tri\ \cite{Perovic:2017}, and \lr\ \cite{Pan:2010}.
+
 \section{Discussion}
-%\input{discussion}
+\begin{itemize}
+\item why is our tool better than the others?
+\item random forest approach
+\item far more datapoints in training data sets
+\item focusing on most important amino acid scales
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
 
@@ -294,7 +166,7 @@ This is the introduction \cite{Nawrocki:2009}.
 
 This work was funded by the S\"achsische Aufbaubank (SAB)
 
-\bibliographystyle{abbrvnat}
+\bibliographystyle{unsrt}
 \bibliography{ppi_prediction}
 
 \end{document}
