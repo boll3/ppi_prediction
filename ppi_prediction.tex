@@ -45,6 +45,8 @@
 
 %% databases
 \newcommand{\ncbi}{\texttt{NCBI}}
+\newcommand{\nega}{\texttt{Negatome Database}}
+\newcommand{\kups}{\texttt{KUPS}}
 
 
 
@@ -152,18 +154,73 @@ existings proteins.
 % --------------------------------------------------------------------------- %
 
 \section{Materials and Methods}
-\subsection{Feature vector calculation}
+To reliable predict protein-protein interactions it is pivotal and inevitable to ... in the most important steps ot the process, i.e., the calculation of the feature vector, the collection of the training and testing data, and the fine tuning of the machine learning algorithm.
 
+\subsection{Feature vector calculation}
+The feature vector calculation describes the extraction and transformation of sequence-based information in a numerical vector. Therefore, it is crucial to extract the properties that are responsible for directing the protein-protein interaction.
+
+In this work, each amino acid sequence of a protein–protein complex was transformed into a sequence of numerical values representing seven sequence-derived physicochemical properties, which include hydrophobicity \cite{Eisenberg:1984}, hydropyhilicity \cite{Hopp:1981}, volumes of side chains of amino acids \cite{Krigbaum:1979}, polarity \cite{Grantham:1974}, polarizability \cite{Charton:1982}, solvent-accessible
+surface area \cite{Rose:1985} and net charge index of side chains of amino acids \cite{Zhou:2006} for each residue in sequence. This set of amino acid scales is taken from researchers working in the fields of protein interaction prediction \cite{Bock:2001} \cite{Bock:2003}, protein recognition \cite{Ding:2001}, or the prediction of protein functional families \cite{Cai:2003}. These researches suggest that these properties significantly contribute to the stability of the protein-protein complexes. Each of these amino acid scales was normalized as follows:
+
+\begin{equation}
+P'_{i} = (P_i - \overline{P}) / \sigma_P
+\end{equation}
+
+where $\overline{P}$ is the mean and $\sigma$ is the standard deviation of the scale-based descriptor covering 20 amino acids, respectively:
+
+\begin{equation}
+\overline{P} = \sum^{20}_{i=1}P_i / 20
+\end{equation}
+ and 
+\begin{equation}
+\sigma_P = \sqrt{\frac{1}{20} \sum^{20}_{i=1}(P_i - \overline{P})^2}
+\end{equation}
+
+The subsequent transformation into suitable feature vectors using autocorrelation works as follows:
+
+\begin{equation}
+AC_{lag, j} = \frac {\frac{1}{n-lag} \sum^{n-lag}_{i=1} ( S_{i,j} - \overline{S_j}) (S_{i+lag,j} - \overline{S_j})} { \sigma_{S_j} * \sigma_{S_j} }
+\end{equation}
+with $S_j$ is the translated amino acid sequence using the normalized scale-based descriptor $P'_j$ with $j = 1, 2, \dots, 7$ , $n$ is the length of sequence S, and $lag = 1, 2, \dots, 30$ . $\overline{S_j}$ and  $\sigma_{S_j}$ are the mean and standard deviation of the translated sequence, respectively.
+Ding \cite{Ding:2016} showed that a maximal $lag$ of less than 30 tends to lose useful information while the larger values may induce noises.
+
+The number of AC values for each of the seven scales is 30. Finally the feature vector describing a given amino acid sequence is produced of 210 dimensions and for a pair of sequences, the feature space contains 420 dimensions.
+
+ 
 \subsection{Collecting datapoints}
+As training and testing data we tried to collect as many trustworthy PPI annotations as possible. We therefore collected data from various sources such as \texttt{Database of Human Interacting Proteins}\footnote{http://dip.doe-mbi.ucla.edu/} (DIP) \cite{Salwinski:2004}, \texttt{Human Protein Reference Database}\footnote{http://www.hprd.org/} (HPRD) \cite{Keshava_Prasad:2009},\texttt{Protein Database}\footnote{www.rcsb.org} (PDB) \cite{Berman:2000}, and the \nega\footnote{http://mips.helmholtz-muenchen.de/proj/ppi/negatome/} \cite{Blohm:2014}. We also included annotations retrieved from the \kups \footnote{http://www.ittc.ku.edu/chenlab/kups/}   server \cite{Chen:2011} which mainly incorporates PPIs from \texttt{MINT}\footnote{https://mint.bio.uniroma2.it/} \cite{Licata:2012} and \texttt{IntAct}\footnote{https://www.ebi.ac.uk/intact/} \cite{Orchard:2014}. In addition to the negative annotations collected from the \nega, the \kups\ server generated negative datapoints based on the the following criteria: (1) proteins should be functional dissimilar, (2) proteins should be localized in different cellular compartmenst, and (3) proteins are part of non-interacting domains.
+
+After a manual curation and mapping of all retrieved proteins, we collected a total amount of 31.867 proteins. These are incorporated in 73.681 positive PPIs. By means of \texttt{CD-hit}, we reduced this set to 41.844 positive protein-protein pairs with at most 50\% sequence identity. For negative pairs, we collected over 1.5 million unique protein-protein pairs.
+
+Finally, our training dataset contains 36.750 positive and 36.750 negative PPIs, while our testing dataset contains 5094 positive and 5094 negative datapoints. To improve the prediction quality of \TODO{our\_tool}, we also incorporated inverse and reverse PPI representations, i.e., each annotated PPI is represented in four distinct descriptions in our final dataset. Each protein-protein pair AB is described in the original and inverse (') direction, as well as in original and reversed order: AB, AB', BA, and BA' \TODO{look this up}.
+
+\subsection{Random forest classification}
+Random forest (RF) is an algorithm, which uses an ensemble of classification trees. Each classification tree is built by using a bootstrap sample of training data, and each split candidate set is a random subset of variables. RF uses both bagging (bootstrap aggregation) and random variable selection for tree building. Each classification tree is unpruned to obtain low-bias trees. The bagging and random variable selection can cause low correlation of individual trees. Therefore, RF has excellent performance in classification tasks.
+
+We define a 420-dimentional feature vector F=($x_1,x_2, \dots,x_{420}$) as the input data of RF model. If the number of cases in the training set is N, the sample is built by randomly choosing N cases from the original data, but with replacement. This sample will be the training set for growing the tree. There are M input variables, a number m≪M is specified such that at each node, m variables are selected at random out of M and the best split on these m is used to split the node. The value of m is held constant during the forest growing. Each tree is grown to the largest extent possible without pruning. \TODO{The number of trees in the forest is set to 750 due to runtime optimization.}
+
+
 
 % --------------------------------------------------------------------------- %
 
 \section{Results}
-%\input{results}
-% --------------------------------------------------------------------------- %
+
+\subsection{Webserver implementation}
+say something about:
+\begin{itemize}
+\item availability
+\item mention URL
+\item input requirements
+\item output
+\item screenshots?
+\end{itemize}
 
 \subsection{Comparison to other tools}
+\TODO{Insert table of sensitivity, specificity, accuracy, etc.}
+
+\TODO{explain the construction of the test dataset to compare multiple tools}
 To verify our achievements, we compared our program against publicly available tools such as \spps\ \cite{Liu:2012}, \tri\ \cite{Perovic:2017}, and \lr\ \cite{Pan:2010}.
+\TODO{Insert a combined ROC-plot showing metaPSI and the three competitors.}
 
 \section{Discussion}
 \begin{itemize}
@@ -171,7 +228,12 @@ To verify our achievements, we compared our program against publicly available t
 \item random forest approach
 \item far more datapoints in training data sets
 \item focusing on most important amino acid scales
+\item inverse reverse included
+\item trained on human proteins
+\item scan against nearly all annotated human proteins that are available
+\item comprehensive name mapping between different human protein databases
 \end{itemize}
+
 
 % --------------------------------------------------------------------------- %
 

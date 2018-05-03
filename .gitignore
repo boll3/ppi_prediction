@@ -4,6 +4,17 @@ bin/packages/CONFIG.pm
 data/
 
 
+# ignore latex compilation files #
+##################################
+*.aux
+*.log
+*.bbl
+*.blg
+*.dvi
+*.ps
+*.spl
+
+
 # Compiled source #
 ###################
 *.com
