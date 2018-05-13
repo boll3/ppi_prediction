@@ -4,6 +4,8 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
 \usepackage{rotating,capt-of}
 \usepackage[small]{caption}
 \usepackage{booktabs}
@@ -26,18 +28,12 @@
 \renewcommand\dbltopfraction{.95}
 \renewcommand\dblfloatpagefraction{.95}
 \newcommand{\TODO}[1] {\begingroup\color{red}#1\endgroup}
-%\newcommand{\FINAL}[1]{\begingroup\color{dgreen}#1\endgroup}
 \newcommand{\ACC}[1]{\emph{\textbf{#1}}}
 \newcommand{\s}[1]{\begin{tiny}#1\end{tiny}}
-\newcommand{\url}[1]{\texttt{\small #1}}
+\newcommand{\url}[1]{\texttt{https://\small #1}}
 \newcommand{\maxentscan}{\texttt{MaxEntScan}}
 \newcommand{\NEW}[1]{\begingroup\color{black}#1\endgroup}
 
-%% abbreviations
-\newcommand{\snos}{snoRNAs}
-\newcommand{\sno}{snoRNA}
-\newcommand{\cd}{box C/D snoRNA}
-\newcommand{\haca}{box H/ACA snoRNA}
 %% programs
 \newcommand{\spps}{\texttt{SPPS}}
 \newcommand{\tri}{\texttt{TRI\_tool}}
@@ -48,26 +44,13 @@
 \newcommand{\nega}{\texttt{Negatome Database}}
 \newcommand{\kups}{\texttt{KUPS}}
 
+%\newcommand{\tool}{\texttt{rfPRO}}
+%\newcommand{\tool}{\texttt{jackProt}}
+\newcommand{\tool}{\texttt{ProteinPrompt}\hspace{2pt}}
+\newcommand{\website}{\url{proteinformatics.org/\tool}}
 
-
-
-%FUNGI
 \newcommand{\Hsa}{\emph{Homo sapiens}}
 \newcommand{\hsa}{\emph{H.sapiens}}
-
-%Trennung verhindern
-\hyphenation{snoRNAs}
-\hyphenation{snoRNA}
-\hyphenation{microRNA}
-\hyphenation{microRNAs}
-\hyphenation{miRNA}
-\hyphenation{miRNAs}
-\hyphenation{lncRNA}
-\hyphenation{lncRNAs}
-\hyphenation{lincRNA}
-\hyphenation{lincRNAs}
-\hyphenation{di-nucleo-tide}
-
 
 \journal{Preprint}
 
@@ -76,31 +59,39 @@
 \begin{document}
 
 \begin{frontmatter}
+   
+\title{\tool: fast and accurate prediction of Protein-Protein-Interactions}
 
-
-
-\title{Predicting Protein-Protein-Interactions based on Autocorrelation and Random Forests}
-
-\author[LEI]{Sebastian Canzler\corref{cor1}}
+\author[LEI,IMT]{Sebastian Canzler\corref{cor1}}
 \ead{sebastian@bioinf.uni-leipzig.de}
-\author[PHY]{Ren\'{e} Staritzbichler}
+\author[PHY,IMT]{Ren\'{e} Staritzbichler\corref{cor1}}
 \ead{rene.staritzbichler@medizin.uni-leipzig.de}
 
 
 \address[LEI]{Bioinformatics Group, Department of Computer Science,
-  Leipzig University,
-  H{\"a}rtelstra{\ss}e 16-18, D-04107 Leipzig, Germany
+  University of Leipzig,
+  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
 }
-\address[PHY]{Institute of Medical Physics and Biophysics, University Leipzig,
-    H{\"ä}rtelstraße 16-18, D-04107 Leipzig, Germany.}
+\address[PHY]{ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
+  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany.}
+
+\address[IMT]{Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
+
 
 %\cortext[jfa]{Joint first authors}
 \cortext[cor1]{Corresponding author}
 
 % --------------------------------------------------------------------------- %
-
+ 
 
 \begin{abstract}
+
+  Here, we present \tool, a precise machine learning method for the calculation of protein-protein interactions.
+  \tool  is available online as a webserver, allowing for scanning the human proteasome for potential binding partners in unprecedent accurracy:
+  \website
+
+  \tool exploits the random forest algorithm using autocorrelation of seven amino-acid scales.
+  A scan through the human proteasome is performed within minutes, reaching an area under curve of 0.95, tested on an extensive and thoroughly curated database of protein-contacts.
   
 \end{abstract}
 
@@ -113,54 +104,90 @@
 % --------------------------------------------------------------------------- %
 
 \section{Introduction}
-The driving force of molecular networks is based in protein
-interactions rather than single protein components accomplishing
-biological functions \cite{Pawson:2004}. Therein, proteins of various
-biological processes, such as cellular organization, regulation of
-transcription and translation, or immune response need to interact and
-work together to function appropriately. The experimental
-identification of interacting proteins is highly expensive and time
-consuming. A reliable \textit{in silico} prediction of protein-protein
-interactions (PPI), however, will therefore shed some more
-light in understanding biological and pharmacological responses and pathways. A
-computational approach of identifying potential PPIs is mostely based
+
+\noindent\begin{figure}
+\includegraphics[width=0.5\textwidth]{img/meta_final_roc.pdf}
+\caption{Performance of \tool}
+\end{figure} 
+
+
+Interacting proteins are among the keyplayers of biology.
+The driving force of molecular networks are protein interactions rather than single protein components, accomplishing their individual functions \cite{Pawson:2004}.
+Biological processes, such as cellular organization, communication, regulation of
+transcription and translation, or immune responses require various proteins to interact and
+work together to function appropriately.
+The experimental identification of interacting proteins is highly expensive and time consuming.
+
+Many biochemical and biophysical methods are available to identify binding partners and to evaluate the strength of their linkage:
+ELISA, gel electrophoresis, immunoblot, flourescence anisotropy, FRET,
+Cross-linking with mass spectrometry.
+For high-throughput-screening of large libraries there are techniques such as phage display.
+In diagnostics, most commonly applied are: \TODO{Thorsten: pros/cons?..}
+
+A reliable \textit{in silico} prediction of protein-protein
+interactions (PPI) will therefore shed more light on biological and pharmacological responses and pathways.
+Computations may complement and guide biochemical assays.
+However, explicit molecular dynamics or docking approaches require structural detail, which is often out of reach.
+Even if structural knowledge is available, these methods are computational highly expensive and therefore are not applicable for scanning libraries of candidates.
+
+Both when structural insight is lacking and when speed is crucial, other methods need to be applied.
+Non structure based computational approaches of identifying potential PPIs are generally based
 on an extensive set of known protein-protein interactions, information
-about cellular localizations, amino acid sequences, or secondary
-structures. Such methods may include phylogenetic trees
+about cellular localization, amino acid sequences, or secondary
+structures.
+
+Such methods may include phylogenetic trees
 \cite{Pazos:2001}, phylogenetic profiles \cite{Barker:2005},
 network-based methods \cite{Yook:2004, Clauset:2008}. In recent years,
 the more sophisticated approach of combining distinct prediction
 methods has been applied, e.g., \texttt{STRING} \cite{Szklarczyk:2011}
-or \texttt{PIPS} \cite{McDowall:2009}. Nevertheless, different proteome-wide prediction methods have shown
+or \texttt{PIPS} \cite{McDowall:2009}.
+
+Nevertheless, different proteome-wide prediction methods have shown
 that knowledge of the amino acid sequence alone may be sufficient to identify novel,
 functional protein-protein interactions \cite{Martin:2005,
   Shen:2007}. Due to its prominent and major advantages like simplicity, rapidity,
 and generality, this kind or prediction method became increasingly
 widespread over the last years \cite{Ofran:2003, Betel:2007, Liu:2012,
   Perovic:2017, Pan:2010}.
+Overall, Biology has seen a massive raise in applications of artificial intelligence and deep learning in the recent years \cite{DOI:10.1098/rsif.2017.0387} \TODO{KEine Ahnung, wie das mit Bibtex funktioniert, da ist ein Repo irgendwo??}
 
-In this paper, we present a sequence-based webtool for predicting PPIs
-that outperforms currently available competitors. Mainly because of
-fine-tuning of machine learning keystones, such as dataset generation,
-selection of most informative amino acid scales, or the design of the
-feature vector. These improvements in combination with a random forest
-(RF) machine learning algorithm boost our predictive power to be a
-cutting-edge, high-throughput, and extremley fast method. Therefore,
-\TODO{OUR\_TOOL} may serve as a reliable tool to identify potential
-interacting protein partner amongst the set of known proteins, and may
-thus help to identify the yet unknown biological mechanism for several
-existings proteins.
+In this paper, we present a sequence-based web-tool for predicting PPIs
+that outperforms all other currently available methods. Mainly due to the
+fine-tuning of machine learning key-elements, such as dataset generation and the design of the
+feature vector. These improvements, in conjunction with a random forest
+(RF) machine learning algorithm, boost our predictive power and allows us to provide a
+cutting-edge, high-throughput, and extremely fast method. Therefore,
+\tool (\textbf{pr}ediction \textbf{o}f \textbf{m}atching \textbf{p}ar\textbf{t}ners) may serve as a reliable tool for identifying potential
+interaction partners from a database of known proteins, and may
+thus help to identify the yet unknown biological role of many proteins.
 
 % --------------------------------------------------------------------------- %
 
 \section{Materials and Methods}
-To reliable predict protein-protein interactions it is pivotal and inevitable to ... in the most important steps ot the process, i.e., the calculation of the feature vector, the collection of the training and testing data, and the fine tuning of the machine learning algorithm.
+
+\begin{figure*}
+  \includegraphics[width=200pt]{img/LR_PPI_roc.pdf}
+  \includegraphics[width=200pt]{img/TRI_tool_roc.pdf} \\
+
+  \includegraphics[width=200pt]{img/SPPS_roc.pdf}
+  \includegraphics[width=200pt]{img/meta_roc.pdf}
+  \caption{Comparison of \tool to }
+\end{figure*} 
+
+
+To maximize the predictive power, it is pivotal to optimize each of the key-elements, i.e. the calculation of the feature vector, the collection of the training and testing data, and finally, the selection and fine-tuning of the machine learning algorithm.
+
+For all aspects, many variations were tested. Here we focus on the ones leading to the highest accuracy.
+
 
 \subsection{Feature vector calculation}
-The feature vector calculation describes the extraction and transformation of sequence-based information in a numerical vector. Therefore, it is crucial to extract the properties that are responsible for directing the protein-protein interaction.
+The feature vector calculation includes the extraction and transformation of sequence-based information into a numerical vector of constant size. Therefore, it is crucial to extract the properties that are responsible for directing the protein-protein interaction.
 
-In this work, each amino acid sequence of a protein–protein complex was transformed into a sequence of numerical values representing seven sequence-derived physicochemical properties, which include hydrophobicity \cite{Eisenberg:1984}, hydropyhilicity \cite{Hopp:1981}, volumes of side chains of amino acids \cite{Krigbaum:1979}, polarity \cite{Grantham:1974}, polarizability \cite{Charton:1982}, solvent-accessible
-surface area \cite{Rose:1985} and net charge index of side chains of amino acids \cite{Zhou:2006} for each residue in sequence. This set of amino acid scales is taken from researchers working in the fields of protein interaction prediction \cite{Bock:2001} \cite{Bock:2003}, protein recognition \cite{Ding:2001}, or the prediction of protein functional families \cite{Cai:2003}. These researches suggest that these properties significantly contribute to the stability of the protein-protein complexes. Each of these amino acid scales was normalized as follows:
+Each amino acid sequence of a protein-protein complex was transformed into a sequence of numerical values representing seven sequence-derived physicochemical properties, which include hydrophobicity \cite{Eisenberg:1984} \TODO{Add: doi: 10.1002/prot.22315}, hydropyhilicity \cite{Hopp:1981}, volumes of side chains of amino acids \cite{Krigbaum:1979}, polarity \cite{Grantham:1974}, polarizability \cite{Charton:1982}, solvent-accessible
+surface area \cite{Rose:1985} and net charge index of side chains of amino acids \cite{Zhou:2006} for each residue in sequence.
+These scales are commonly applied in protein interaction prediction \cite{Bock:2001} \cite{Bock:2003}, alignment \cite{DOI:10.1371/journal.pone.0057731}, protein recognition \cite{Ding:2001}, protein structure prediction \cite{DOI:10.1007/s00894-009-0454-9}, or the prediction of protein functional families \cite{Cai:2003}.
+These applications suggest that these properties significantly contribute to the stability of the protein-protein complexes. Each of these amino acid scales was normalized as follows:
 
 \begin{equation}
 P'_{i} = (P_i - \overline{P}) / \sigma_P
@@ -176,70 +203,140 @@ where $\overline{P}$ is the mean and $\sigma$ is the standard deviation of the s
 \sigma_P = \sqrt{\frac{1}{20} \sum^{20}_{i=1}(P_i - \overline{P})^2}
 \end{equation}
 
-The subsequent transformation into suitable feature vectors using autocorrelation works as follows:
+The subsequent transformation into suitable feature vectors using auto-correlation works as follows:
 
 \begin{equation}
 AC_{lag, j} = \frac {\frac{1}{n-lag} \sum^{n-lag}_{i=1} ( S_{i,j} - \overline{S_j}) (S_{i+lag,j} - \overline{S_j})} { \sigma_{S_j} * \sigma_{S_j} }
 \end{equation}
-with $S_j$ is the translated amino acid sequence using the normalized scale-based descriptor $P'_j$ with $j = 1, 2, \dots, 7$ , $n$ is the length of sequence S, and $lag = 1, 2, \dots, 30$ . $\overline{S_j}$ and  $\sigma_{S_j}$ are the mean and standard deviation of the translated sequence, respectively.
+with $S_j$ is the translated amino acid sequence using the normalized scale-based descriptor $P'_j$ with $j = 1, 2, \dots, 7$ , $n$ is the length of sequence S, and $lag = 1, 2, \dots, 30$  being the shift for which the autocorrelation is being calculated. $\overline{S_j}$ and  $\sigma_{S_j}$ are the mean and standard deviation of the translated sequence, respectively.
 Ding \cite{Ding:2016} showed that a maximal $lag$ of less than 30 tends to lose useful information while the larger values may induce noises.
 
 The number of AC values for each of the seven scales is 30. Finally the feature vector describing a given amino acid sequence is produced of 210 dimensions and for a pair of sequences, the feature space contains 420 dimensions.
 
- 
-\subsection{Collecting datapoints}
-As training and testing data we tried to collect as many trustworthy PPI annotations as possible. We therefore collected data from various sources such as \texttt{Database of Human Interacting Proteins}\footnote{http://dip.doe-mbi.ucla.edu/} (DIP) \cite{Salwinski:2004}, \texttt{Human Protein Reference Database}\footnote{http://www.hprd.org/} (HPRD) \cite{Keshava_Prasad:2009},\texttt{Protein Database}\footnote{www.rcsb.org} (PDB) \cite{Berman:2000}, and the \nega\footnote{http://mips.helmholtz-muenchen.de/proj/ppi/negatome/} \cite{Blohm:2014}. We also included annotations retrieved from the \kups \footnote{http://www.ittc.ku.edu/chenlab/kups/}   server \cite{Chen:2011} which mainly incorporates PPIs from \texttt{MINT}\footnote{https://mint.bio.uniroma2.it/} \cite{Licata:2012} and \texttt{IntAct}\footnote{https://www.ebi.ac.uk/intact/} \cite{Orchard:2014}. In addition to the negative annotations collected from the \nega, the \kups\ server generated negative datapoints based on the the following criteria: (1) proteins should be functional dissimilar, (2) proteins should be localized in different cellular compartmenst, and (3) proteins are part of non-interacting domains.
 
-After a manual curation and mapping of all retrieved proteins, we collected a total amount of 31.867 proteins. These are incorporated in 73.681 positive PPIs. By means of \texttt{CD-hit}, we reduced this set to 41.844 positive protein-protein pairs with at most 50\% sequence identity. For negative pairs, we collected over 1.5 million unique protein-protein pairs.
+\subsection{Collecting data-points}
+In order to create comprehensive training and testing data we tried to collect as many trustworthy PPI annotations as possible. We included data from various sources such as \texttt{Database of Human Interacting Proteins}\footnote{http://dip.doe-mbi.ucla.edu/} (DIP) \cite{Salwinski:2004}, \texttt{Human Protein Reference Database}\footnote{http://www.hprd.org/} (HPRD) \cite{Keshava_Prasad:2009},\texttt{Protein Database}\footnote{www.rcsb.org} (PDB) \cite{Berman:2000}, and the \nega\footnote{http://mips.helmholtz-muenchen.de/proj/ppi/negatome/} \cite{Blohm:2014}. We also included annotations retrieved from the \kups \footnote{http://www.ittc.ku.edu/chenlab/kups/}   server \cite{Chen:2011} which mainly incorporates PPIs from \texttt{MINT}\footnote{https://mint.bio.uniroma2.it/} \cite{Licata:2012} and \texttt{IntAct}\footnote{https://www.ebi.ac.uk/intact/} \cite{Orchard:2014}. In addition to the negative annotations collected from the \nega, the \kups\ server generated negative data-points based on the the following criteria: (1) proteins should be functional dissimilar, (2) proteins should be localized in different cellular compartments, and (3) proteins are part of non-interacting domains.
 
-Finally, our training dataset contains 36.750 positive and 36.750 negative PPIs, while our testing dataset contains 5094 positive and 5094 negative datapoints. To improve the prediction quality of \TODO{our\_tool}, we also incorporated inverse and reverse PPI representations, i.e., each annotated PPI is represented in four distinct descriptions in our final dataset. Each protein-protein pair AB is described in the original and inverse (') direction, as well as in original and reversed order: AB, AB', BA, and BA' \TODO{look this up}.
+After intense manual curation and mapping of all retrieved proteins, we collected a total amount of 31.867 proteins. \TODO{$\leftarrow$ explain the step from previous to following statemtent $\rightarrow$} These are incorporated in 73.681 positive PPIs. By means of \texttt{CD-hit}, we reduced this set to 41.844 positive protein-protein pairs with at most 50\% sequence identity. For negative pairs, we collected over 1.5 million unique protein-protein pairs, from which we randomly selected a number of contacts, that was matching the size of the positive dataset.
+
+Finally, our training dataset contains 36.750 positive and 36.750 negative PPIs, while our testing dataset contains 5094 positive and 5094 negative data-points. For further enhancement of the prediction quality of \tool, we also incorporated inverse and reverse PPI representations.
+Each protein-protein pair AB is described in the original and inverse (') direction, as well as in original and reversed order.
+In the final dataset each annotated PPI is represented in four distinct descriptions\footnote{Example: (ABCD,KLMN), (ABCD,NMLK), (KLMN,ABCD), (KLMN,DCBA)}: 
+AB, AB', BA, and BA'
+\TODO{look this up}.
+\TODO{Wir hatten doch noch einen dritten Datensatz, fuer die Crossvalidierung, oder? Hatten wir nicht auch verschiedene Unterteilungen getestet?} 
+
+\subsection{Selection of learning method}
+Plenty implementations of various learning algorithms are available. After testing the \TODO{R-PACKAGE}, we moved to the Python \TODO{PACKAGE} for speed reasons. We tested several artificial neural network implementations, support vector machines and ...
+Final winner of this competition was the Random Forest approach. 
 
 \subsection{Random forest classification}
+\TODO{Den Teil hier verstehe ich kaum}
 Random forest (RF) is an algorithm, which uses an ensemble of classification trees. Each classification tree is built by using a bootstrap sample of training data, and each split candidate set is a random subset of variables. RF uses both bagging (bootstrap aggregation) and random variable selection for tree building. Each classification tree is unpruned to obtain low-bias trees. The bagging and random variable selection can cause low correlation of individual trees. Therefore, RF has excellent performance in classification tasks.
 
-We define a 420-dimentional feature vector F=($x_1,x_2, \dots,x_{420}$) as the input data of RF model. If the number of cases in the training set is N, the sample is built by randomly choosing N cases from the original data, but with replacement. This sample will be the training set for growing the tree. There are M input variables, a number m≪M is specified such that at each node, m variables are selected at random out of M and the best split on these m is used to split the node. The value of m is held constant during the forest growing. Each tree is grown to the largest extent possible without pruning. \TODO{The number of trees in the forest is set to 750 due to runtime optimization.}
+We define a 420-dimensional feature vector F=($x_1,x_2, \dots,x_{420}$) as the input data of RF model. If the number of cases in the training set is N, the sample is built by randomly choosing N cases from the original data, but with replacement. This sample will be the training set for growing the tree. There are M input variables, a number m≪M is specified such that at each node, m variables are selected at random out of M and the best split on these m is used to split the node. The value of m is held constant during the forest growing. Each tree is grown to the largest extent possible without pruning. \TODO{The number of trees in the forest is set to 750 due to run-time optimization.}
 
 
+
+\begingroup
+\begin{table*}
+\begin{tabular}{|c |c | c |}
+  \hline
+  Method  & Actual versus predicted & Quality \\
+  \hline
+  \tool  & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 417 & 78 \\ \hline non-binder: & 58 & 415 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.94 \\ Spec.: 0.88 \\ Sens.: 0.84 \\ Acc.: 0.86 \end{tabular} \\
+  \hline
+  SPPS   & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 474 & 21 \\ \hline non-binder: & 312 & 161 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.77 \\ Spec.: 0.34 \\ Sens.: 0.96 \\ Acc.: 0.66 \end{tabular} \\
+  \hline
+  TRI\_tool  & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 158 & 337 \\ \hline non-binder: & 25 & 448 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.73 \\ Spec.: 0.95 \\ Sens.: 0.32 \\ Acc.: 0.63 \end{tabular} \\
+  \hline
+  LR\_PI  & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 451 & 44 \\ \hline non-binder: & 398 & 75 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.60 \\ Spec.: 0.16 \\ Sens.: 0.91 \\ Acc.: 0.53 \end{tabular} \\
+  \hline
+\end{tabular}
+\caption{ Quality measures of \tool, compared to other tools}
+\label{tbl:all}
+\end{table*}
+\endgroup
 
 % --------------------------------------------------------------------------- %
 
 \section{Results}
 
 \subsection{Webserver implementation}
-say something about:
+\TODO{should this be in the results section?}
+
+\tool is available online as webserver under: \website
+The basic usage is as simple as providing an input sequence.
+By default \tool will search a database of human protein sequences \TODO{WHICH?}.
+Scanning the entire humand database takes minutes.
+Other more extensive databases are provided as well as additional service.
+However, as we have optimized it for human proteins, we cannot estimate the quality of the results for other organisms. 
+
+The server is free for academic users.
+Providing an email is optional.
+Results for anonymous users will be made accessible via a public search engine.
+
+There are two ranges of sequence lengths, for which \tool was optimized:
 \begin{itemize}
-\item availability
-\item mention URL
-\item input requirements
-\item output
-\item screenshots?
+\item \TODO{? - ?} AA
+\item \TODO{? - ?} AA
 \end{itemize}
+
+The sequence length is detected automatically. When the user provides sequences shorter or longer than the given range, a warning is thrown, the calculation is performed nonetheless.
+
+As output a ranked and scored list of proteins from the database is returned.
+By default it is truncated after the first 100 top hits.
+This can be adjusted on the webform.
+
+\TODO{ screenshots?}
+
+\subsection{Performance}
+\label{performance}
+
+Based on our test set of 5094 positive and 5094 negative cases (binders vs. non-binders), we plot the receiver operation characteristics (ROC) curve. These allow not only to estimate the overall quality of the predictions, but also gives a visual overview over the relationship between true and false positives.
+This allows to select a useful threshold and thus a finetuning of sensitivity versus specificity.
+
+An ideal signal would have would lead to a plot with rectangular shape with an AUC of 1.
+The other extreme, pure noise, would be a crossing line with an AUC of 0.5.
+
+Our method reaches an AUC of 0.95,
+specificity: 0.88,
+sensitivity: 0.87,
+accuracy: 0.88.
+
+Currently, our method balances specificity and sensitivity to avoid an unwanted bias in different applications. \TODO{THINK!}
+
+
 
 \subsection{Comparison to other tools}
-\TODO{Insert table of sensitivity, specificity, accuracy, etc.}
 
-\TODO{explain the construction of the test dataset to compare multiple tools}
+As \TODO{all/most} other methods are significantly slower, it was not feasible to perform this test using our entire test dataset with more than 10k datapoints. Instead we randomly selected 495 positive and 473 negative pairs for the comparison with the other accessible methods.
+
+Please note: the following values for \tool are related to this subset and therefore differ from the values given in \ref{performance}.
+
 To verify our achievements, we compared our program against publicly available tools such as \spps\ \cite{Liu:2012}, \tri\ \cite{Perovic:2017}, and \lr\ \cite{Pan:2010}.
-\TODO{Insert a combined ROC-plot showing metaPSI and the three competitors.}
+
 
 \section{Discussion}
-\begin{itemize}
-\item why is our tool better than the others?
-\item random forest approach
-\item far more datapoints in training data sets
-\item focusing on most important amino acid scales
-\item inverse reverse included
-\item trained on human proteins
-\item scan against nearly all annotated human proteins that are available
-\item comprehensive name mapping between different human protein databases
-\end{itemize}
+
+The direct comparison with other available tools prooved the outstanding quality of \tool.
+Beside its high accurracy, \tool is the only tool that allows scanning the entire human proteasome.
+This makes \tool both the fastest and most accurate method available.
+We provide full access via a webinterface:
+\website
+
+After an exhaustive optimization of: i) the learning algorithm, ii) the contact database, and iii) the representation of the binding sequences, we identified a random forest using autcorrelation on seven residue scales as the ideal combination. 
 
 
 % --------------------------------------------------------------------------- %
 
 \section*{Acknowledgments}
 
-This work was funded by the S\"achsische Aufbaubank (SAB)
+This work was funded by the S\"achsische Aufbaubank (SAB).
+Thorsten Kaiser, Johanna Tiemann for proofreading.
+The universe for all the cookies.
+
+%\stoptext
 
 \bibliographystyle{unsrt}
 \bibliography{ppi_prediction}
