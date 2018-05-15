@@ -1,7 +1,7 @@
 .PHONY: all
 all: ppi_prediction.dvi
 
-l=latex
+l=pdflatex
 b=bibtex
 s=dvips
 p=ps2pdf
@@ -11,8 +11,8 @@ ppi_prediction.dvi:	ppi_prediction.tex
 		$(b) ppi_prediction
 		$(l) ppi_prediction
 		$(l) ppi_prediction
-		$(s) ppi_prediction.dvi
-		$(p) ppi_prediction.ps
+#		$(s) ppi_prediction.dvi
+#		$(p) ppi_prediction.ps
 
 .PHONY: 	clean		
 clean:		
