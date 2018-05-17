@@ -395,7 +395,8 @@ unwanted bias in different applications. \TODO{THINK!}
 
 \begin{figure}[t]
 \includegraphics[width=0.5\textwidth]{img/meta_final_roc.pdf}
-\caption{Performance of \tool}
+\caption{Performance of \tool tested on the whole test dataset
+  containing over 10.000 PPIs.}
 \label{fig:roc}
 \end{figure} 
 
@@ -412,17 +413,23 @@ Since we re-evaluated \tool on the dimished testset, to ensure
 comparability, the results are somewhat different compared to the
 whole testing data set. 
 
-
-
-\begin{figure*}
-  \includegraphics[width=200pt]{img/LR_PPI_roc.pdf}
-  \includegraphics[width=200pt]{img/TRI_tool_roc.pdf} \\
-
-  \includegraphics[width=200pt]{img/SPPS_roc.pdf}
-  \includegraphics[width=200pt]{img/meta_roc.pdf}
-  \caption{Comparison of \tool to }
+\begin{figure}
+  \includegraphics[width=0.5\textwidth]{img/comparison_roc.pdf}
+  \caption{Comparison of ROC-curves between \tool, \spps, \tri, \lr\ 
+    using the diminished test dataset that included 968
+    protein-protein pairs.}
   \label{fig:comparison}
-\end{figure*} 
+\end{figure}
+
+%\begin{figure*}
+%  \includegraphics[width=200pt]{img/LR_PPI_roc.pdf}
+%  \includegraphics[width=200pt]{img/TRI_tool_roc.pdf} \\
+%
+%  \includegraphics[width=200pt]{img/SPPS_roc.pdf}
+%  \includegraphics[width=200pt]{img/meta_roc.pdf}
+%  \caption{Comparison of \tool to }
+%  \label{fig:comparison}
+%\end{figure*} 
 
 
 %\begin{table*}
@@ -488,6 +495,17 @@ After an exhaustive optimization of: i) the learning algorithm, ii)
 the contact database, and iii) the representation of the binding
 sequences, we identified a random forest using autcorrelation on seven
 residue scales as the ideal combination.
+
+%\begin{itemize}
+% \item why is our tool better than the others?
+% \item random forest approach
+% \item far more datapoints in training data sets
+% \item focusing on most important amino acid scales
+%\item inverse reverse included
+%\item trained on human proteins
+%\item scan against nearly all annotated human proteins that are available
+%\item comprehensive name mapping between different human protein databases
+% \end{itemize}
 
 
 % --------------------------------------------------------------------------- %
