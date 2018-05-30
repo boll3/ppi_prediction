@@ -91,7 +91,7 @@
   \tool  is available online as a webserver, allowing for scanning the human proteasome for potential binding partners in unprecedent accurracy:
   \website
 
-  \tool exploits the random forest algorithm using autocorrelation of seven amino-acid scales.
+  \tool exploits the random forest algorithm using auto-correlation of seven amino-acid scales.
   A scan through the human proteasome is performed within minutes, reaching an area under curve of 0.95, tested on an extensive and thoroughly curated database of protein-contacts.
   
 \end{abstract}
@@ -224,7 +224,7 @@ respectively:
 \end{equation}
 
 The subsequent transformation into suitable feature vectors using
-auto-correlation works as follows: 
+auto-correlation (AC) works as follows: 
 
 \begin{equation}
 AC_{lag, j} = \frac {\frac{1}{n-lag} \sum^{n-lag}_{i=1} ( S_{i,j} - \overline{S_j}) (S_{i+lag,j} - \overline{S_j})} { \sigma_{S_j} * \sigma_{S_j} }
@@ -232,7 +232,7 @@ AC_{lag, j} = \frac {\frac{1}{n-lag} \sum^{n-lag}_{i=1} ( S_{i,j} - \overline{S_
 with $S_j$ is the translated amino acid sequence using the normalized
 scale-based descriptor $P'_j$ with $j = 1, 2, \dots, 7$ , $n$ is the
 length of sequence S, and $lag = 1, 2, \dots, 30$  being the shift for
-which the autocorrelation is being calculated. $\overline{S_j}$ and
+which the auto-correlation is being calculated. $\overline{S_j}$ and
 $\sigma_{S_j}$ are the mean and standard deviation of the translated
 sequence, respectively. Ding \cite{Ding:2016} showed that a maximal
 $lag$ of less than 30 tends to lose useful information while the
@@ -323,7 +323,7 @@ variables, a number $m \ll M$ is specified such that at each node, $m$
 variables are selected at random out of $M$ and the best split on
 these m is used to split the node. The value of $m$ is held constant
 during the forest growing. Each tree is grown to the largest extent
-possible without pruning. The finalnumber of trees in the forest is
+possible without pruning. The final number of trees in the forest is
 set to 750 due to run-time optimization. 
 
 
@@ -343,7 +343,7 @@ containing 31.867 proteins. Scanning the entire humand database takes
 up to one or two minutes. Other more extensive databases are provided
 as well as additional service, e.g. mammalian, vertebrate, and
 metazoan protein sets. However, since \tool\ is trained and optimized
-on human proteins, we cannot guarantee the equivalent prediction
+on human proteins, we cannot guarantee an equivalent prediction
 quality for other organisms. 
 
 The server is free for academic users. Providing an email is
@@ -478,9 +478,10 @@ balance between sensitivity and specificity. \spps\ and \lr\ show an
 excellent sensitivity of 0.96 and 0.91, however, their
 specificity is rather poor with 0.34 and 0.16, respectively. \tri\ on
 the other hand shows a massive bias towards specificity, 0.95 compared
-to 0.32 . Additionally, the overall prediction accuracy and the area under the curve
-are significantly higher: 0.86 versus 0.66 (\spps), 0.63 (\tri), and
-0.53 (\lr) and 0.94 versus 0.77 (\spps), 0.73 (\tri), and 0.60 (\lr), respectively.
+to 0.32 .
+Additionally, the overall prediction accuracy and the area under the curve are significantly higher.
+Accuracy: 0.86 versus 0.66 (\spps), 0.63 (\tri).
+AUC: 0.53 (\lr) and 0.94 versus 0.77 (\spps), 0.73 (\tri), and 0.60 (\lr), respectively.
 
 
 \section{Discussion}
