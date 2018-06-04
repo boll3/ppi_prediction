@@ -192,8 +192,7 @@ Each amino acid sequence of a protein-protein complex was transformed
 into a sequence of numerical values representing seven
 sequence-derived physicochemical properties, which include
 hydrophobicity \cite{Eisenberg:1984} \TODO{Add: doi:
-  10.1002/prot.22315} \SC{ich habe eigentlich nur die original refs
-  der von uns benutzten skalen rausgesucht...}, hydropyhilicity
+  10.1002/prot.22315}, hydropyhilicity
 \cite{Hopp:1981}, volumes of side chains of amino acids
 \cite{Krigbaum:1979}, polarity \cite{Grantham:1974}, polarizability
 \cite{Charton:1982}, solvent-accessible surface area \cite{Rose:1985}
@@ -348,17 +347,10 @@ quality for other organisms.
 
 The server is free for academic users. Providing an email is
 optional. Results for anonymous users will be made accessible via a
-public search engine. 
+public search engine.
+\tool\ was optimized for sequences with a minimum length of 16 AA.
 
-\TODO{Ist das in dem webserver so umgesetzt?
-
-There are two ranges of sequence lengths, for which \tool\ was
-optimized: 
-\begin{itemize}
-\item \TODO{? - ?} AA
-\item \TODO{? - ?} AA
-\end{itemize}
-}
+\TODO{Check}
 
 The sequence length is detected automatically. When the user provides
 sequences shorter or longer than the given range, a warning is thrown,
@@ -391,7 +383,7 @@ sensitivity: 0.87,
 accuracy: 0.88.
 
 Currently, our method balances specificity and sensitivity to avoid an
-unwanted bias in different applications. \TODO{THINK!} 
+unwanted bias in different applications. \TODO{(is this the best solution for the server?)} 
 
 \begin{figure}[t]
 \includegraphics[width=0.5\textwidth]{img/meta_final_roc.pdf}
