@@ -191,9 +191,7 @@ that are responsible for directing the protein-protein interaction.
 Each amino acid sequence of a protein-protein complex was transformed
 into a sequence of numerical values representing seven
 sequence-derived physicochemical properties, which include
-hydrophobicity \cite{Eisenberg:1984} \TODO{Add: doi:
-  10.1002/prot.22315} \SC{ich habe eigentlich nur die original refs
-  der von uns benutzten skalen rausgesucht...}, hydropyhilicity
+hydrophobicity \cite{Eisenberg:1984, Koehler:2009}, hydropyhilicity
 \cite{Hopp:1981}, volumes of side chains of amino acids
 \cite{Krigbaum:1979}, polarity \cite{Grantham:1974}, polarizability
 \cite{Charton:1982}, solvent-accessible surface area \cite{Rose:1985}
@@ -339,10 +337,11 @@ set to 750 due to run-time optimization.
 \tool is available online as webserver under: \website The basic usage
 is as simple as providing an input sequence. By default \tool will
 search our manualy curated database of human protein sequences
-containing 31.867 proteins. Scanning the entire humand database takes
-up to one or two minutes. Other more extensive databases are provided
+containing 31.867 proteins. Scanning the entire human database takes
+approximately one minute. Other more extensive databases are provided
 as well as additional service, e.g. mammalian, vertebrate, and
-metazoan protein sets. However, since \tool\ is trained and optimized
+metazoan protein sets. Searching these databases takes considerably
+longer. However, since \tool\ is trained and optimized
 on human proteins, we cannot guarantee an equivalent prediction
 quality for other organisms. 
 
@@ -350,25 +349,26 @@ The server is free for academic users. Providing an email is
 optional. Results for anonymous users will be made accessible via a
 public search engine. 
 
-\TODO{Ist das in dem webserver so umgesetzt?
+%\TODO{Ist das in dem webserver so umgesetzt?
+%
+%There are two ranges of sequence lengths, for which \tool\ was
+%optimized: 
+%\begin{itemize}
+%\item \TODO{? - ?} AA
+%\item \TODO{? - ?} AA
+%\end{itemize}
+%}
 
-There are two ranges of sequence lengths, for which \tool\ was
-optimized: 
-\begin{itemize}
-\item \TODO{? - ?} AA
-\item \TODO{? - ?} AA
-\end{itemize}
-}
-
-The sequence length is detected automatically. When the user provides
-sequences shorter or longer than the given range, a warning is thrown,
+\tool was originally optimized for proteins longer than 16aa. The
+sequence length of the uploaded protein is detected automatically. When the user provides
+sequences shorter than 16aa, a warning is thrown,
 the calculation is performed nonetheless.
 
 As output a ranked and scored list of proteins from the database is
 returned. By default it is truncated after the first 100 top
 hits. This can be adjusted on the webform. 
 
-\TODO{ screenshots?}
+\TODO{ screenshots!!!}
 
 \subsection{Performance}
 \label{performance}
