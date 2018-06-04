@@ -266,7 +266,7 @@ compartments, and (3) proteins are part of non-interacting domains.
 
 After intense manual curation and mapping of different names describing
 the exact same protein, we derived a total amount of 31.867 distinct
-human proteins. Among this set, 73.681 positive PPIs were collected
+human proteins. For this set, 73.681 positive PPIs were collected
 from the datasources previously mentioned. By means of \texttt{CD-hit}
 \cite{Li:2006, Fu:2012}, we reduced this set to 41.844 positive
 protein-protein pairs with at most 50\% sequence identity. For
@@ -347,7 +347,8 @@ quality for other organisms.
 
 The server is free for academic users. Providing an email is
 optional. Results for anonymous users will be made accessible via a
-public search engine. 
+public search engine.
+\tool\ was originally optimized for sequences with a minimum length of 16 AA.
 
 %\TODO{Ist das in dem webserver so umgesetzt?
 %
@@ -359,10 +360,10 @@ public search engine.
 %\end{itemize}
 %}
 
-\tool was originally optimized for proteins longer than 16aa. The
-sequence length of the uploaded protein is detected automatically. When the user provides
+The sequence length of the uploaded proteins is detected automatically. When the user provides
 sequences shorter than 16aa, a warning is thrown,
 the calculation is performed nonetheless.
+\TODO{Check}
 
 As output a ranked and scored list of proteins from the database is
 returned. By default it is truncated after the first 100 top
@@ -391,7 +392,7 @@ sensitivity: 0.87,
 accuracy: 0.88.
 
 Currently, our method balances specificity and sensitivity to avoid an
-unwanted bias in different applications. \TODO{THINK!} 
+unwanted bias in different applications. \TODO{(is this the best solution for the server?)} 
 
 \begin{figure}[t]
 \includegraphics[width=0.5\textwidth]{img/meta_final_roc.pdf}
