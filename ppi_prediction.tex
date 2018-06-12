@@ -116,12 +116,11 @@ and work together to function appropriately. The experimental
 identification of interacting proteins is highly expensive and time
 consuming.
 
-Many biochemical and biophysical methods are available to identify
-binding partners and to evaluate the strength of their linkage: ELISA,
-gel electrophoresis, immunoblot, flourescence anisotropy, FRET,
+Many biochemical and biophysical methods for research and medical diagnostics are based on protein-binding:
+ELISA,
+gel electrophoresis, immunoblot, florescence anisotropy, FRET,
 Cross-linking with mass spectrometry. For high-throughput-screening of
-large libraries there are techniques such as phage display. In
-diagnostics, most commonly applied are: \TODO{Thorsten: pros/cons?..}
+large libraries there are techniques such as phage display. 
 
 A reliable \textit{in silico} prediction of protein-protein
 interactions (PPI) will therefore shed more light on biological and
@@ -157,17 +156,19 @@ of artificial intelligence and deep learning in the recent years
 \cite{Ching:2018}.
 
 In this paper, we present a sequence-based web-tool for predicting
-PPIs that outperforms all other currently available methods. Mainly
-due to the fine-tuning of machine learning key-elements, such as
-dataset generation and the design of the feature vector. These
-improvements, in conjunction with a random forest (RF) machine
-learning algorithm, boost our predictive power and allows us to
-provide a cutting-edge, high-throughput, and extremely fast
-method. Therefore, \tool (\textbf{pr}ediction \textbf{o}f
-\textbf{m}atching \textbf{p}ar\textbf{t}ners) may serve as a reliable
-tool for identifying potential interaction partners from a database of
+PPIs that outperforms all other currently available methods distinctively.
+The predictive power was boosted by a rigorous fine-tuning
+of the machine learning key-elements, such as
+dataset generation and the design of the feature vector.
+In conjunction with a random forest (RF) machine learning algorithm,
+these lead to a highly accurate and extremely fast high-throughput
+method.
+
+Therefore, \tool (\textbf{pr}ediction \textbf{o}f \textbf{m}atching \textbf{p}ar\textbf{t}ners)
+may serve as a reliable tool for identifying potential interaction partners from a database of
 known proteins, and may thus help to identify the yet unknown
 biological role of many proteins.
+
 
 % --------------------------------------------------------------------------- %
 
@@ -297,8 +298,9 @@ Plenty implementations of various learning algorithms are
 available. By means of the \texttt{caret} R package \cite{Kuhn:2008},
 the fine-tuning and comparison is relatively easy. We tested several
 artificial neural network implementations, support vector machines and
-tree-based methods. After electing the random forest approach as our
-best candidate we moved to a Python-based implementation mainly
+tree-based methods. After electing the random forest approach as
+performing best on our extensive testing and training datasets,
+we moved to a Python-based implementation mainly
 because of speed reasons.  
 
 \subsection{Random forest classification}
@@ -332,7 +334,6 @@ set to 750 due to run-time optimization.
 \section{Results}
 
 \subsection{Webserver implementation}
-\TODO{should this be in the results section?}
 
 \tool is available online as webserver under: \website The basic usage
 is as simple as providing an input sequence. By default \tool will
@@ -369,7 +370,7 @@ As output a ranked and scored list of proteins from the database is
 returned. By default it is truncated after the first 100 top
 hits. This can be adjusted on the webform. 
 
-\TODO{ screenshots!!!}
+\TODO{ screenshots}
 
 \subsection{Performance}
 \label{performance}
@@ -489,7 +490,7 @@ AUC: 0.53 (\lr) and 0.94 versus 0.77 (\spps), 0.73 (\tri), and 0.60 (\lr), respe
 
 The direct comparison with other available tools prooved the
 outstanding quality of \tool. Beside its high accurracy, \tool is the
-only tool that allows scanning the entire human proteasome. This makes
+only tool allowing to scan the entire human proteasome. This makes
 \tool both the fastest and most accurate method available. We provide
 full access via a webinterface: \website
 
@@ -497,6 +498,22 @@ After an exhaustive optimization of: i) the learning algorithm, ii)
 the contact database, and iii) the representation of the binding
 sequences, we identified a random forest using autcorrelation on seven
 residue scales as the ideal combination.
+
+The collection of an extensive database with little redundancy was crucial
+and required several iterations of manual curation of the test and training datasets.
+The diversity posed hard challenges to the learning
+- it would have been easy to reach even higher accuracy values by omitting parts of our dataset.
+However, this turned \tool into a broadly applicable tool.
+
+In our next steps we will extend \tool to predict also the binding of short peptides to protein receptors, specifically to those of the GPCR subclass.
+We furthermore intend to expand \tool towards antibody-protein binding.
+Initial tests have shown, that the methods described in this paper are not directly applicable to this important class of protein interactions - which is easily understood, as the antibody binding mode via 3 very short loop segments does not reflect the general protein binding modes, covered currently by \tool. 
+
+Based on our extensive tests, we assume that
+\tool will be useful for understanding complex networks of protein-protein interactions,
+which provide the basis for a broad range of biological functionalities. 
+
+
 
 %\begin{itemize}
 % \item why is our tool better than the others?
@@ -515,7 +532,7 @@ residue scales as the ideal combination.
 \section*{Acknowledgments}
 
 This work was funded by the S\"achsische Aufbaubank (SAB).
-Thorsten Kaiser, Johanna Tiemann for proofreading.
+Johanna Tiemann, Peter Hildebrand and Thorsten Kaiser for proofreading.
 The universe for all the cookies.
 
 %\stoptext
