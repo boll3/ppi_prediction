@@ -47,7 +47,8 @@
 
 %\newcommand{\tool}{\texttt{rfPRO}}
 %\newcommand{\tool}{\texttt{jackProt}}
-\newcommand{\tool}{\texttt{ProteinPrompt}\hspace{2pt}}
+\newcommand{\toolblank}{\texttt{ProteinPrompt}}
+\newcommand{\tool}{\toolblank\hspace{2pt}}
 \newcommand{\website}{\url{proteinformatics.org/\tool}}
 
 \newcommand{\Hsa}{\emph{Homo sapiens}}
@@ -88,12 +89,19 @@
 \begin{abstract}
 
   Here, we present \tool, a precise machine learning method for the calculation of protein-protein interactions.
-  \tool  is available online as a webserver, allowing for scanning the human proteasome for potential binding partners in unprecedent accurracy:
-  \website
-
-  \tool exploits the random forest algorithm using auto-correlation of seven amino-acid scales.
-  A scan through the human proteasome is performed within minutes, reaching an area under curve of 0.95, tested on an extensive and thoroughly curated database of protein-contacts.
+  Learning methods depend crucially on both size and quality of datasets used for training and testing.
+  Starting point of \tool was therefore the collection of a comprehensive dataset from basically all available sources.
+  In turn, a very thorough filtering was imperative.
+  The actual keystep is the transformation of the original sequence data into a representation that enables the learning algorithm to understand the underlying patterns that lead to binding versus non-binding.
+   \tool exploits the random forest algorithm using auto-correlation of seven amino-acid scales.
+   Based on this combination, \tool is reaching an area under curve of 0.95, which is far above any other publicly available tool. 
   
+  \tool  is accessible online as a webserver:
+  \website
+  The server allows  scanning the human proteasome for potential binding partners of the query in unprecedent accurracy.
+  A scan through the entire human proteasome is performed within minutes.  
+  
+
 \end{abstract}
 
 \begin{keyword}
@@ -160,8 +168,11 @@ PPIs that outperforms all other currently available methods distinctively.
 The predictive power was boosted by a rigorous fine-tuning
 of the machine learning key-elements, such as
 dataset generation and the design of the feature vector.
-In conjunction with a random forest (RF) machine learning algorithm,
-these lead to a highly accurate and extremely fast high-throughput
+Auto-correlation of hydrophobicities,
+in conjunction with a random forest (RF) machine learning algorithm,
+has lead to maximum accuracy.
+Additionally to its outstanding quality, it is 
+an extremely fast high-throughput
 method.
 
 Therefore, \tool (\textbf{pr}ediction \textbf{o}f \textbf{m}atching \textbf{p}ar\textbf{t}ners)
@@ -282,7 +293,7 @@ quality of \tool, we also incorporated inverse and reverse PPI
 representations. Each protein-protein pair $AB$ is described in the
 original and inverse (') direction, as well as in original and
 reversed order. In the final dataset each annotated PPI is represented
-in four distinct descriptions\footnote{Example: (ABCD,KLMN),
+in four distinct descriptions\footnote{Example pseudo-sequences: (ABCD,KLMN),
   (ABCD,NMLK), (KLMN,ABCD), (KLMN,DCBA)}: $AB$, $AB'$, $BA$, and
 $BA'$. 
 
@@ -456,7 +467,7 @@ whole testing data set.
 \begin{table}
 \begin{tabular}{|l |c | c | c | c |}
   \hline
-  Tool  & AUC & Spec. & Sens. & acc \\
+  Tool  & AUC & Spec. & Sens. & Acc. \\
   \hline
   \tool  & 0.94 & 0.88 & 0.84 &  0.86 \\
   \hline
@@ -469,7 +480,9 @@ whole testing data set.
 \end{tabular}
 \caption{ Quality measures of \tool, compared to other publicly
   available tools, such as \spps\ \cite{Liu:2012}, \tri\
-  \cite{Perovic:2017}, and \lr\ \cite{Pan:2010}. }
+  \cite{Perovic:2017}, and \lr\ \cite{Pan:2010}.
+  Listed are area under curve (AUC), specificity, sensitivity and accuracy.}
+
 \label{table:comparison}
 \end{table}
 
@@ -505,13 +518,13 @@ The diversity posed hard challenges to the learning
 - it would have been easy to reach even higher accuracy values by omitting parts of our dataset.
 However, this turned \tool into a broadly applicable tool.
 
-In our next steps we will extend \tool to predict also the binding of short peptides to protein receptors, specifically to those of the GPCR subclass.
+In our next steps we will extend \tool to predict also the binding of short peptides to protein receptors, specifically to those of the GPCR family.
 We furthermore intend to expand \tool towards antibody-protein binding.
-Initial tests have shown, that the methods described in this paper are not directly applicable to this important class of protein interactions - which is easily understood, as the antibody binding mode via 3 very short loop segments does not reflect the general protein binding modes, covered currently by \tool. 
+Initial tests have shown, that the methods described in this paper are not directly applicable to this important class of protein interactions - which is easily understood, as the antibody binding mode via 3 very short loop segments does not reflect the general protein binding modes, covered currently by \toolblank. 
 
-Based on our extensive tests, we assume that
-\tool will be useful for understanding complex networks of protein-protein interactions,
-which provide the basis for a broad range of biological functionalities. 
+Based on our extensive tests, we expect
+\tool to be beneficial for the understanding of complex networks of protein-protein interactions,
+which are the basis for a broad range of mechanisms in biology.
 
 
 
