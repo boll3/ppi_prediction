@@ -83,6 +83,14 @@
   \node (db1) [io, right=1cm of db] {Human};
   \node (db2) [io, right=0.5cm of db1] {Non red.};
   \node (db3) [io, right=0.5cm of db2] {Others};
+
+  \draw [->] (seq) -- (ac);
+  \draw [->] (db) -- (backdb);
+  \draw [->] (ac) -- (prompt);
+  \draw [->] (prompt) -- (result);
+  \draw [->] (db1) |- (prompt);
+  \draw [->] (db2) |- (prompt);
+  \draw [->] (db3) |- (prompt);
   
 \end{tikzpicture}
 \end{document}
