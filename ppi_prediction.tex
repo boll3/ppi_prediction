@@ -156,7 +156,7 @@ Nevertheless, different proteome-wide prediction methods have shown
 that knowledge of the amino acid sequence alone may be sufficient to
 identify novel, functional protein-protein interactions
 \cite{Martin:2005, Shen:2007}. Due to its prominent and major
-advantages like simplicity, rapidity, and generality, this kind or
+advantages like simplicity, rapidity, and generality, this kind of
 prediction method became increasingly widespread over the last years
 \cite{Ofran:2003, Betel:2007, Liu:2012, Perovic:2017,
   Pan:2010}. Overall, Biology has seen a massive raise in applications
@@ -175,7 +175,7 @@ Additionally to its outstanding quality, it is
 an extremely fast high-throughput
 method.
 
-Therefore, \tool (\textbf{pr}ediction \textbf{o}f \textbf{m}atching \textbf{p}ar\textbf{t}ners)
+Therefore, \tool (protein \textbf{pr}ediction \textbf{o}f \textbf{m}atching \textbf{p}ar\textbf{t}ners)
 may serve as a reliable tool for identifying potential interaction partners from a database of
 known proteins, and may thus help to identify the yet unknown
 biological role of many proteins.
@@ -358,8 +358,9 @@ on human proteins, we cannot guarantee an equivalent prediction
 quality for other organisms. 
 
 The server is free for academic users. Providing an email is
-optional. Results for anonymous users will be made accessible via a
-public search engine.
+optional.
+%Results for anonymous users will be made accessible via a
+%public search engine.
 \tool\ was originally optimized for sequences with a minimum length of 16 AA.
 
 %\TODO{Ist das in dem webserver so umgesetzt?
@@ -375,26 +376,26 @@ public search engine.
 The sequence length of the uploaded proteins is detected automatically. When the user provides
 sequences shorter than 16aa, a warning is thrown,
 the calculation is performed nonetheless.
-\TODO{Check}
+%\TODO{Check}
 
 As output a ranked and scored list of proteins from the database is
 returned. By default it is truncated after the first 100 top
 hits. This can be adjusted on the webform. 
 
-\TODO{ screenshots}
+%\TODO{ screenshots}
 
 \subsection{Performance}
 \label{performance}
 
 Based on our test set of 5094 positive and 5094 negative cases
 (binders vs. non-binders), we plot the receiver operation
-characteristics (ROC) curve, see Figure \ref{fig:roc}. These allow not
-only to estimate the overall quality of the predictions, but also
+characteristics (ROC) curve, see Figure \ref{fig:roc}.
+These allow not only to estimate the overall quality of the predictions, but also
 gives a visual overview over the relationship between true and false
 positives. This allows to select a useful threshold and thus a
 finetuning of sensitivity versus specificity.
 
-An ideal signal would have would lead to a plot with rectangular shape
+An ideal signal would lead to a plot with rectangular shape
 with an area under the curve (AUC) of 1. The other extreme, pure noise, would be a crossing
 line with an AUC of 0.5.
 
@@ -404,7 +405,8 @@ sensitivity: 0.87,
 accuracy: 0.88.
 
 Currently, our method balances specificity and sensitivity to avoid an
-unwanted bias in different applications. \TODO{(is this the best solution for the server?)} 
+unwanted bias in different applications.
+% \TODO{(is this the best solution for the server?)} 
 
 \begin{figure}[t]
 \includegraphics[width=0.5\textwidth]{img/meta_final_roc.pdf}
@@ -520,7 +522,7 @@ However, this turned \tool into a broadly applicable tool.
 
 In our next steps we will extend \tool to predict also the binding of short peptides to protein receptors, specifically to those of the GPCR family.
 We furthermore intend to expand \tool towards antibody-protein binding.
-Initial tests have shown, that the methods described in this paper are not directly applicable to this important class of protein interactions - which is easily understood, as the antibody binding mode via 3 very short loop segments does not reflect the general protein binding modes, covered currently by \toolblank. 
+Initial tests have shown, that the methods described in this paper are not directly applicable to this important class of protein interactions - which is easily understood, as the antibody binding mode via 3 very short loop segments does not reflect the general protein binding modes, covered currently by \toolblank. \TODO{ -- eher kritischer abschnitt, ist das sinnvoll?}
 
 Based on our extensive tests, we expect
 \tool to be beneficial for the understanding of complex networks of protein-protein interactions,
