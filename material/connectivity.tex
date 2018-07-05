@@ -84,13 +84,13 @@
   \node (db2) [io, right=0.5cm of db1] {Non red.};
   \node (db3) [io, right=0.5cm of db2] {Others};
 
-  \draw [->] (seq) -- (ac);
-  \draw [->] (db) -- (backdb);
-  \draw [->] (ac) -- (prompt);
-  \draw [->] (prompt) -- (result);
-  \draw [->] (db1) |- (prompt);
-  \draw [->] (db2) |- (prompt);
-  \draw [->] (db3) |- (prompt);
+  \draw [->, shorten >=2pt, shorten <=2pt] (seq) -- (ac);
+  \draw [->, shorten <=2pt] (db) -- (backdb);
+  \draw [->, shorten >=2pt, shorten <=2pt] (ac) -- (prompt);
+  \draw [->, shorten >=2pt, shorten <=2pt] (prompt) -- (result);
+  \draw [->, shorten >=3pt, shorten <=3pt] (db1) edge (prompt);
+  \draw [->, shorten >=3pt, shorten <=3pt] (db2) edge (prompt);
+  \draw [->, shorten >=3pt, shorten <=3pt] (db3) edge (prompt);
   
 \end{tikzpicture}
 \end{document}
