@@ -15,9 +15,11 @@
 \tikzstyle{queries}=[draw,circle,burntorange, left color=\oran,
                        text=violet,minimum width=30pt]
 
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=burntorange,left color=\oran]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=burntorange,left color=\oran,text=black]
 
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, bottom color=\lav, top color=white]
+\tikzstyle{res} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=violet,bottom color=\lav, top color=white,text=black]
+
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=violet, bottom color=\lav, top color=white]
 
 \tikzstyle{grey} = [ rectangle, rounded corners=10pt, bottom color=black!10, top color=black!2] 
 
@@ -58,16 +60,16 @@
 
   
 
-  \node (r1) [io, below of=35] {Query 1};
-  \node (r2) [io, below of=r1] {Query 2};
-  \node (r3) [io, below of=r2] {Query 3};
-  \node (r4) [io, below of=r3] {Query 4};
+  \node (r1) [res, below of=35] {Query 1};
+  \node (r2) [res, below of=r1] {Query 2};
+  \node (r3) [res, below of=r2] {Query 3};
+  \node (r4) [res, below of=r3] {Query 4};
 
-  \node (webform) [grey, minimum width = 4.5cm, minimum height=6.8cm] at (-16.5cm,-7.2 ) {\parbox[t][5.8cm]{1.7cm}{\Large  Webform}};
+  \node (webform) [grey, minimum width = 4.5cm, minimum height=6.2cm] at (-16.5cm,-7.5 ) {\parbox[t][5.8cm]{1.7cm}{\Large  Webform}};
 
-  \node (server) [grey, minimum width = 7.5cm, minimum height=3cm] at (-10.2cm,-5.5 ) {\parbox[t][2.5cm]{2.5cm}{\Large  ProteinPrompt}};
+  \node (server) [grey, minimum width = 7.5cm, minimum height=2.4cm] at (-10.2cm,-5.7 ) {\parbox[t][2.1cm]{2.8cm}{\Large  ProteinPrompt}};
 
-  \node (result) [io] at (n5 |- r1) {Binders};
+  \node (result) [res] at (n5 |- r1) {Binders};
 
   \node (prompt) [process, left=1cm of result] {Random Forrest};
 
@@ -78,19 +80,25 @@
   \node (db)  [io, below=0.7 of tag] {Database};
 
 
-  \node (backdb) [grey, right=0.5cm of db, minimum width=12cm, minimum height=2.2cm] {};
+  \node (backdb) [grey, minimum width=9.4cm, minimum height=3.9cm] at (-9.25cm,-10cm) {\parbox[t][3.1cm]{5.5cm}{\Large Databases to scan against}};
   
-  \node (db1) [io, right=1cm of db] {Human};
-  \node (db2) [io, right=0.5cm of db1] {Non red.};
-  \node (db3) [io, right=0.5cm of db2] {Others};
+  \node (db1) [io, right=1.5cm of db] {Human};
+  \node (db2) [io, right=0.5cm of db1] {Mammalia};
+  \node (db3) [io, below=0.3cm of db1] {Vertebrata};
+  \node (db4) [io, below=0.3cm of db2] {Metazoa};
 
   \draw [->, shorten >=2pt, shorten <=2pt] (seq) -- (ac);
-  \draw [->, shorten <=2pt] (db) -- (backdb);
+  \draw [->, shorten <=2pt, shorten >=9pt] (db) -- (db1);
   \draw [->, shorten >=2pt, shorten <=2pt] (ac) -- (prompt);
   \draw [->, shorten >=2pt, shorten <=2pt] (prompt) -- (result);
-  \draw [->, shorten >=3pt, shorten <=3pt] (db1) edge (prompt);
-  \draw [->, shorten >=3pt, shorten <=3pt] (db2) edge (prompt);
-  \draw [->, shorten >=3pt, shorten <=3pt] (db3) edge (prompt);
+  \draw [->, ] (-8.1,-7.9) edge (-8.1,-6.5);
+
+  \draw [loosely dotted, shorten >=3pt, shorten <=3pt] (result) -- (r1);
+  \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r2);
+  \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r3);
+  \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r4);
+
+  
   
 \end{tikzpicture}
 \end{document}
