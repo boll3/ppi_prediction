@@ -1,7 +1,9 @@
 \documentclass{article}
-\usepackage{tikz}
+\usepackage{tikz,graphicx}
 \usetikzlibrary{shapes.geometric, arrows}
 \usetikzlibrary{shapes.misc, positioning}
+\usetikzlibrary{backgrounds}
+
 
 \definecolor{lavander}{cmyk}{0,0.48,0,0}
 \definecolor{violet}{cmyk}{0.79,0.88,0,0}
@@ -15,18 +17,22 @@
 \tikzstyle{queries}=[draw,circle,burntorange, left color=\oran,
                        text=violet,minimum width=30pt]
 
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=burntorange,left color=\oran,text=black]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=burntorange,left color=\oran,text=black,font=\Large]
 
-\tikzstyle{res} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=violet,bottom color=\lav, top color=white,text=black]
+\tikzstyle{res} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=violet,bottom color=\lav, top color=white,text=black,font=\Large]
 
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=violet, bottom color=\lav, top color=white]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=violet, bottom color=\lav, top color=white,font=\Large]
 
-\tikzstyle{grey} = [ rectangle, rounded corners=10pt, bottom color=black!10, top color=black!2] 
+\tikzstyle{grey} = [ rectangle, rounded corners=10pt, bottom color=black!10, top color=black!2,font=\Large] 
 
 \begin{document}
-\begin{tikzpicture}[auto,thick, scale=0.5, transform shape,align=center, node distance = 1.5cm]
 
-    \node[queries] (n0) at (-4,0) {query};
+
+\hspace*{-3cm}
+\begin{tikzpicture}[auto,thick, scale=0.6, transform shape,align=left, node distance = 1.5cm]
+
+
+  \node[queries] (n0) at (-4,0) {query};
     \foreach \k/\l/\j in {1/1/2,-1/1/8,1.4/0/3,-1.4/0/7,1/-1/4,-1/-1/6,0/1.4/1,0/-1.4/5}{
         \node[neighbors] (n\j) at (\k-4,\l) {b:\j};
         %      \path (n\i\j) edge (\i);
@@ -55,50 +61,52 @@
     }
   }
   
-  \draw (43) -- (27);
-
-
-  
+ % \draw (43) -- (27);
 
   \node (r1) [res, below of=35] {Query 1};
   \node (r2) [res, below of=r1] {Query 2};
   \node (r3) [res, below of=r2] {Query 3};
   \node (r4) [res, below of=r3] {Query 4};
 
-  \node (webform) [grey, minimum width = 4.5cm, minimum height=6.2cm] at (-16.5cm,-7.5 ) {\parbox[t][5.8cm]{1.7cm}{\Large  Webform}};
-
-  \node (server) [grey, minimum width = 7.5cm, minimum height=2.4cm] at (-10.2cm,-5.7 ) {\parbox[t][2.1cm]{2.8cm}{\Large  ProteinPrompt}};
-
   \node (result) [res] at (n5 |- r1) {Binders};
-
   \node (prompt) [process, left=1cm of result] {Random Forrest};
-
   \node (ac) [process, left=1cm of prompt] {Autocorrolation};
 
-  \node (seq) [io, left=1cm of ac] {Sequence};
+  \node (seq) [io, left=1.5cm of ac] {Sequence};
   \node (tag) [io, below=0.7 of seq] {Tags};
   \node (db)  [io, below=0.7 of tag] {Database};
 
-
-  \node (backdb) [grey, minimum width=9.4cm, minimum height=3.9cm] at (-9.25cm,-10cm) {\parbox[t][3.1cm]{5.5cm}{\Large Databases to scan against}};
-  
-  \node (db1) [io, right=1.5cm of db] {Human};
+  \node (db1) [io, right=2.5cm of db] {Human};
   \node (db2) [io, right=0.5cm of db1] {Mammalia};
   \node (db3) [io, below=0.3cm of db1] {Vertebrata};
   \node (db4) [io, below=0.3cm of db2] {Metazoa};
 
+  
+  \begin{scope}[on background layer]
+    \node (server) [grey, minimum width = 9.2cm, minimum height=2.4cm, below left=-2cm and -4.1cm of prompt] {\parbox[t][2.1cm]{2.8cm}{\Large  ProteinPrompt}};
+    \node (webform) [grey, minimum width = 5cm, minimum height=6cm, below left=-5.6cm and -3cm of db] {\parbox[t][5.7cm]{1.7cm}{\Large  Webform}};
+    \node (backdb) [grey, minimum width=10.4cm, minimum height=3.7cm, below left=-2.cm and -3.3cm of db2] {\parbox[t][3.3cm]{5.5cm}{\Large Databases to scan against}};
+  \end{scope}
+
+  
   \draw [->, shorten >=2pt, shorten <=2pt] (seq) -- (ac);
-  \draw [->, shorten <=2pt, shorten >=9pt] (db) -- (db1);
+  \draw [->, shorten <=2pt, shorten >=22pt] (db) -- (db1);
   \draw [->, shorten >=2pt, shorten <=2pt] (ac) -- (prompt);
   \draw [->, shorten >=2pt, shorten <=2pt] (prompt) -- (result);
-  \draw [->, ] (-8.1,-7.9) edge (-8.1,-6.5);
+  \draw [->, ] (-8.6,-7.9) edge (-8.6,-6.5);
 
   \draw [loosely dotted, shorten >=3pt, shorten <=3pt] (result) -- (r1);
   \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r2);
   \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r3);
   \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r4);
 
-  
-  
+
+  \path (seq) |- node(logo)[inner sep=0,above=1.5cm]
+        {\includegraphics[width=0.4\textwidth]{../img/logo_small.jpg}}
+  (n0);
+
+
+
+
 \end{tikzpicture}
 \end{document}

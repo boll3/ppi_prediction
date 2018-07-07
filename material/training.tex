@@ -28,8 +28,9 @@
 \begin{document}
 \begin{tikzpicture}[auto,thick, scale=0.5, transform shape,align=center, node distance = 1.5cm]
 
-
-  \node (final) [io] {\large ProteinPrompt - final predictor};
+  \tikz {every node} = [font=\LARGE]
+  
+  \node (final) [io] { ProteinPrompt - final predictor};
   \node (apply) [process, below=1cm of final] {Evaluate}
   edge [aro] (final);
   \node (opt) [process,below=1cm of apply] {Optimize};
@@ -38,7 +39,7 @@
                             (opt.north) edge (apply.south);
 
 
-  \node[grey,minimum width=11cm,minimum height=9.5cm,below left=0.5cm and 0 of opt]{ \parbox[b][8.5cm]{4cm}{\Large Positive Dataset}};
+  \node[grey,minimum width=11cm,minimum height=9.5cm,below left=0.5cm and 0 of opt]{ \parbox[b][8.5cm]{4cm}{Positive Dataset}};
   
   \node (ptrain) [io,below left=1cm and 3.4cm of opt] {Train}
   edge[aro,bend left=45] (opt.west);
@@ -62,7 +63,7 @@
   \node (ip3) [io,left=1cm of ip1] {PDB}
   edge[aro](pclean);
 
-  \node[grey,minimum width=11cm,minimum height=9.5cm,below right=0.5cm and 0 of opt]{ \parbox[b][8.5cm]{4cm}{\Large Negative Dataset}};
+  \node[grey,minimum width=11cm,minimum height=9.5cm,below right=0.5cm and 0 of opt]{ \parbox[b][8.5cm]{5cm}{Negative Dataset}};
 
   \node (ntrain) [io,below right=1cm and 3cm of opt] {Train}
   edge[aro,bend right=45] (opt.east);
