@@ -1,34 +1,35 @@
-\documentclass{article}
-\usepackage{tikz,graphicx}
-\usetikzlibrary{shapes.geometric, arrows}
-\usetikzlibrary{shapes.misc, positioning}
-\usetikzlibrary{backgrounds}
+\iffalse
+%\documentclass{article}
+%\usepackage{tikz,graphicx}
+%\usetikzlibrary{shapes.geometric, arrows}
+%\usetikzlibrary{shapes.misc, positioning}
+%\usetikzlibrary{backgrounds}
+%
+%
+%\definecolor{lavander}{cmyk}{0,0.48,0,0}
+%\definecolor{violet}{cmyk}{0.79,0.88,0,0}
+%\definecolor{burntorange}{cmyk}{0,0.52,1,0}
+%
+%\def\lav{lavander!90}
+%\def\oran{orange!30}
+%
+%\tikzstyle{neighbors}=[draw,circle,violet,bottom color=\lav,
+%                  top color= white, font=\scriptsize,text=violet,minimum width=10pt]
+%\tikzstyle{queries}=[draw,circle,burntorange, left color=\oran,
+%                       text=violet,minimum width=30pt]
+%
+%\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=burntorange,left color=\oran,text=black,font=\Large]
+%
+%\tikzstyle{res} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=violet,bottom color=\lav, top color=white,text=black,font=\Large]
+%
+%\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=violet, bottom color=\lav, top color=white,font=\Large]
+%
+%\tikzstyle{grey} = [ rectangle, rounded corners=10pt, bottom color=black!10, top color=black!2,font=\Large] 
+%
+%\begin{document}
+\fi
 
-
-\definecolor{lavander}{cmyk}{0,0.48,0,0}
-\definecolor{violet}{cmyk}{0.79,0.88,0,0}
-\definecolor{burntorange}{cmyk}{0,0.52,1,0}
-
-\def\lav{lavander!90}
-\def\oran{orange!30}
-
-\tikzstyle{neighbors}=[draw,circle,violet,bottom color=\lav,
-                  top color= white, font=\scriptsize,text=violet,minimum width=10pt]
-\tikzstyle{queries}=[draw,circle,burntorange, left color=\oran,
-                       text=violet,minimum width=30pt]
-
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=burntorange,left color=\oran,text=black,font=\Large]
-
-\tikzstyle{res} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=violet,bottom color=\lav, top color=white,text=black,font=\Large]
-
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=violet, bottom color=\lav, top color=white,font=\Large]
-
-\tikzstyle{grey} = [ rectangle, rounded corners=10pt, bottom color=black!10, top color=black!2,font=\Large] 
-
-\begin{document}
-
-
-\hspace*{-3cm}
+\hspace*{-2cm}
 \begin{tikzpicture}[auto,thick, scale=0.6, transform shape,align=left, node distance = 1.5cm]
 
 
@@ -102,11 +103,9 @@
 
 
   \path (seq) |- node(logo)[inner sep=0,above=1.5cm]
-        {\includegraphics[width=0.4\textwidth]{../img/logo_small.jpg}}
+        {\includegraphics[width=0.4\textwidth]{img/logo_small.jpg}}
   (n0);
 
-
-
-
 \end{tikzpicture}
-\end{document}
+
+%%\end{document}

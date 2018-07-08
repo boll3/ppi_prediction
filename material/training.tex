@@ -1,31 +1,34 @@
-\documentclass{article}
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows}
-\usetikzlibrary{shapes.misc, positioning}
+\iffalse
+%\documentclass{article}
+%\usepackage{tikz}
+%\usetikzlibrary{shapes.geometric, arrows}
+%\usetikzlibrary{shapes.misc, positioning}
+%
+%\definecolor{lavander}{cmyk}{0,0.48,0,0}
+%\definecolor{violet}{cmyk}{0.79,0.88,0,0}
+%\definecolor{burntorange}{cmyk}{0,0.52,1,0}
+%
+%\def\lav{lavander!90}
+%\def\oran{orange!30}
+%
+%\tikzstyle{neighbors}=[draw,circle,violet,bottom color=\lav,
+%                  top color= white, font=\scriptsize,text=violet,minimum width=10pt]
+%\tikzstyle{queries}=[draw,circle,burntorange, left color=\oran,
+%                       text=violet,minimum width=30pt]
+%
+%\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=burntorange,left color=\oran,text=black]
+%
+%\tikzstyle{res} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=violet,bottom color=\lav, top color=white,text=black]
+%
+%\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=violet, bottom color=\lav, top color=white]
+%
+%\tikzstyle{grey} = [ rectangle, rounded corners=10pt, bottom color=black!10, top color=black!2] 
+%
+%\tikzstyle{aro} = [->, thick,  shorten >=2pt, shorten <=2pt]
+%
+%\begin{document}
+\fi
 
-\definecolor{lavander}{cmyk}{0,0.48,0,0}
-\definecolor{violet}{cmyk}{0.79,0.88,0,0}
-\definecolor{burntorange}{cmyk}{0,0.52,1,0}
-
-\def\lav{lavander!90}
-\def\oran{orange!30}
-
-\tikzstyle{neighbors}=[draw,circle,violet,bottom color=\lav,
-                  top color= white, font=\scriptsize,text=violet,minimum width=10pt]
-\tikzstyle{queries}=[draw,circle,burntorange, left color=\oran,
-                       text=violet,minimum width=30pt]
-
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=burntorange,left color=\oran,text=black]
-
-\tikzstyle{res} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, color=violet,bottom color=\lav, top color=white,text=black]
-
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=violet, bottom color=\lav, top color=white]
-
-\tikzstyle{grey} = [ rectangle, rounded corners=10pt, bottom color=black!10, top color=black!2] 
-
-\tikzstyle{aro} = [->, thick,  shorten >=2pt, shorten <=2pt]
-
-\begin{document}
 \begin{tikzpicture}[auto,thick, scale=0.5, transform shape,align=center, node distance = 1.5cm]
 
   \tikz {every node} = [font=\LARGE]
@@ -52,7 +55,7 @@
   \draw [aro] (ppool) edge (ptest)
   edge( ptrain);
 
-  \node (pclean) [process,below=1cm of ppool] {Clean \& CD-Hit}
+  \node (pclean) [process,below=1cm of ppool] {Filtering}
   edge[aro](ppool);
   
   
@@ -73,7 +76,7 @@
 
   \path (ntrain) -- node(npool)[io,below=1.5cm]{Pool} (ntest);
 
-  \node (nclean) [process,below=1cm of npool] {Clean \& CD-Hit}
+  \node (nclean) [process,below=1cm of npool] {Filtering}
   edge[aro] (npool);
   
   \draw [aro] (npool) edge (ntest)
@@ -92,6 +95,6 @@
 \end{tikzpicture}
 
 
-\end{document}
+%\end{document}
 
   
