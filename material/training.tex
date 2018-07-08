@@ -42,7 +42,7 @@
                             (opt.north) edge (apply.south);
 
 
-  \node[grey,minimum width=11cm,minimum height=9.5cm,below left=0.5cm and 0 of opt]{ \parbox[b][8.5cm]{4cm}{Positive Dataset}};
+  \node[grey,minimum width=11cm,minimum height=11.5cm,below left=0.5cm and 0 of opt]{ \parbox[b][10.5cm]{4cm}{Positive Dataset}};
   
   \node (ptrain) [io,below left=1cm and 3.4cm of opt] {Train}
   edge[aro,bend left=45] (opt.west);
@@ -59,11 +59,13 @@
   edge[aro](ppool);
   
   
-  \node (ip1) [io, below=1cm of pclean] {DIP}
+  \node (ip1) [io, below left=1.5cm of pclean] {PDB}
   edge[aro](pclean);
-  \node (ip2) [io,right=1cm of ip1] {HPRD}
+  \node (ip2) [io,right=4cm of ip1] {HPRD}
   edge[aro](pclean);
-  \node (ip3) [io,left=1cm of ip1] {PDB}
+  \node (ip3) [io,below right=0.8cm of ip1] {DIP}
+  edge[aro](pclean);
+  \node (ip4) [io,right=1cm of ip3] {KUPS}
   edge[aro](pclean);
 
   \node[grey,minimum width=11cm,minimum height=9.5cm,below right=0.5cm and 0 of opt]{ \parbox[b][8.5cm]{5cm}{Negative Dataset}};
