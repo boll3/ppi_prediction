@@ -29,7 +29,7 @@
 %\begin{document}
 \fi
 
-\hspace*{-2cm}
+\hspace*{-1.5cm}
 \begin{tikzpicture}[auto,thick, scale=0.6, transform shape,align=left, node distance = 1.5cm]
 
 
@@ -77,7 +77,7 @@
   \node (tag) [io, below=0.7 of seq] {Tags};
   \node (db)  [io, below=0.7 of tag] {Database};
 
-  \node (db1) [io, right=2.5cm of db] {Human};
+  \node (db1) [io, right=2.1cm of db] {Human};
   \node (db2) [io, right=0.5cm of db1] {Mammalia};
   \node (db3) [io, below=0.3cm of db1] {Vertebrata};
   \node (db4) [io, below=0.3cm of db2] {Metazoa};
@@ -102,9 +102,9 @@
   \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r4);
 
 
-  \path (seq) |- node(logo)[inner sep=0,above=1.5cm]
-        {\includegraphics[width=0.4\textwidth]{img/logo_small.jpg}}
-  (n0);
+%  \path (seq) |- node(logo)[inner sep=0,above=1.5cm]
+%        {\includegraphics[width=0.4\textwidth]{img/logo_small.jpg}}
+%  (n0);
 
 \end{tikzpicture}
 

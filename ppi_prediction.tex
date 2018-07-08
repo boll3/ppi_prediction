@@ -1,4 +1,5 @@
-\documentclass[preprint,3p,times,twocolumn]{elsarticle}
+\documentclass{nature}
+%\documentclass[preprint,3p,times,twocolumn]{elsarticle}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{amssymb}
@@ -9,7 +10,7 @@
 \usepackage{rotating,capt-of}
 \usepackage[small]{caption}
 \usepackage{booktabs}
-\usepackage{float} % for placing figures where i want
+%\usepackage{float} % for placing figures where i want
 \usepackage{afterpage}
 \usepackage{epsfig, a4wide}
 
@@ -54,34 +55,54 @@
 \newcommand{\Hsa}{\emph{Homo sapiens}}
 \newcommand{\hsa}{\emph{H.sapiens}}
 
-\journal{Preprint}
+%\journal{Preprint}
 
-\DeclareCaptionLabelFormat{simplesupp}{#1~S#2} % new caption format with Sxx
+%\DeclareCaptionLabelFormat{simplesupp}{#1~S#2} % new caption format with Sxx
+
+\bibliographystyle{naturemag}
+
+\title{\tool: fast and accurate prediction of Protein-Protein-Interactions}
+
+\author{ Sebastian Canzler$^{1,3}$ \& Ren\'{ex} Staritzbichler$^{2,3}$}
+
 
 \begin{document}
 
-\begin{frontmatter}
-   
-\title{\tool: fast and accurate prediction of Protein-Protein-Interactions}
+%\begin{frontmatter}
 
-\author[LEI,IMT]{Sebastian Canzler\corref{cor1}}
-\ead{sebastian@bioinf.uni-leipzig.de}
-\author[PHY,IMT]{Ren\'{e} Staritzbichler\corref{cor1}}
-\ead{rene.staritzbichler@medizin.uni-leipzig.de}
+  
+\maketitle
 
 
-\address[LEI]{Bioinformatics Group, Department of Computer Science,
+\begin{affiliations}
+\item Bioinformatics Group, Department of Computer Science,
   University of Leipzig,
   H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
-}
-\address[PHY]{ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
-  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany.}
+  
+\item ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
+  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
+  
+\item Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany
+\end{affiliations}
 
-\address[IMT]{Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
+%\author[LEI,IMT]{Sebastian Canzler\corref{cor1}}
+%\ead{sebastian@bioinf.uni-leipzig.de}
+%\author[PHY,IMT]{Ren\'{e} Staritzbichler\corref{cor1}}
+%\ead{rene.staritzbichler@medizin.uni-leipzig.de}
+
+
+%\address[LEI]{Bioinformatics Group, Department of Computer Science,
+%  University of Leipzig,
+%  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
+%}
+%\address[PHY]{ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
+%  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany.}
+%
+%\address[IMT]{Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
 
 
 %\cortext[jfa]{Joint first authors}
-\cortext[cor1]{Corresponding author}
+%\cortext[cor1]{Corresponding author}
 
 % --------------------------------------------------------------------------- %
  
@@ -104,11 +125,11 @@
 
 \end{abstract}
 
-\begin{keyword}
-  protein-protein-interaction, machine learning, random forest
-\end{keyword}
+%\begin{keyword}
+%  protein-protein-interaction, machine learning, random forest
+%\end{keyword}
 
-\end{frontmatter}
+%\end{frontmatter}
 
 % --------------------------------------------------------------------------- %
 
@@ -530,27 +551,19 @@ which are the basis for a broad range of mechanisms in biology.
 
 
 
-%\begin{itemize}
-% \item why is our tool better than the others?
-% \item random forest approach
-% \item far more datapoints in training data sets
-% \item focusing on most important amino acid scales
-%\item inverse reverse included
-%\item trained on human proteins
-%\item scan against nearly all annotated human proteins that are available
-%\item comprehensive name mapping between different human protein databases
-% \end{itemize}
 
+%% Here is the endmatter stuff: Supplementary Info, etc.
+%% Use \item's to separate, default label is "Acknowledgements"
 
-% --------------------------------------------------------------------------- %
-
-\section*{Acknowledgments}
-
-This work was funded by the S\"achsische Aufbaubank (SAB).
+\begin{addendum}
+ \item [Acknowledgements] This work was funded by the S\"achsische Aufbaubank (SAB).
 Johanna Tiemann, Peter Hildebrand and Thorsten Kaiser for proofreading.
 The universe for all the cookies.
-
-%\stoptext
+ \item[Competing Interests] The authors declare that they have no
+competing financial interests.
+ \item[Correspondence] Correspondence and requests for materials
+should be addressed to R.S. and S.C. (email: rene.staritzbichler@medizin.uni-leipzig.de,sebastian@bioinf.uni-leipzig.de).
+\end{addendum}
 
 \bibliographystyle{naturemag}
 \bibliography{ppi_prediction}

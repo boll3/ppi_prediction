@@ -76,8 +76,7 @@
 
 %\newcommand{\tool}{\texttt{rfPRO}}
 %\newcommand{\tool}{\texttt{jackProt}}
-\newcommand{\toolblank}{\texttt{ProteinPrompt}}
-\newcommand{\tool}{\toolblank\hspace{2pt}}
+\newcommand{\tool}{\texttt{ProteinPrompt}}
 \newcommand{\website}{\url{proteinformatics.org/\tool}}
 
 \newcommand{\Hsa}{\emph{Homo sapiens}}
@@ -88,7 +87,6 @@
 \bibliographystyle{naturemag}
 \title{\tool: fast and accurate prediction of Protein-Protein-Interactions}
 
-
 \author{ Sebastian Canzler$^{1,3}$, Ren\'{e} Staritzbichler$^{2,3}$}
 
 
@@ -96,76 +94,67 @@
 
 \maketitle
 
-%\begin{affiliations}
-%\item Bioinformatics Group, Department of Computer Science,
-%  University of Leipzig,
-%  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
-%  
-%\item ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
-%  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
-%  
-%\item Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany
-%\end{affiliations}
 
 
 
-
-
-
-% --------------------------------------------------------------------------- %
- 
 
 \begin{abstract}
 
-  Here, we present \tool, a precise machine learning method for the calculation of protein-protein interactions.
-  Learning methods depend crucially on both size and quality of datasets used for training and testing.
-  Starting point of \tool was therefore the collection of a comprehensive dataset from basically all available sources.
-  In turn, a very thorough filtering was imperative.
-  The actual keystep is the transformation of the original sequence data into a representation that enables the learning algorithm to understand the underlying patterns that lead to binding versus non-binding.
-   \tool exploits the random forest algorithm using auto-correlation of seven amino-acid scales.
-   Based on this combination, \tool is reaching an area under curve of 0.95, which is far above any other publicly available tool. 
-  
-  \tool  is accessible online as a webserver:
-  \website
-  The server allows  scanning the human proteasome for potential binding partners of the query in unprecedent accurracy.
-  A scan through the entire human proteasome is performed within minutes.  
-  
+ Proteins are the 'machines' of the cell, consisting of linear chains of amino acids.
+They fulfil manyfold roles as receptors, enzymes, transporters or molecular factories.
+Understanding biological processes often depends on insight into the interaction between proteins.
+
+Computations of the binding behaviour of proteins can both complement and guide experimental studies.
+However, calculating protein binding in atomic detail is highly time consuming and requires  knowledge about their structures.
+While proteins are complex threedimensional molecules, their structure, function and also binding behaviour is encoded in their amino acid sequence.
+In turn, many of their properties and behaviour can be understood from their sequence.
+We developed \tool, a tool based on machine learning, using the sequences of protein pairs as input to estimate their tendency to bind.
+
+Starting point of the training of a learning algorithm, was the collection of a comprehensive dataset from basically all available sources.
+Positive data was collected from the
+Database of Human Interacting Proteins (DIP)
+\cite{Salwinski:2004},
+Human Protein Reference Database (HPRD)
+\cite{Keshava_Prasad:2009},
+Protein  Database (PDB) \cite{Berman:2000}.
+We also included annotations retrieved from the
+KUPS server \cite{Chen:2011}.
+Negative data was collected
+from the Negatome Database \cite{Blohm:2014}  and the KUPS server.
+
+
+After collecting such a broad database, a thorough curation was imperative.
+We performed several iterations of filtering and cleanup, automated in terms of computational tools, as well as through manual inspection.
+
+Obviously, the quality of a learning method depends crucially both on the amount as well as on the quality of the datasets used for training.
+But the key to 'stellar' performance lays often in the way, the data is presented to the learning algorithm itself. 
+Sequences can not be fed into learning algorithms directly, but need to be translated into descriptors that enable the learning algorithm to spot the patterns, whether a pair of sequences will bind or not.
+We identified autocorralation profiles on hydrophobicity scales to best capture the binding propensity. 
+
+Learning algorithms themselves are available in many implementations.
+Most prominently in the rise of learning approaches in biology  are artificial neural networks (ANN).
+We compared ANNs with support vector machines and several other learning methods.
+As a result, we identified the random forrest approach as leading to the cleanest separation of binders and non-binders.
+
+The described procedure resulted in an accurracy far above any other available tool, with the following values:
+area under curve of 0.94,
+specificity of 0.88
+sensitivity: 0.84,
+and a total accurracy of 0.86.
+Testing was performed on a challenging dataset, as the comparison with other tools shows (see Fig. \ref{fig:comparison}).
+
+\tool\  is available online, free for academic users. The server allows users to scan several databases for potential binders of their query sequence. 
+Scanning a query sequence against the human database requires around one minute. 
+(The URL will be ready for testing by the time of submission of the full draft.) \\
+\noindent \centerline{\website.} \\
 
 \end{abstract}
 
 
-\section*{Scientific summary}
-
-
-We achieved a significant breakthrough in the high-throughput detection of protein binders for a query protein sequence.
-
-
-\section*{Popular summary}
-
-Proteins are the \'machines\' of the cell, consisting of linear chains of amino acids. They fulfill manyfold roles as receptors, enzymes, transporters or molecular factories. Understanding biological processes involves mostly knowledge about the interaction of proteins an thus their binding.
-Why computations?
-Calculating protein binding in atomic detail is highly time consuming.
-While the proteins are complex threedimensional molecules, their structure, function and also binding behaviour is encoded in their amino acid sequence. In turn, many of their properties and behaviour can be understood from their sequence.
-
-
-Biology sees an increase of applications based on learning algorithms. Learning algorithms, most prominently artificial neural networks, but with many other very powerful approaches as well. 
-
-
-Here we present a new tool in the field of computational biology, \tool. 
-
-
-Learning algorithms themselves are available in many implementations.
-Databases and curation, automated in terms of computational tools, as well as manual inspection.
-
-Data needs to be translated. Thus 
-
-
 
 \begin{figure}
-  \includegraphics[width=0.5\textwidth]{img/comparison_roc.pdf}
-  \caption{Comparison of ROC-curves between \tool, \spps, \tri, \lr\ 
-    using a diminished test dataset including 968
-    protein-protein pairs.}
+  \centerline{\includegraphics[width=0.5\textwidth]{img/comparison_roc.pdf}}
+  \caption{Quality estimate: comparison of ROC-curves between \tool, \spps, \tri, \lr\ using a diminished test dataset including 968 protein-protein pairs.}
   \label{fig:comparison}
 \end{figure}
 
@@ -178,22 +167,24 @@ Data needs to be translated. Thus
 
 \begin{figure}
   \include{material/connectivity}
-  \caption{The user has to provide the query sequence, a tag for later identification, and to select the database in which potential binders are expected. \tool converts the sequence first into autocorrelation descriptors prior to calling the random forrest algorithm. The server returns a list of potential binders, sorted by expected binding strength. The website displays a searchable and filterable table. Additionally a download link is provided. Having accumulated the lists for several queries, connectivities, and thus complex binding networks can be investigated. }
+  \caption{Workflow of the \tool\  server: the user has to provide the query sequence, a tag for later identification, and to select the database in which potential binders are expected. \tool\  converts the sequence first into autocorrelation descriptors prior to calling the random forrest algorithm. The server returns a list of potential binders, sorted by expected binding strength. The website displays the results as a table, that can be filtered by keywords and sorted by several criteria. Additionally, a download link is provided. Having accumulated the lists for several queries, connectivities and thus complex binding networks can be explored. }
+\end{figure}
+
+\begin{figure}
+%  \include{material/webform}
+  \caption{The webform of \tool.
+    Required inputs are the sequence and a tag, allowing to locate results.
+    Users providing their email will be able to access their results for 2 weeks.
+    By default, the query sequence is scanned against the (filtered) human database, containing XX entries.
+    Other organisms can be selected in the drop-down.
+    (Subject to further development until publication.)}
 \end{figure}
 
 
 
-%% Here is the endmatter stuff: Supplementary Info, etc.
-%% Use \item's to separate, default label is "Acknowledgements"
 
-%\begin{addendum}
-% \item Put acknowledgements here.
-% \item[Competing Interests] The authors declare that they have no
-%competing financial interests.
-% \item[Correspondence] Correspondence and requests for materials
-%should be addressed to R.S. and S.C. (email: rene.staritzbichler@medizin.uni-leipzig.de,sebastian@bioinf.uni-leipzig.de).
-%\end{addendum}
-
+\bibliographystyle{naturemag}
+\bibliography{ppi_prediction}
 
 
 
