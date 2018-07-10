@@ -42,7 +42,7 @@
                             (opt.north) edge (apply.south);
 
 
-  \node[grey,minimum width=11cm,minimum height=11.5cm,below left=0.5cm and 0 of opt]{ \parbox[b][10.5cm]{4cm}{Positive Dataset}};
+  \node[grey,minimum width=11cm,minimum height=11.cm,below left=0.5cm and 0 of opt]{\parbox[b][10.cm]{4cm}{Positive Dataset}};
   
   \node (ptrain) [io,below left=1cm and 3.4cm of opt] {Train}
   edge[aro,bend left=45] (opt.west);
@@ -59,18 +59,18 @@
   edge[aro](ppool);
   
   
-  \node (ip1) [io, below left=1.5cm of pclean] {PDB}
+  \node (ip1) [io, below left=1.5cm and 1cm of pclean] {PDB}
   edge[aro](pclean);
   \node (ip2) [io,right=4cm of ip1] {HPRD}
   edge[aro](pclean);
-  \node (ip3) [io,below right=0.8cm of ip1] {DIP}
+  \node (ip3) [io,below right=0.3cm and 0.1cm of ip1] {DIP}
   edge[aro](pclean);
-  \node (ip4) [io,right=1cm of ip3] {KUPS}
+  \node (ip4) [io,right=0.7cm of ip3] {KUPS}
   edge[aro](pclean);
 
-  \node[grey,minimum width=11cm,minimum height=9.5cm,below right=0.5cm and 0 of opt]{ \parbox[b][8.5cm]{5cm}{Negative Dataset}};
+  \node[grey,minimum width=11cm,minimum height=11.cm,below right=0.5cm and 0 of opt]{\parbox[b][10.cm]{4cm}{Negative Dataset}};
 
-  \node (ntrain) [io,below right=1cm and 3cm of opt] {Train}
+  \node (ntrain) [io,below right=1cm and 3.2cm of opt] {Train}
   edge[aro,bend right=45] (opt.east);
 
   \node (ntest)  [io,right=1cm of ntrain] {Test}
@@ -85,18 +85,15 @@
   edge( ntrain);
 
   \node (ghost) [below=1.5cm of nclean]{};
-  \node (in1) [io, right=0.5cm of ghost] {Negatome DB}
+  \node (in1) [io, below right=1.5cm and 0.2cm of nclean] {Negatome DB}
   edge[aro](nclean);
-  \node (in2) [io, left=0.5cm of ghost] {KUPS}
+  \node (in2) [io, below left=1.5cm and 0.7cm of nclean] {KUPS}
   edge[aro](nclean);
 
-  \draw [dotted, shorten <=2pt] (opt) edge (0,-14.6);
+  \draw [dotted, shorten <=2pt] (opt) edge (0,-16.1);
   
 %  edge[aro, bend right=45] (ptest.north);
 
 \end{tikzpicture}
 
-
 %\end{document}
-
-  
