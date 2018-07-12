@@ -29,20 +29,20 @@
 %\begin{document}
 \fi
 
-\hspace*{-1.5cm}
-\begin{tikzpicture}[auto,thick, scale=0.6, transform shape,align=left, node distance = 1.5cm]
+\hspace*{1.5cm}
+\begin{tikzpicture}[auto,thick, scale=0.7, transform shape,align=left, node distance = 1.5cm]
 
 
-  \node[queries] (n0) at (-4,0) {query};
+  \node[queries] (n0) at (-6,0) {query};
     \foreach \k/\l/\j in {1/1/2,-1/1/8,1.4/0/3,-1.4/0/7,1/-1/4,-1/-1/6,0/1.4/1,0/-1.4/5}{
-        \node[neighbors] (n\j) at (\k-4,\l) {b:\j};
+        \node[neighbors] (n\j) at (\k-6,\l) {b:\j};
         %      \path (n\i\j) edge (\i);
         \draw (n\j) -- (n0);
     }
   \foreach \x/\y/\i in {1/0/4,7/0/2,4/3/1,4/-3/3} {
-    \node[queries] (\i) at (\x,\y) {q:\i};
+    \node[queries] (\i) at (\x,\y) {query:\i};
     \foreach \k/\l/\j in {1/1/2,-1/1/8,1.4/0/3,-1.4/0/7,1/-1/4,-1/-1/6,0/1.4/1,0/-1.4/5}{
-        \node[neighbors] (\i\j) at (\x+\k,\y+\l) {b:\i\j};
+        \node[neighbors] (\i\j) at (\x+1.05*\k,\y+1.05*\l) {b:\i\j};
         %      \path (n\i\j) edge (\i);
         \draw (\i\j) -- (\i);
     }
@@ -63,7 +63,7 @@
   }
   
  % \draw (43) -- (27);
-
+\iffalse
   \node (r1) [res, below of=35] {Query 1};
   \node (r2) [res, below of=r1] {Query 2};
   \node (r3) [res, below of=r2] {Query 3};
@@ -100,7 +100,7 @@
   \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r2);
   \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r3);
   \draw [loosely dotted, shorten >=3pt] (0.85,-6.1) |- (r4);
-
+\fi
 
 %  \path (seq) |- node(logo)[inner sep=0,above=1.5cm]
 %        {\includegraphics[width=0.4\textwidth]{img/logo_small.jpg}}

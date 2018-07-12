@@ -12,6 +12,7 @@
 %\usepackage{float} % for placing figures where i want
 \usepackage{afterpage}
 \usepackage{epsfig, a4wide}
+\usepackage{titling} % shifting title
 
 \usepackage{tikz,graphicx}
 \usetikzlibrary{shapes.geometric, arrows}
@@ -84,14 +85,18 @@
 
 %\journal{Nature}
 
+\setlength{\droptitle}{-7em}
+
 %\bibliographystyle{naturemag}
-\title{\tool: fast and accurate prediction of Protein-Protein-Interactions}
+\title{\tool: fast and accurate prediction of protein-protein-interactions}
 
 \author{ Sebastian Canzler$^{1,3}$, Ren\'{e} Staritzbichler$^{2,3}$}
 \date{}
 
+
+
 \begin{document}
-\vspace{-1.5cm}
+
 
 \maketitle
 
@@ -110,34 +115,31 @@
 \begin{abstract}
   Proteins are the 'machines' of the cell, taking on manifold roles as receptors, enzymes, transporters or even molecular factories.
   Most biological processes involve the interaction between proteins, both in healthy systems as well as in disease.
-  Therefore most drugs target proteins and often impact protein interactions - whether intended as desired effect or unexpected as side-effects.
+  Therefore, most drugs target proteins and often impact protein-protein interactions - whether intended as desired effect or unexpected as side-effects.
 
   
-  Computations of the binding behaviour of proteins can complement and guide experimental studies as well as the development of protein-based therapeutics.
+  Computation of the binding behaviour of proteins can complement and guide experimental studies as well as the development of protein-based therapeutics.
   However, calculating protein binding in atomic detail is highly time consuming and requires  knowledge about their structures.
   While proteins are complex three-dimensional molecules, their structure, function and also binding behaviour is encoded in their amino acid sequence.
-  In turn, the interactions between proteins can be understood to some degree from their sequence.
+  In turn, the interaction between proteins can be understood to some degree from their sequence alone.
   
   We developed \tool, a tool based on machine learning, using the sequences of protein pairs as input to estimate their tendency to bind.
   The quality of its predictions outperforms any current competitor by far.
   
-  Starting point of the training of a learning algorithm is the collection of a comprehensive dataset. We exploited basically all available sources.
+  Starting point of the training of a learning algorithm is the collection of a comprehensive dataset. We exploited all available sources.
   Positive data was collected from the
-  Database of Human Interacting Proteins (DIP)
+  Database of Interacting Proteins (DIP)
   \cite{Salwinski:2004},
   Human Protein Reference Database (HPRD)
   \cite{Keshava_Prasad:2009},
-  Protein  Database (PDB) \cite{Berman:2000}.
-  We also included annotations retrieved from the
-  KUPS server \cite{Chen:2011}.
-  Negative data was collected
-  from the Negatome Database \cite{Blohm:2014}  and the KUPS server.
+  Protein  Data Bank (PDB) \cite{Berman:2000}, and the University of Kansas Proteomics Service (KUPS) \cite{Chen:2011}.
+  Negative data was collected from the Negatome Database \cite{Blohm:2014}  and the KUPS server.
   
   
   After collecting such a broad database, thorough curation was imperative.
   We performed several iterations of filtering and cleanup, both automated in terms of computational tools, as well as through manual inspection.
   
-  Obviously, the quality reached by a learning method depends crucially as well on the amount as on the quality of the datasets used for training.
+  Obviously, the quality reached by a learning method depends crucially on the amount as well as on the quality of the datasets used for training.
   But the key to 'stellar' performance lays often in the way, the data is presented to the learning algorithm itself. 
   Sequences can not be fed into learning algorithms directly, but need to be translated into descriptors that enable the learning algorithm to spot the patterns, whether a pair of sequences will bind or not.
   We identified auto-correlation profiles of hydrophobicity scales to best capture the binding propensity. 
@@ -145,19 +147,17 @@
   Learning algorithms themselves are available in many implementations.
   Most prominent in the current rise of learning applications in biology  are artificial neural networks (ANN).
   However, following an agnostic approach, we compared ANNs with support vector machines and several other learning methods.
-  As a result, we identified the random forest approach as leading to the cleanest separation of binders and non-binders.
+  As a result, we found that the random forest approach leads to the cleanest separation of binders and non-binders (see Fig. \ref{fig:training}).
   
-  The outlined procedure resulted in an accuracy far above any other available tool:
-  area under curve of 0.94,
-  specificity of 0.88
-  sensitivity: 0.84,
-  and a total accuracy of 0.86.
-  These quality estimates were calculated using a challenging dataset, as the comparison with other tools clearly underlines (see Fig. \ref{fig:comparison}).
+  The outlined procedure resulted in an area under curve (AUC) of 0.94. 
+  This is far above any other available tool: \spps: 0.77, \tri:0.73, \lr: 0.6.
+  These quality estimates were calculated using a challenging dataset, as the comparison with the other tools clearly underlines (see Fig. \ref{fig:comparison}).
   
-  \tool\  is available online, free for academic users.
-  The server allows users to scan their query sequence against several large databases for potential binders.
-  Scanning a query sequence against the human database requires around one minute. 
-  (The URL will be ready for testing by the time of submission of the full draft.) \\
+  \tool\  is available online and free for academic users.
+  The server allows users to scan their query sequence against several large databases (27k-XXk) for potential binders (see Fig. \ref{fig:workflow} and \ref{fig:webform}).
+  Scanning a query sequence against the human database requires around one minute.
+  Running \tool for independent queries allows the identification of interaction networks (see Fig. \ref{fig:connect}).
+  (The URL will be ready for testing by the time of submission of the full draft.) 
  
   \noindent \centerline{\website.} \\
 
@@ -177,25 +177,34 @@ Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
 
 \begin{figure}
   \centerline{\includegraphics[width=0.7\textwidth]{img/comparison_roc.pdf}}
-  \caption{Quality estimation: comparison of ROC-curves between \tool, \spps, \tri, \lr\ using a test dataset including 968 protein-protein pairs (excluded from training of method).}
+  \caption{ROC Quality estimation: comparison of \tool, \spps, \tri, \lr\ using a test-dataset including 968 protein-protein pairs (excluded from training of method). A perfect predictor would have a rectengular curve, passing (0,1). Complete noise is depicted as dashed line.}
   \label{fig:comparison}
 \end{figure}
 
 
 \begin{figure}
   \include{material/training}
-  \caption{ Training of the learning algorithm: goal is to distinguish positive data of known binders from negative data of non-binders (depicted by dotted line). Data from several sources was collected, such as ... Rigorous filtering is crucial for the quality of the data. In order to avoid over-fitting, the datasets have to be split in training and testing data. In an iterative process the performance of the learning algorithm is maximized on the training dataset, while at the same time monitoring the performance on the test-data. Over-fitting starts where the prediction quality for the test data starts to decrease.}
+  \caption{ Training of the learning algorithm: goal is to distinguish positive data of known binders from negative data of non-binders (depicted by dotted line). Data was collected from PDB, DIP, KUPS, HPRD, and the Negatome DB. Rigorous filtering is crucial for the quality of the data. In order to avoid over-fitting, the datasets have to be split in training and testing data. In an iterative process the performance of the learning algorithm is maximized on the training dataset, while at the same time monitoring the performance on the test-data. Over-fitting starts where the prediction quality for the test-data starts to decrease.}
+  \label{fig:training}
 \end{figure}
 
 
 \begin{figure}
-  \include{material/connectivity}
+  \include{material/workflow}
   \caption{ Workflow of the \tool\  server: the user has to provide the query sequence, a tag for later identification, and to select the database in which potential binders are expected. \tool\  converts the sequence first into auto-correlation descriptors prior to calling the random forest algorithm.
     The server returns a list of potential binders, sorted by expected binding strength.
-    (The list is illustrated as top left graph, connecting the query (orange, center) with its potential binders (magenta)).
-    The website displays the results as a table, that can be filtered by keywords and sorted by several criteria. 
+     The website displays the results as a table, that can be filtered by keywords and sorted by several criteria. 
     Additionally, a download link is provided. Having accumulated the lists for several queries, connectivities and thus complex binding networks can be explored.
-  The graph top right is a schematic description of potential interconnections between multiple independent queries.}
+    The graph top right is a schematic description of potential interconnections between multiple independent queries.}
+  \label{fig:workflow}
+\end{figure}
+
+\begin{figure}
+  \include{material/connectivity}
+  \caption{Network tracing: having accumulated the lists for several queries, connectivities and thus complex binding networks can be explored.
+   The left graph connects an individual query (orange, center) with its potential binders (magenta).
+   The right graph is a schematic description of potential interconnections between multiple independent queries.}
+  \label{fig:connect}
 \end{figure}
 
 \begin{figure}
@@ -203,8 +212,9 @@ Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
   \caption{ The webform of \tool.
     Required inputs are the sequence and a tag, allowing to locate results.
     Results will be accessible for 2 weeks.
-    By default, the query sequence is scanned against the (filtered) human database, containing >27k entries.
+    By default, the query sequence is scanned against the (filtered) human database, containing $>$27k entries.
     Other organisms can be selected in the drop-down.}
+  \label{fig:webform}
 \end{figure}
 
 

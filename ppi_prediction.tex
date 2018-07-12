@@ -1,5 +1,5 @@
-\documentclass{nature}
-%\documentclass[preprint,3p,times,twocolumn]{elsarticle}
+%\documentclass{nature}
+\documentclass[3p,times,twocolumn]{elsarticle}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{amssymb}
@@ -10,7 +10,7 @@
 \usepackage{rotating,capt-of}
 \usepackage[small]{caption}
 \usepackage{booktabs}
-%\usepackage{float} % for placing figures where i want
+\usepackage{float} % for placing figures where i want
 \usepackage{afterpage}
 \usepackage{epsfig, a4wide}
 
@@ -57,13 +57,13 @@
 
 %\journal{Preprint}
 
-%\DeclareCaptionLabelFormat{simplesupp}{#1~S#2} % new caption format with Sxx
+\DeclareCaptionLabelFormat{simplesupp}{#1~S#2} % new caption format with Sxx
 
-\bibliographystyle{naturemag}
+%\bibliographystyle{naturemag}
 
-\title{\tool: fast and accurate prediction of Protein-Protein-Interactions}
+\title{\tool: fast and accurate prediction of protein-protein-interactions}
 
-\author{ Sebastian Canzler$^{1,3}$ \& Ren\'{ex} Staritzbichler$^{2,3}$}
+%\author{ Sebastian Canzler$^{1,3}$ \& Ren\'{e} Staritzbichler$^{2,3}$}
 
 
 \begin{document}
@@ -71,38 +71,37 @@
 %\begin{frontmatter}
 
   
-\maketitle
 
-
-\begin{affiliations}
-\item Bioinformatics Group, Department of Computer Science,
-  University of Leipzig,
-  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
-  
-\item ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
-  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
-  
-\item Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany
-\end{affiliations}
-
-%\author[LEI,IMT]{Sebastian Canzler\corref{cor1}}
-%\ead{sebastian@bioinf.uni-leipzig.de}
-%\author[PHY,IMT]{Ren\'{e} Staritzbichler\corref{cor1}}
-%\ead{rene.staritzbichler@medizin.uni-leipzig.de}
-
-
-%\address[LEI]{Bioinformatics Group, Department of Computer Science,
+%\begin{affiliations}
+%\item Bioinformatics Group, Department of Computer Science,
 %  University of Leipzig,
 %  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
-%}
-%\address[PHY]{ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
-%  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany.}
-%
-%\address[IMT]{Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
+%  
+%\item ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
+%  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
+%  
+%\item Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany
+%\end{affiliations}
+
+\author[LEI,IMT]{Sebastian Canzler\corref{cor1}}
+\ead{sebastian@bioinf.uni-leipzig.de}
+\author[PHY,IMT]{Ren\'{e} Staritzbichler\corref{cor1}}
+\ead{rene.staritzbichler@medizin.uni-leipzig.de}
 
 
-%\cortext[jfa]{Joint first authors}
-%\cortext[cor1]{Corresponding author}
+\address[LEI]{Bioinformatics Group, Department of Computer Science,
+  University of Leipzig,
+  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
+}
+\address[PHY]{ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
+  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany.}
+
+\address[IMT]{Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
+
+
+\cortext[jfa]{Joint first authors}
+\cortext[cor1]{Corresponding author}
+
 
 % --------------------------------------------------------------------------- %
  
@@ -125,9 +124,13 @@
 
 \end{abstract}
 
-%\begin{keyword}
-%  protein-protein-interaction, machine learning, random forest
-%\end{keyword}
+\begin{keyword}
+  protein-protein-interaction, machine learning, random forest
+\end{keyword}
+
+\maketitle
+
+
 
 %\end{frontmatter}
 
@@ -550,22 +553,26 @@ Based on our extensive tests, we expect
 which are the basis for a broad range of mechanisms in biology.
 
 
+\section*{Acknowledgements} This work was funded by the S\"achsische Aufbaubank (SAB).
+Johanna Tiemann, Peter Hildebrand and Thorsten Kaiser for proofreading.
+The universe for all the cookies.
 
 
 %% Here is the endmatter stuff: Supplementary Info, etc.
 %% Use \item's to separate, default label is "Acknowledgements"
 
-\begin{addendum}
- \item [Acknowledgements] This work was funded by the S\"achsische Aufbaubank (SAB).
-Johanna Tiemann, Peter Hildebrand and Thorsten Kaiser for proofreading.
-The universe for all the cookies.
- \item[Competing Interests] The authors declare that they have no
-competing financial interests.
- \item[Correspondence] Correspondence and requests for materials
-should be addressed to R.S. and S.C. (email: rene.staritzbichler@medizin.uni-leipzig.de,sebastian@bioinf.uni-leipzig.de).
-\end{addendum}
+%\begin{addendum}
+% \item [Acknowledgements] This work was funded by the S\"achsische Aufbaubank (SAB).
+%Johanna Tiemann, Peter Hildebrand and Thorsten Kaiser for proofreading.
+%The universe for all the cookies.
+% \item[Competing Interests] The authors declare that they have no
+%competing financial interests.
+% \item[Correspondence] Correspondence and requests for materials
+%should be addressed to R.S. and S.C. (email: rene.staritzbichler@medizin.uni-leipzig.de,sebastian@bioinf.uni-leipzig.de).
+%\end{addendum}
 
-\bibliographystyle{naturemag}
+%\bibliographystyle{naturemag}
+\bibliographystyle{natbib}
 \bibliography{ppi_prediction}
 
 \end{document}
