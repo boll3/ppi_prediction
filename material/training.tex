@@ -37,10 +37,13 @@
   \node (apply) [process, below=1cm of final] {Evaluate}
   edge [aro] (final);
   \node (opt) [process,below=1cm of apply] {Optimize};
+  \path [aro,bend right=25] (opt) edge (apply)
+        (apply) edge (opt);
 
-  \draw [aro,bend right=45] (apply.south) edge (opt.north)
-                            (opt.north) edge (apply.south);
+%  \draw [aro] (apply.south) edge (opt.north);
+%                            (opt.north) edge (apply.south);
 
+                             
 
   \node[grey,minimum width=11cm,minimum height=11.cm,below left=0.5cm and 0 of opt]{\parbox[b][10.cm]{4cm}{Positive Dataset}};
   
@@ -61,7 +64,7 @@
   
   \node (ip1) [io, below left=1.5cm and 1cm of pclean] {PDB}
   edge[aro](pclean);
-  \node (ip2) [io,right=4cm of ip1] {HPRD}
+  \node (ip2) [io,right=3.7cm of ip1] {HPRD}
   edge[aro](pclean);
   \node (ip3) [io,below right=0.3cm and 0.1cm of ip1] {DIP}
   edge[aro](pclean);
