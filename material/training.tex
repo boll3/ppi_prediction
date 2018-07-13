@@ -33,7 +33,7 @@
 
   \tikz {every node} = [font=\LARGE]
   
-  \node (final) [io] { ProteinPrompt - final predictor};
+  \node (final) [propro] { ProteinPrompt - final predictor};
   \node (apply) [process, below=1cm of final] {Evaluate}
   edge [aro] (final);
   \node (opt) [process,below=1cm of apply] {Optimize};
