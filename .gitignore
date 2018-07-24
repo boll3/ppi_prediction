@@ -13,7 +13,12 @@ data/
 *.dvi
 *.ps
 *.spl
-
+*.4ct
+*.4tc
+*.idv
+*.lg
+*.tmp
+*.xref
 
 # Compiled source #
 ###################
@@ -23,7 +28,9 @@ data/
 *.exe
 *.o
 *.so
-
+*.pdf
+*.svg
+*.png
 
 # Packages #
 ############
