@@ -427,8 +427,16 @@ Based on our test set of 5094 positive and 5094 negative cases
 characteristics (ROC) curve, see Figure \ref{fig:roc}.
 These allow not only to estimate the overall quality of the predictions, but also
 gives a visual overview over the relationship between true and false
-positives. This allows to select a useful threshold and thus a
-finetuning of sensitivity versus specificity.
+positives.
+Every point on the curve shows how many falsely predicted binders one has to expect for how many correctly predicted ones.
+As the datapoints are sorted by their predicted binding propensity, a reasonable threshold can be selected.
+This allows for a finetuning of the balance between sensitivity versus specificity.
+
+\TODO{ Sensitivity is the ratio of correctly predicted binders (true positives), to actual binders.
+  Specificity is then the ratio of correctly predicted non-binders (true negatives) to all non-binders).
+  For example, a false positive rate of 0.02 will give a true positive rate of 0.6.
+  Selecting the according score as threshold will give a hit rate of 60\perc while only N false predictions have to be expected.
+}
 
 An ideal signal would lead to a plot with rectangular shape
 with an area under the curve (AUC) of 1. The other extreme, pure noise, would be a diagonal
