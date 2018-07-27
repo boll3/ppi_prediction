@@ -48,8 +48,8 @@
 
 %\newcommand{\tool}{\texttt{rfPRO}}
 %\newcommand{\tool}{\texttt{jackProt}}
-\newcommand{\toolblank}{\texttt{ProteinPrompt}}
-\newcommand{\tool}{\toolblank\hspace{2pt}}
+\newcommand{\tool}{\texttt{ProteinPrompt}}
+%\newcommand{\tool}{\toolblank\hspace{2pt}}
 \newcommand{\website}{\url{proteinformatics.org/\tool}}
 
 \newcommand{\Hsa}{\emph{Homo sapiens}}
@@ -110,13 +110,13 @@
 
   Here, we present \tool, a precise machine learning method for the calculation of protein-protein interactions.
   Learning methods depend crucially on both size and quality of datasets used for training and testing.
-  Starting point of \tool was therefore the collection of a comprehensive dataset from basically all available sources.
+  Starting point of \tool\  was therefore the collection of a comprehensive dataset from basically all available sources.
   In turn, a very thorough filtering was imperative.
-  The actual keystep is the transformation of the original sequence data into a representation that enables the learning algorithm to understand the underlying patterns that lead to binding versus non-binding.
-   \tool exploits the random forest algorithm using auto-correlation of seven amino-acid scales.
-   Based on this combination, \tool is reaching an area under curve of 0.95, which is far above any other publicly available tool. 
+  The actual key step is the transformation of the original sequence data into a representation that enables the learning algorithm to understand the underlying patterns that lead to binding versus non-binding.
+   \tool\  exploits the random forest algorithm using auto-correlation of seven amino acid scales.
+   Based on this combination, \tool\  is reaching an area under curve of 0.95, which is far above any other publicly available tool. 
   
-  \tool  is accessible online as a webserver:
+  \tool\   is accessible online as a webserver:
   \website
   The server allows  scanning the human proteasome for potential binding partners of the query in unprecedent accurracy.
   A scan through the entire human proteasome is performed within minutes.  
@@ -138,7 +138,7 @@
 
 \section{Introduction}
 
-Interacting proteins are among the keyplayers of biology. The driving
+Interacting proteins are among the key players of biology. The driving
 force of molecular networks are protein interactions rather than
 single protein components, accomplishing their individual functions
 \cite{Pawson:2004}. Biological processes, such as cellular
@@ -179,18 +179,19 @@ been applied, e.g., \texttt{STRING} \cite{Szklarczyk:2011} or
 Nevertheless, different proteome-wide prediction methods have shown
 that knowledge of the amino acid sequence alone may be sufficient to
 identify novel, functional protein-protein interactions
-\cite{Martin:2005, Shen:2007}. Due to its prominent and major
-advantages like simplicity, rapidity, and generality, this kind of
+\cite{Martin:2005, Shen:2007}.
+Mostly, these methods rely on statistical learning algorithms.
+Due to its prominent and major advantages like simplicity, rapidity, and generality, this kind of
 prediction method became increasingly widespread over the last years
-\cite{Ofran:2003, Betel:2007, Liu:2012, Perovic:2017,
-  Pan:2010}. Overall, Biology has seen a massive raise in applications
+\cite{Ofran:2003, Betel:2007, Liu:2012, Perovic:2017, Pan:2010}.
+Overall, biology has seen a massive raise in applications
 of artificial intelligence and deep learning in the recent years
 \cite{Ching:2018}.
 
 In this paper, we present a sequence-based web-tool for predicting
 PPIs that outperforms all other currently available methods distinctively.
 The predictive power was boosted by a rigorous fine-tuning
-of the machine learning key-elements, such as
+of the machine learning key elements, such as
 dataset generation and the design of the feature vector.
 Auto-correlation of hydrophobicities,
 in conjunction with a random forest (RF) machine learning algorithm,
@@ -199,7 +200,7 @@ Additionally to its outstanding quality, it is
 an extremely fast high-throughput
 method.
 
-Therefore, \tool (protein \textbf{pr}ediction \textbf{o}f \textbf{m}atching \textbf{p}ar\textbf{t}ners)
+Therefore, \tool\  (\textbf{protein} \textbf{pr}ediction \textbf{o}f \textbf{m}atching \textbf{p}ar\textbf{t}ners)
 may serve as a reliable tool for identifying potential interaction partners from a database of
 known proteins, and may thus help to identify the yet unknown
 biological role of many proteins.
@@ -210,7 +211,7 @@ biological role of many proteins.
 \section{Materials and Methods}
 
 To maximize the predictive power, it is pivotal to optimize each of
-the key-elements, i.e., the calculation of the feature vector, the
+the key elements, i.e., the calculation of the feature vector, the
 collection of the training and testing data, and finally, the
 selection and fine-tuning of the machine learning algorithm. 
 
@@ -263,19 +264,18 @@ auto-correlation (AC) works as follows:
 \begin{equation}
 AC_{lag, j} = \frac {\frac{1}{n-lag} \sum^{n-lag}_{i=1} ( S_{i,j} - \overline{S_j}) (S_{i+lag,j} - \overline{S_j})} { \sigma_{S_j} * \sigma_{S_j} }
 \end{equation}
-with $S_j$ is the translated amino acid sequence using the normalized
+where $S_j$ is the translated amino acid sequence using the normalized
 scale-based descriptor $P'_j$ with $j = 1, 2, \dots, 7$ , $n$ is the
 length of sequence S, and $lag = 1, 2, \dots, 30$  being the shift for
 which the auto-correlation is being calculated. $\overline{S_j}$ and
 $\sigma_{S_j}$ are the mean and standard deviation of the translated
 sequence, respectively. Ding \cite{Ding:2016} showed that a maximal
 $lag$ of less than 30 tends to lose useful information while the
-larger values may induce noises. 
+larger values may induce noise. 
 
-The number of AC values for each of the seven scales is 30. Finally
-the feature vector describing a given amino acid sequence is produced
-of 210 dimensions and for a pair of sequences, the feature space
-contains 420 dimensions. 
+The number of AC values for each of the seven scales is 30. 
+The feature vector describing any individual amino acid sequence has 210 elements or dimensions.
+Thus, for a pair of sequences, the feature space has 420 dimensions. 
 
 
 \subsection{Collecting data-points}
@@ -301,42 +301,51 @@ dissimilar, (2) proteins should be localized in different cellular
 compartments, and (3) proteins are part of non-interacting domains. 
 
 After intense manual curation and mapping of different names describing
-the exact same protein, we derived a total amount of 31.867 distinct
-human proteins. For this set, 73.681 positive PPIs were collected
+the exact same protein, we derived a total amount of 31,867 distinct
+human proteins. For this set, 73,681 positive PPIs were collected
 from the datasources previously mentioned. By means of \texttt{CD-hit}
-\cite{Li:2006, Fu:2012}, we reduced this set to 41.844 positive
+\cite{Li:2006, Fu:2012}, we reduced this set to 41,844 positive
 protein-protein pairs with at most 50\% sequence identity. For
 negative pairs, we collected over 1.5 million unique protein-protein
 pairs, from which we randomly selected a number of PPIs, that was
 matching the size of the positive dataset.
 
-Finally, our training dataset contains 36.750 positive and 36.750
+Finally, our training dataset contains 36,750 positive and 36,750
 negative PPIs, while our testing dataset contains 5094 positive and
-5094 negative data-points. For further enhancement of the prediction
+5094 negative data-points.
+The separation into test and training data is required to counterbalance overfitting.
+While the actual learning is performed on the training data,
+the simultaneous monitoring of the test data allows to determine the point where overfitting starts.
+Overfitting begins when the prediction quality for the test data is starting to decrease,
+while it is still improving for the training data.
+
+For further enhancement of the prediction
 quality of \tool, we also incorporated inverse and reverse PPI
 representations. Each protein-protein pair $AB$ is described in the
-original and inverse (') direction, as well as in original and
-reversed order. In the final dataset each annotated PPI is represented
-in four distinct descriptions\footnote{Example pseudo-sequences: (ABCD,KLMN),
-  (ABCD,NMLK), (KLMN,ABCD), (KLMN,DCBA)}: $AB$, $AB'$, $BA$, and
-$BA'$. 
+original and inverse direction ($A$: ``ABC'' $\rightarrow$ $A'$:  ``CBA''),
+as well as in original and reversed order ($AB$,$BA$).
+In the final dataset each annotated PPI is represented
+in four distinct descriptions. Example pseudo-sequences: (``ABCD'', ``KLMN''),
+  (``ABCD'', ``NMLK''), (``KLMN'', ``ABCD''), (``KLMN'', ``DCBA'')
 
-To verify the prediction quality of \tool, we compared our tool to
+To assess the prediction quality of \tool, we compared our tool to
 several other publicly available programs. As some of them are limited
 in speed or upload capacity to their webserver, it was not
 feasible to perform this test using our entire test dataset with more
 than 10k datapoints. Instead, we randomly selected 495 positive and 473
 negative pairs from our test set.
 
+
 \subsection{Selection of learning method}
-Plenty implementations of various learning algorithms are
+Many implementations of various learning algorithms are
 available. By means of the \texttt{caret} R package \cite{Kuhn:2008},
 the fine-tuning and comparison is relatively easy. We tested several
 artificial neural network implementations, support vector machines and
-tree-based methods. After electing the random forest approach as
+tree-based methods. After identifying the random forest approach as
 performing best on our extensive testing and training datasets,
 we moved to a Python-based implementation mainly
-because of speed reasons.  
+due to speed reasons.  
+
 
 \subsection{Random forest classification}
 Random forest (RF) is an algorithm, which uses an ensemble of
@@ -370,14 +379,16 @@ set to 750 due to run-time optimization.
 
 \subsection{Webserver implementation}
 
-\tool is available online as webserver under: \website The basic usage
-is as simple as providing an input sequence. By default \tool will
-search our manualy curated database of human protein sequences
-containing 31.867 proteins. Scanning the entire human database takes
+\tool\  is available online as webserver under: \website The basic usage
+is as simple as providing an input sequence. By default \tool\  will
+search our manually curated database of human protein sequences
+containing 27,223 proteins. Scanning the entire human database takes
 approximately one minute. Other more extensive databases are provided
 as well as additional service, e.g. mammalian, vertebrate, and
 metazoan protein sets. Searching these databases takes considerably
-longer. However, since \tool\ is trained and optimized
+longer.
+The vertebrate database has 91,592 entries, and therfore will take approximately three times longer.
+However, since \tool\ is trained and optimized
 on human proteins, we cannot guarantee an equivalent prediction
 quality for other organisms. 
 
@@ -398,12 +409,12 @@ optional.
 %}
 
 The sequence length of the uploaded proteins is detected automatically. When the user provides
-sequences shorter than 16aa, a warning is thrown,
+sequences shorter than 16 AA, a warning is thrown,
 the calculation is performed nonetheless.
 %\TODO{Check}
 
 As output a ranked and scored list of proteins from the database is
-returned. By default it is truncated after the first 100 top
+returned. By default it is truncated after the top 100 
 hits. This can be adjusted on the webform. 
 
 %\TODO{ screenshots}
@@ -420,7 +431,7 @@ positives. This allows to select a useful threshold and thus a
 finetuning of sensitivity versus specificity.
 
 An ideal signal would lead to a plot with rectangular shape
-with an area under the curve (AUC) of 1. The other extreme, pure noise, would be a crossing
+with an area under the curve (AUC) of 1. The other extreme, pure noise, would be a diagonal
 line with an AUC of 0.5.
 
 Our method reaches an AUC of 0.95,
@@ -434,8 +445,8 @@ unwanted bias in different applications.
 
 \begin{figure}[t]
 \includegraphics[width=0.5\textwidth]{img/meta_final_roc.pdf}
-\caption{Performance of \tool tested on the whole test dataset
-  containing over 10.000 PPIs.}
+\caption{Performance of \tool\  tested on the whole test dataset
+  containing over 10,000 PPIs.}
 \label{fig:roc}
 \end{figure} 
 
@@ -448,7 +459,7 @@ available tools such as \spps\ \cite{Liu:2012}, \tri\
 \cite{Perovic:2017}, and \lr\ \cite{Pan:2010}. Therefore, we used the
 diminished test dataset, as described in the Methods section. 
 
-Since we re-evaluated \tool on the dimished testset, to ensure
+Since we re-evaluated \tool\  on the dimished testset, to ensure
 comparability, the results are somewhat different compared to the
 whole testing data set. 
 
@@ -460,42 +471,13 @@ whole testing data set.
   \label{fig:comparison}
 \end{figure}
 
-%\begin{figure*}
-%  \includegraphics[width=200pt]{img/LR_PPI_roc.pdf}
-%  \includegraphics[width=200pt]{img/TRI_tool_roc.pdf} \\
-%
-%  \includegraphics[width=200pt]{img/SPPS_roc.pdf}
-%  \includegraphics[width=200pt]{img/meta_roc.pdf}
-%  \caption{Comparison of \tool to }
-%  \label{fig:comparison}
-%\end{figure*} 
-
-
-%\begin{table*}
-%\begin{tabular}{|c |c | c |}
-%\hline
-%Method  & Actual versus predicted & Quality \\
-%\hline
-%\tool  & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 417 & 78 \\ \hline non-binder: & 58 & 415 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.94 \\ Spec.: 0.88 \\ Sens.: 0.84 \\ Acc.: 0.86 \end{tabular} \\
-%\hline
-%SPPS   & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 474 & 21 \\ \hline non-binder: & 312 & 161 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.77 \\ Spec.: 0.34 \\ Sens.: 0.96 \\ Acc.: 0.66 \end{tabular} \\
-%\hline
-%TRI\_tool  & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 158 & 337 \\ \hline non-binder: & 25 & 448 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.73 \\ Spec.: 0.95 \\ Sens.: 0.32 \\ Acc.: 0.63 \end{tabular} \\
-%\hline
-%LR\_PI  & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 451 & 44 \\ \hline non-binder: & 398 & 75 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.60 \\ Spec.: 0.16 \\ Sens.: 0.91 \\ Acc.: 0.53 \end{tabular} \\
-%\hline
-%\end{tabular}
-%\caption{ Quality measures of \tool, compared to other tools}
-%\label{table:comparison}
-%\end{table*}
-
 
 \begin{table}
 \begin{tabular}{|l |c | c | c | c |}
   \hline
   Tool  & AUC & Spec. & Sens. & Acc. \\
   \hline
-  \tool  & 0.94 & 0.88 & 0.84 &  0.86 \\
+  \tool\   & 0.94 & 0.88 & 0.84 &  0.86 \\
   \hline
   \spps\  & 0.77 & 0.34 & 0.96 & 0.66 \\
   \hline
@@ -513,13 +495,13 @@ whole testing data set.
 \end{table}
 
 The results shown in Table \ref{table:comparison} and the ROC plot in
-Figure \ref{fig:comparison} suggest that \tool clearly outperforms all
-three competitors. \tool is furthermore the only tool that finds a
+Figure \ref{fig:comparison} suggest that \tool\  clearly outperforms all
+three competitors. \tool\  is furthermore the only tool that finds a
 balance between sensitivity and specificity. \spps\ and \lr\ show an
 excellent sensitivity of 0.96 and 0.91, however, their
 specificity is rather poor with 0.34 and 0.16, respectively. \tri\ on
 the other hand shows a massive bias towards specificity, 0.95 compared
-to 0.32 .
+to a sensitivity of 0.32 .
 Additionally, the overall prediction accuracy and the area under the curve are significantly higher.
 Accuracy: 0.86 versus 0.66 (\spps), 0.63 (\tri).
 AUC: 0.53 (\lr) and 0.94 versus 0.77 (\spps), 0.73 (\tri), and 0.60 (\lr), respectively.
@@ -527,34 +509,34 @@ AUC: 0.53 (\lr) and 0.94 versus 0.77 (\spps), 0.73 (\tri), and 0.60 (\lr), respe
 
 \section{Discussion}
 
-The direct comparison with other available tools prooved the
-outstanding quality of \tool. Beside its high accurracy, \tool is the
+The direct comparison with other available tools proved the
+outstanding quality of \tool. Beside its high accurracy, \tool\  is the
 only tool allowing to scan the entire human proteasome. This makes
-\tool both the fastest and most accurate method available. We provide
+\tool\  both the fastest and most accurate method available. We provide
 full access via a webinterface: \website
 
 After an exhaustive optimization of: i) the learning algorithm, ii)
 the contact database, and iii) the representation of the binding
-sequences, we identified a random forest using autcorrelation on seven
+sequences, we identified the random forest algorithm using autocorrelation on seven
 residue scales as the ideal combination.
 
 The collection of an extensive database with little redundancy was crucial
 and required several iterations of manual curation of the test and training datasets.
 The diversity posed hard challenges to the learning
 - it would have been easy to reach even higher accuracy values by omitting parts of our dataset.
-However, this turned \tool into a broadly applicable tool.
+However, this turned \tool\ into a broadly applicable tool.
 
-In our next steps we will extend \tool to predict also the binding of short peptides to protein receptors, specifically to those of the GPCR family.
-We furthermore intend to expand \tool towards antibody-protein binding.
-Initial tests have shown, that the methods described in this paper are not directly applicable to this important class of protein interactions - which is easily understood, as the antibody binding mode via 3 very short loop segments does not reflect the general protein binding modes, covered currently by \toolblank. \TODO{ -- eher kritischer abschnitt, ist das sinnvoll?}
+In our next steps we will extend \tool\  to predict also the binding of short peptides to protein receptors, specifically to those of the GPCR family.
+We furthermore intend to expand \tool\  towards antibody-protein binding.
+Initial tests have shown, that the methods described in this paper are not directly applicable to this important class of protein interactions - which is easily understood, as the antibody binding mode via 3 very short loop segments does not reflect the general protein binding modes, covered currently by \tool. 
 
 Based on our extensive tests, we expect
-\tool to be beneficial for the understanding of complex networks of protein-protein interactions,
+\tool\  to be beneficial for the understanding of complex networks of protein-protein interactions,
 which are the basis for a broad range of mechanisms in biology.
 
 
 \section*{Acknowledgements} This work was funded by the S\"achsische Aufbaubank (SAB).
-Johanna Tiemann, Peter Hildebrand and Thorsten Kaiser for proofreading.
+Johanna Tiemann, Peter Hildebrand, Alexander Vogel and Thorsten Kaiser for proofreading.
 The universe for all the cookies.
 
 

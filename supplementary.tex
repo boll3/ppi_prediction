@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+\newcommand{\tool}{\texttt{ProteinPrompt}}
+\usepackage[small]{caption}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
+
+
+\begin{document}
+
+
+
+\begin{figure*}
+  \includegraphics[width=200pt]{img/LR_PPI_roc.pdf}
+  \includegraphics[width=200pt]{img/TRI_tool_roc.pdf} \\
+
+  \includegraphics[width=200pt]{img/SPPS_roc.pdf}
+  \includegraphics[width=200pt]{img/meta_roc.pdf}
+  \caption{Comparison of \tool\  to }
+  \label{fig:comparison}
+\end{figure*} 
+
+
+\begin{table*}
+\begin{tabular}{|c |c | c |}
+\hline
+Method  & Actual versus predicted & Quality \\
+\hline
+\tool\   & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 417 & 78 \\ \hline non-binder: & 58 & 415 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.94 \\ Spec.: 0.88 \\ Sens.: 0.84 \\ Acc.: 0.86 \end{tabular} \\
+\hline
+SPPS   & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 474 & 21 \\ \hline non-binder: & 312 & 161 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.77 \\ Spec.: 0.34 \\ Sens.: 0.96 \\ Acc.: 0.66 \end{tabular} \\
+\hline
+TRI\_tool  & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 158 & 337 \\ \hline non-binder: & 25 & 448 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.73 \\ Spec.: 0.95 \\ Sens.: 0.32 \\ Acc.: 0.63 \end{tabular} \\
+\hline
+LR\_PI  & \begin{tabular}{|c|c|c|} \firsthline  &  binder & non-binder \\ \hline binder: & 451 & 44 \\ \hline non-binder: & 398 & 75 \\ \hline \end{tabular} & \begin{tabular}{c} AUC: 0.60 \\ Spec.: 0.16 \\ Sens.: 0.91 \\ Acc.: 0.53 \end{tabular} \\
+\hline
+\end{tabular}
+\caption{ Quality measures of \tool, compared to other tools}
+\label{table:comparison}
+\end{table*}
+
+
+\end{document}
