@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+
+
+\newcommand{\db}{\texttt{PPromptDB}}
+\newcommand{\url}[1]{\texttt{http://\small #1}}
+\newcommand{\server}{ \url{proteinformatics.org/\db}}
+
+
+
+\title{\db: a comprehensive and curated database of protein-protein interactions}
+
+\author{ Sebastian Canzler$^{1,3}$, Ren\'{e} Staritzbichler$^{2,3}$}
+\date{}
+
+
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+  Protein-protein interactions are among the key-drivers of biology and thus important targets for medical regulation. 
+  Here, we present a comprehensive and curated database of both positive and negative protein-protein contacts.
+  \db\ is available for download under \server.
+  
+  
+\end{abstract}
+
+
+
+\section*{Introduction}
+  Proteins are the 'machines' of the cell, taking on manifold roles as receptors, enzymes, transporters or even molecular factories.
+  Most biological processes involve the interaction between proteins, both in healthy systems as well as in disease.
+  Therefore, most drugs target proteins and often impact protein-protein interactions - whether intended as desired effect or unexpected as side-effects.
+
+  
+  Computation of the binding behaviour of proteins can complement and guide experimental studies as well as the development of protein-based therapeutics.
+  However, calculating protein binding in atomic detail is highly time consuming and requires  knowledge about the structures.
+  While proteins are complex three-dimensional molecules, their structure, function and also binding behaviour is encoded in their amino acid sequence.
+  In turn, the interaction between proteins can be understood to some degree from their sequence alone.
+
+  Hence, protein-protein interactions are a field, where the application of
+
+  No real high quality predictor available yet.
+  We provide the \db\ 
+
+
+  
+  For the training of a high quality learning algorithm a comprehensive dataset needs to be collected.
+  We exploited all available sources.
+  Positive data was gathered from the
+  Database of Interacting Proteins (DIP)
+  \cite{Salwinski:2004},
+  Human Protein Reference Database (HPRD)
+  \cite{Keshava_Prasad:2009},
+  Protein  Data Bank (PDB) \cite{Berman:2000}, and the University of Kansas Proteomics Service (KUPS) \cite{Chen:2011}.
+  Negative data was obtained from the Negatome Database \cite{Blohm:2014}  and the KUPS server.
+  After collecting such a broad database, thorough curation was imperative to improve data quality.
+  We performed several iterations of filtering and cleanup, both automated in terms of computational tools, as well as through manual inspection.
+  
+ \section*{Methods}
+
+In order to create comprehensive training and testing data we tried to
+collect as many trustworthy PPI annotations as possible. We included
+data from various sources such as \texttt{Database of Human
+  Interacting Proteins}\footnote{http://dip.doe-mbi.ucla.edu/} (DIP)
+\cite{Salwinski:2004}, \texttt{Human Protein Reference
+  Database}\footnote{http://www.hprd.org/} (HPRD)
+\cite{Keshava_Prasad:2009}, \texttt{Protein
+  Database}\footnote{www.rcsb.org} (PDB) \cite{Berman:2000}, and the
+\nega\footnote{http://mips.helmholtz-muenchen.de/proj/ppi/negatome/}
+\cite{Blohm:2014}. We also included annotations retrieved from the
+\kups \footnote{http://www.ittc.ku.edu/chenlab/kups/}   server
+\cite{Chen:2011} which mainly incorporates PPIs from
+\texttt{MINT}\footnote{https://mint.bio.uniroma2.it/}
+\cite{Licata:2012} and
+\texttt{IntAct}\footnote{https://www.ebi.ac.uk/intact/}
+\cite{Orchard:2014}. In addition to the negative annotations collected
+from the \nega, the \kups\ server generated negative data-points based
+on the the following criteria: (1) proteins should be functional
+dissimilar, (2) proteins should be localized in different cellular
+compartments, and (3) proteins are part of non-interacting domains. 
+
+After intense manual curation and mapping of different names describing
+the exact same protein, we derived a total amount of 31,867 distinct
+human proteins. For this set, 73,681 positive PPIs were collected
+from the datasources previously mentioned. By means of \texttt{CD-hit}
+\cite{Li:2006, Fu:2012}, we reduced this set to 41,844 positive
+protein-protein pairs with at most 50\% sequence identity. For
+negative pairs, we collected over 1.5 million unique protein-protein
+pairs, from which we randomly selected a number of PPIs, that was
+matching the size of the positive dataset.
+
+
+
+ \section*{Results}
+
+ 
+ \section*{Conclusions}
+
+
+\end{document}
+
+

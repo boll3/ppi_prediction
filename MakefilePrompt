@@ -1,0 +1,19 @@
+.PHONY: all
+all: protein_prompt.dvi
+
+l=pdflatex
+b=bibtex
+s=dvips
+p=ps2pdf
+
+protein_prompt.dvi:	protein_prompt.tex
+		$(l) protein_prompt
+		$(b) protein_prompt
+		$(l) protein_prompt
+		$(l) protein_prompt
+#		$(s) protein_prompt.dvi
+#		$(p) protein_prompt.ps
+
+.PHONY: 	clean		
+clean:		
+		@rm -f protein_prompt.pdf protein_prompt.dvi protein_prompt.bbl protein_prompt.blg protein_prompt.aux protein_prompt.log protein_prompt.ps
