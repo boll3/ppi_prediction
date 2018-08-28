@@ -10,17 +10,13 @@
 \usepackage{rotating,capt-of}
 \usepackage[small]{caption}
 \usepackage{booktabs}
-\usepackage{float} % for placing figures where i want
+\usepackage{float} 
 \usepackage{afterpage}
 \usepackage{epsfig, a4wide}
 
 \newcommand{\myparagraph}[1]{
   \paragraph*{\normalfont\itshape #1}\hspace{5pt}}
 
-% strange snos
-\definecolor{purple}{RGB}{180,90,200}
-\definecolor{dgreen}{RGB}{0,160,0}
-\definecolor{turquoise}{RGB}{0,180,140}
 \renewcommand\dblfloatpagefraction{0.03}
 \renewcommand\topfraction{.95}
 \renewcommand\bottomfraction{.95}
@@ -46,63 +42,38 @@
 \newcommand{\nega}{\texttt{Negatome Database}}
 \newcommand{\kups}{\texttt{KUPS}}
 
-%\newcommand{\tool}{\texttt{rfPRO}}
-%\newcommand{\tool}{\texttt{jackProt}}
-\newcommand{\tool}{\texttt{ProteinPrompt}}
-%\newcommand{\tool}{\toolblank\hspace{2pt}}
-\newcommand{\website}{\url{proteinformatics.org/\tool}}
+\newcommand{\tool}{\textsc{ProteinPrompt}}
 
-\newcommand{\Hsa}{\emph{Homo sapiens}}
-\newcommand{\hsa}{\emph{H.sapiens}}
 
-%\journal{Preprint}
+\journal{Bioinformatics}
 
 \DeclareCaptionLabelFormat{simplesupp}{#1~S#2} % new caption format with Sxx
 
-%\bibliographystyle{naturemag}
 
 \title{\tool: fast and accurate prediction of protein-protein-interactions}
 
-%\author{ Sebastian Canzler$^{1,3}$ \& Ren\'{e} Staritzbichler$^{2,3}$}
-
 
 \begin{document}
-
-%\begin{frontmatter}
-
   
-
-%\begin{affiliations}
-%\item Bioinformatics Group, Department of Computer Science,
-%  University of Leipzig,
-%  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
-%  
-%\item ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
-%  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
-%  
-%\item Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany
-%\end{affiliations}
-
-\author[LEI,IMT]{Sebastian Canzler\corref{cor1}}
+\author[LEI,UFZ,IMT]{Sebastian Canzler\corref{cor1}}
 \ead{sebastian@bioinf.uni-leipzig.de}
 \author[PHY,IMT]{Ren\'{e} Staritzbichler\corref{cor1}}
 \ead{rene.staritzbichler@medizin.uni-leipzig.de}
-
 
 \address[LEI]{Bioinformatics Group, Department of Computer Science,
   University of Leipzig,
   H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
 }
+
 \address[PHY]{ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
   H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany.}
 
-\address[IMT]{Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
-
 \address[UFZ]{Young Investigators Group Bioinformatics and Transcriptomics, Department of Proteomics, Helmholtz Centre for Environmental Research – UFZ, 04318 Leipzig, Germany}
+
+\address[IMT]{Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
 
 \cortext[jfa]{Joint first authors}
 \cortext[cor1]{Corresponding author}
-
 
 % --------------------------------------------------------------------------- %
  
@@ -117,12 +88,7 @@
   The actual key step is the transformation of the original sequence data into a representation that enables the learning algorithm to understand the underlying patterns that lead to binding versus non-binding.
    \tool\  exploits the random forest algorithm using auto-correlation of seven amino acid scales.
    Based on this combination, \tool\  is reaching an area under curve of 0.95, which is far above any other publicly available tool. 
-  
-  \tool\   is accessible online as a webserver:
-  \website
-  The server allows  scanning the human proteasome for potential binding partners of the query in unprecedent accurracy.
-  A scan through the entire human proteasome is performed within minutes.  
-  
+    
 
 \end{abstract}
 
@@ -132,9 +98,6 @@
 
 \maketitle
 
-
-
-%\end{frontmatter}
 
 % --------------------------------------------------------------------------- %
 
@@ -379,47 +342,6 @@ set to 750 due to run-time optimization.
 
 \section{Results}
 
-\subsection{Webserver implementation}
-
-\tool\  is available online as webserver under: \website The basic usage
-is as simple as providing an input sequence. By default \tool\  will
-search our manually curated database of human protein sequences
-containing 27,223 proteins. Scanning the entire human database takes
-approximately one minute. Other more extensive databases are provided
-as well as additional service, e.g. mammalian, vertebrate, and
-metazoan protein sets. Searching these databases takes considerably
-longer.
-The vertebrate database has 91,592 entries, and therfore will take approximately three times longer.
-However, since \tool\ is trained and optimized
-on human proteins, we cannot guarantee an equivalent prediction
-quality for other organisms. 
-
-The server is free for academic users. Providing an email is
-optional.
-%Results for anonymous users will be made accessible via a
-%public search engine.
-\tool\ was originally optimized for sequences with a minimum length of 16 AA.
-
-%\TODO{Ist das in dem webserver so umgesetzt?
-%
-%There are two ranges of sequence lengths, for which \tool\ was
-%optimized: 
-%\begin{itemize}
-%\item \TODO{? - ?} AA
-%\item \TODO{? - ?} AA
-%\end{itemize}
-%}
-
-The sequence length of the uploaded proteins is detected automatically. When the user provides
-sequences shorter than 16 AA, a warning is thrown,
-the calculation is performed nonetheless.
-%\TODO{Check}
-
-As output a ranked and scored list of proteins from the database is
-returned. By default it is truncated after the top 100 
-hits. This can be adjusted on the webform. 
-
-%\TODO{ screenshots}
 
 \subsection{Performance}
 \label{performance}
@@ -434,11 +356,11 @@ Every point on the curve shows how many falsely predicted binders one has to exp
 As the datapoints are sorted by their predicted binding propensity, a reasonable threshold can be selected.
 This allows for a finetuning of the balance between sensitivity versus specificity.
 
-\TODO{ Sensitivity is the ratio of correctly predicted binders (true positives), to actual binders.
-  Specificity is then the ratio of correctly predicted non-binders (true negatives) to all non-binders).
-  For example, a false positive rate of 0.02 will give a true positive rate of 0.6.
-  Selecting the according score as threshold will give a hit rate of 60\% while only N false predictions have to be expected.
-}
+Sensitivity is the ratio of correctly predicted binders (true positives), to actual binders.
+  Specificity is then the ratio of correctly predicted non-binders (true negatives) to all non-binders.
+  For example, in Figure \ref{fig:roc} a false positive rate of 0.03 will lead to a true positive rate of $\sim$0.6.
+  Thus, selecting this point (its associated score) as threshold will give a hit rate of 60\%, while only 3\% false predictions have to be expected.
+
 
 An ideal signal would lead to a plot with rectangular shape
 with an area under the curve (AUC) of 1. The other extreme, pure noise, would be a diagonal
@@ -451,7 +373,6 @@ accuracy: 0.88.
 
 Currently, our method balances specificity and sensitivity to avoid an
 unwanted bias in different applications.
-% \TODO{(is this the best solution for the server?)} 
 
 \begin{figure}[t]
 \includegraphics[width=0.5\textwidth]{img/meta_final_roc.pdf}
@@ -519,11 +440,11 @@ AUC: 0.53 (\lr) and 0.94 versus 0.77 (\spps), 0.73 (\tri), and 0.60 (\lr), respe
 
 \section{Discussion}
 
-The direct comparison with other available tools proved the
-outstanding quality of \tool. Beside its high accurracy, \tool\  is the
-only tool allowing to scan the entire human proteasome. This makes
-\tool\  both the fastest and most accurate method available. We provide
-full access via a webinterface: \website
+The direct comparison with other available tools
+proved the outstanding quality of \tool.
+Beside its high accurracy, \tool\ is based on a fast random forrest algorithm.
+It is thus possible to scan the entire human proteasome within roughly one minute.
+This makes \tool\  both the fastest and most accurate method available. 
 
 After an exhaustive optimization of: i) the learning algorithm, ii)
 the contact database, and iii) the representation of the binding
@@ -540,8 +461,8 @@ In our next steps we will extend \tool\  to predict also the binding of short pe
 We furthermore intend to expand \tool\  towards antibody-protein binding.
 Initial tests have shown, that the methods described in this paper are not directly applicable to this important class of protein interactions - which is easily understood, as the antibody binding mode via 3 very short loop segments does not reflect the general protein binding modes, covered currently by \tool. 
 
-Based on our extensive tests, we expect
-\tool\  to be beneficial for the understanding of complex networks of protein-protein interactions,
+Based on our extensive tests, we expect \tool\
+to be beneficial for the understanding of complex networks of protein-protein interactions,
 which are the basis for a broad range of mechanisms in biology.
 
 
@@ -549,21 +470,6 @@ which are the basis for a broad range of mechanisms in biology.
 Johanna Tiemann, Peter Hildebrand, Alexander Vogel and Thorsten Kaiser for proofreading.
 The universe for all the cookies.
 
-
-%% Here is the endmatter stuff: Supplementary Info, etc.
-%% Use \item's to separate, default label is "Acknowledgements"
-
-%\begin{addendum}
-% \item [Acknowledgements] This work was funded by the S\"achsische Aufbaubank (SAB).
-%Johanna Tiemann, Peter Hildebrand and Thorsten Kaiser for proofreading.
-%The universe for all the cookies.
-% \item[Competing Interests] The authors declare that they have no
-%competing financial interests.
-% \item[Correspondence] Correspondence and requests for materials
-%should be addressed to R.S. and S.C. (email: rene.staritzbichler@medizin.uni-leipzig.de,sebastian@bioinf.uni-leipzig.de).
-%\end{addendum}
-
-%\bibliographystyle{naturemag}
 \bibliographystyle{natbib}
 \bibliography{ppi_prediction}
 

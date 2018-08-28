@@ -1,19 +1,19 @@
 .PHONY: all
-all: protein_prompt.dvi
+all: protein_prompt_methods.dvi
 
 l=pdflatex
 b=bibtex
 s=dvips
 p=ps2pdf
 
-protein_prompt.dvi:	protein_prompt.tex
-		$(l) protein_prompt
-		$(b) protein_prompt
-		$(l) protein_prompt
-		$(l) protein_prompt
-#		$(s) protein_prompt.dvi
-#		$(p) protein_prompt.ps
+protein_prompt_methods.dvi:	protein_prompt_methods.tex
+		$(l) protein_prompt_methods
+		$(b) protein_prompt_methods
+		$(l) protein_prompt_methods
+		$(l) protein_prompt_methods
+#		$(s) protein_prompt_methods.dvi
+#		$(p) protein_prompt_methods.ps
 
 .PHONY: 	clean		
 clean:		
-		@rm -f protein_prompt.pdf protein_prompt.dvi protein_prompt.bbl protein_prompt.blg protein_prompt.aux protein_prompt.log protein_prompt.ps
+		@rm -f protein_prompt_methods.pdf protein_prompt_methods.dvi protein_prompt_methods.bbl protein_prompt_methods.blg protein_prompt_methods.aux protein_prompt_methods.log protein_prompt_methods.ps
