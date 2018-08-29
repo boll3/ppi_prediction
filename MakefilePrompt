@@ -1,7 +1,7 @@
 .PHONY: all
 all: protein_prompt_methods.dvi
 
-l=pdflatex
+l=latex
 b=bibtex
 s=dvips
 p=ps2pdf
@@ -11,8 +11,8 @@ protein_prompt_methods.dvi:	protein_prompt_methods.tex
 		$(b) protein_prompt_methods
 		$(l) protein_prompt_methods
 		$(l) protein_prompt_methods
-#		$(s) protein_prompt_methods.dvi
-#		$(p) protein_prompt_methods.ps
+		$(s) protein_prompt_methods.dvi
+		$(p) protein_prompt_methods.ps
 
 .PHONY: 	clean		
 clean:		
