@@ -1,28 +1,33 @@
-\documentclass[3p,times,twocolumn]{elsarticle}
-\usepackage{graphicx}
-\usepackage{color}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{multirow}
-\usepackage{multicol}
-\usepackage{array}
-\usepackage{rotating,capt-of}
-\usepackage[small]{caption}
-\usepackage{booktabs}
-\usepackage{float} 
-\usepackage{afterpage}
-\usepackage{epsfig, a4wide}
+\documentclass{bioinfo}
 
-\newcommand{\myparagraph}[1]{
-  \paragraph*{\normalfont\itshape #1}\hspace{5pt}}
+%\usepackage{graphicx}
+%\usepackage{color}
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{multirow}
+%\usepackage{multicol}
+%\usepackage{array}
+%\usepackage{rotating,capt-of}
+%\usepackage{caption}
+%\captionsetup[table]{skip=10pt}
+%\usepackage{booktabs}
+%\usepackage{float} 
+%\usepackage{afterpage}
+%\usepackage{epsfig} %, a4wide}
 
-\renewcommand\dblfloatpagefraction{0.03}
-\renewcommand\topfraction{.95}
-\renewcommand\bottomfraction{.95}
-\renewcommand\textfraction{.05}
-\renewcommand\floatpagefraction{.95}
-\renewcommand\dbltopfraction{.95}
-\renewcommand\dblfloatpagefraction{.95}
+%\newcommand{\myparagraph}[1]{
+%  \paragraph*{\normalfont\itshape #1}\hspace{5pt}}
+%
+%\renewcommand\dblfloatpagefraction{0.03}
+%\renewcommand\topfraction{.95}
+%\renewcommand\bottomfraction{.95}
+%\renewcommand\textfraction{.05}
+%\renewcommand\floatpagefraction{.95}
+%\renewcommand\dbltopfraction{.95}
+%\renewcommand\dblfloatpagefraction{.95}
+
+
+
 \newcommand{\TODO}[1] {\begingroup\color{red}#1\endgroup}
 \newcommand{\SC}[1] {\begingroup\color{purple}#1\endgroup}
 \newcommand{\ACC}[1]{\emph{\textbf{#1}}}
@@ -43,62 +48,51 @@
 
 \newcommand{\tool}{\textsc{ProteinPrompt}}
 
-
-\journal{Bioinformatics}
-
-\DeclareCaptionLabelFormat{simplesupp}{#1~S#2} % new caption format with Sxx
-
-
-\title{\tool: fast and accurate prediction of protein-protein-interactions}
+\copyrightyear{2018}
+\pubyear{2018}
+\access{Advance Access Publication Date: Day Month Year}
+\appnotes{Protein-Protein-Interaction, Machine Learning, Random Forest}
 
 
 \begin{document}
-  
-\author[LEI,UFZ,IMT]{Sebastian Canzler\corref{cor1}}
-\ead{sebastian@bioinf.uni-leipzig.de}
-\author[PHY,IMT]{Ren\'{e} Staritzbichler\corref{cor1}}
-\ead{rene.staritzbichler@medizin.uni-leipzig.de}
+\firstpage{1}
 
-\address[LEI]{Bioinformatics Group, Department of Computer Science,
-  University of Leipzig,
-  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany
-}
+\subtitle{Structural Biology}
 
-\address[PHY]{ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig,
-  H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany.}
+\title{\tool: fast and accurate prediction of protein-protein-interactions}
 
-\address[UFZ]{Young Investigators Group Bioinformatics and Transcriptomics, Department of Proteomics, Helmholtz Centre for Environmental Research – UFZ, 04318 Leipzig, Germany}
+\author{Sebastian Canzler$^{\text{\sfb 1,3,4,} *}$, Ren\'{e} Staritzbichler$^{\text{\sfb 1,2,} *}$}
 
-\address[IMT]{Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany.}
+\address{
+  $^{\text{\sf 1}}$Immuthera GmbH, L{\"o}{\ss}niger Stra{\ss}e 16, 04275 Leipzig, Germany and 
+  $^{\text{\sf 2}}$Bioinformatics Group, Department of Computer Science, University of Leipzig, H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany and
+  $^{\text{\sf 3}}$ProteinFormatics Group, Institute of Medical Physics and Biophysics, University of Leipzig, H{\"a}rtelstra{\ss}e 16-18, 04107 Leipzig, Germany and
+  $^{\text{\sf 4}}$Young Investigators Group Bioinformatics and Transcriptomics, Department of Proteomics, Helmholtz Centre for Environmental Research - UFZ, 04318 Leipzig, Germany.}
 
-\cortext[jfa]{Joint first authors}
-\cortext[cor1]{Corresponding author}
 
-% --------------------------------------------------------------------------- %
- 
+\corresp{$^\ast$To whom correspondence should be addressed.}
 
-\begin{abstract}
+\history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
 
-  Protein-protein interactions are among the key drivers of biology and thus are an important class of targets for medical regulation.
+\editor{Associate Editor: XXXXXXX}
+
+
+\abstract{\textbf{Motivation:}  Protein-protein interactions are among the key drivers of biology and thus are an important class of targets for medical regulation.
   Here, we present \tool, a precise machine learning method for the calculation of protein-protein interactions.
   Learning methods depend crucially on both size and quality of datasets used for training and testing.
   Starting point of \tool\  was therefore the collection of a comprehensive dataset from basically all available sources.
   In turn, a very thorough filtering was imperative.
   The actual key step is the transformation of the original sequence data into a representation that enables the learning algorithm to understand the underlying patterns that lead to binding versus non-binding.
-   \tool\  exploits the random forest algorithm using auto-correlation of seven amino acid scales.
-   Based on this combination, \tool\  is reaching an area under curve of 0.95, which is far above any other publicly available tool. 
-    
+  \tool\  exploits the random forest algorithm using auto-correlation of seven amino acid scales.\\
+  \textbf{Results:}
+  Based on this combination, \tool\  is reaching an area under curve of 0.95, which is far above any other publicly available tool. \\
+  \textbf{Contact:} \href{rene.staritzbichler@medizin.uni-leipzig.de}{rene.staritzbichler@medizin.uni-leipzig.de}, \href{sebastian@bioinf.uni-leipzig.de}{sebastian@bioinf.uni-leipzig.de} }
 
-\end{abstract}
-
-\begin{keyword}
-  protein-protein-interaction, machine learning, random forest
-\end{keyword}
 
 \maketitle
 
 
-% --------------------------------------------------------------------------- %
+
 
 \section{Introduction}
 
@@ -152,7 +146,7 @@ Overall, biology has seen a massive raise in applications
 of artificial intelligence and deep learning in the recent years
 \cite{Ching:2018}.
 
-In this paper, we present a sequence-based web-tool for predicting
+In this paper, we present a sequence-based method for predicting
 PPIs that outperforms all other currently available methods distinctively.
 The predictive power was boosted by a rigorous fine-tuning
 of the machine learning key elements, such as
@@ -165,12 +159,10 @@ an extremely fast high-throughput
 method.
 
 Therefore, \tool\  (\textbf{protein} \textbf{pr}ediction \textbf{o}f \textbf{m}atching \textbf{p}ar\textbf{t}ners)
-may serve as a reliable tool for identifying potential interaction partners from a database of
+may serve as a reliable method for identifying potential interaction partners from a database of
 known proteins, and may thus help to identify the yet unknown
 biological role of many proteins.
 
-
-% --------------------------------------------------------------------------- %
 
 \section{Materials and Methods}
 
@@ -292,7 +284,7 @@ In the final dataset each annotated PPI is represented
 in four distinct descriptions. Example pseudo-sequences: (``ABCD'', ``KLMN''),
   (``ABCD'', ``NMLK''), (``KLMN'', ``ABCD''), (``KLMN'', ``DCBA'')
 
-To assess the prediction quality of \tool, we compared our tool to
+To assess the prediction quality of \tool, we compared our method to
 several other publicly available programs. As some of them are limited
 in speed or upload capacity to their webserver, it was not
 feasible to perform this test using our entire test dataset with more
@@ -336,8 +328,6 @@ set to 750 due to run-time optimization.
 
 
 
-
-% --------------------------------------------------------------------------- %
 
 \section{Results}
 
@@ -420,13 +410,12 @@ whole testing data set.
   available tools, such as \spps\ \cite{Liu:2012}, \tri\
   \cite{Perovic:2017}, and \lr\ \cite{Pan:2010}.
   Listed are area under curve (AUC), specificity, sensitivity and accuracy.}
-
 \label{table:comparison}
 \end{table}
 
 The results shown in Table \ref{table:comparison} and the ROC plot in
 Figure \ref{fig:comparison} suggest that \tool\  clearly outperforms all
-three competitors. \tool\  is furthermore the only tool that finds a
+three competitors. \tool\  is furthermore the only method that finds a
 balance between sensitivity and specificity. \spps\ and \lr\ show an
 excellent sensitivity of 0.96 and 0.91, however, their
 specificity is rather poor with 0.34 and 0.16, respectively. \tri\ on
@@ -454,7 +443,7 @@ The collection of an extensive database with little redundancy was crucial
 and required several iterations of manual curation of the test and training datasets.
 The diversity posed hard challenges to the learning
 - it would have been easy to reach even higher accuracy values by omitting parts of our dataset.
-However, this turned \tool\ into a broadly applicable tool.
+However, this turned \tool\ into a broadly applicable method.
 
 In our next steps we will extend \tool\  to predict also the binding of short peptides to protein receptors, specifically to those of the GPCR family.
 We furthermore intend to expand \tool\  towards antibody-protein binding.
@@ -465,9 +454,13 @@ to be beneficial for the understanding of complex networks of protein-protein in
 which are the basis for a broad range of mechanisms in biology.
 
 
-\section*{Acknowledgements} This work was funded by the S\"achsische Aufbaubank (SAB).
+\section*{Acknowledgements} 
 Johanna Tiemann, Peter Hildebrand, Alexander Vogel and Thorsten Kaiser for proofreading.
 The universe for all the cookies.
+
+\section*{Funding}
+
+This work was funded by the S\"achsische Aufbaubank (SAB).
 
 \bibliographystyle{natbib}
 \bibliography{ppi_prediction}
