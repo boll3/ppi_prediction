@@ -99,7 +99,7 @@
 Interacting proteins are among the key players of biology. The driving
 force of molecular networks are protein interactions rather than
 single protein components, accomplishing their individual functions
-\cite{Pawson:2004}. Biological processes, such as cellular
+\citep{Pawson:2004}. Biological processes, such as cellular
 organization, communication, regulation of transcription and
 translation, or immune responses require various proteins to interact
 and work together to function appropriately. The experimental
@@ -127,24 +127,24 @@ approaches of identifying potential PPIs are generally based on an
 extensive set of known protein-protein interactions, information about
 cellular localization, amino acid sequences, or secondary structures.
 
-Such methods may include phylogenetic trees \cite{Pazos:2001},
-phylogenetic profiles \cite{Barker:2005}, network-based methods
-\cite{Yook:2004, Clauset:2008}. In recent years, the more
+Such methods may include phylogenetic trees \citep{Pazos:2001},
+phylogenetic profiles \citep{Barker:2005}, network-based methods
+\citep{Yook:2004, Clauset:2008}. In recent years, the more
 sophisticated approach of combining distinct prediction methods has
-been applied, e.g., \texttt{STRING} \cite{Szklarczyk:2011} or
-\texttt{PIPS} \cite{McDowall:2009}.
+been applied, e.g., \texttt{STRING} \citep{Szklarczyk:2011} or
+\texttt{PIPS} \citep{McDowall:2009}.
 
 Nevertheless, different proteome-wide prediction methods have shown
 that knowledge of the amino acid sequence alone may be sufficient to
 identify novel, functional protein-protein interactions
-\cite{Martin:2005, Shen:2007}.
+\citep{Martin:2005, Shen:2007}.
 Mostly, these methods rely on statistical learning algorithms.
 Due to its prominent and major advantages like simplicity, rapidity, and generality, this kind of
 prediction method became increasingly widespread over the last years
-\cite{Ofran:2003, Betel:2007, Liu:2012, Perovic:2017, Pan:2010}.
+\citep{Ofran:2003, Betel:2007, Liu:2012, Perovic:2017, Pan:2010}.
 Overall, biology has seen a massive raise in applications
 of artificial intelligence and deep learning in the recent years
-\cite{Ching:2018}.
+\citep{Ching:2018}.
 
 In this paper, we present a sequence-based method for predicting
 PPIs that outperforms all other currently available methods distinctively.
@@ -184,16 +184,16 @@ that are responsible for directing the protein-protein interaction.
 Each amino acid sequence of a protein-protein complex was transformed
 into a sequence of numerical values representing seven
 sequence-derived physicochemical properties, which include
-hydrophobicity \cite{Eisenberg:1984, Koehler:2009}, hydropyhilicity
-\cite{Hopp:1981}, volumes of side chains of amino acids
-\cite{Krigbaum:1979}, polarity \cite{Grantham:1974}, polarizability
-\cite{Charton:1982}, solvent-accessible surface area \cite{Rose:1985}
-and net charge index of side chains of amino acids \cite{Zhou:2006}
+hydrophobicity \citep{Eisenberg:1984, Koehler:2009}, hydropyhilicity
+\citep{Hopp:1981}, volumes of side chains of amino acids
+\citep{Krigbaum:1979}, polarity \citep{Grantham:1974}, polarizability
+\citep{Charton:1982}, solvent-accessible surface area \citep{Rose:1985}
+and net charge index of side chains of amino acids \citep{Zhou:2006}
 for each residue in sequence. These scales are commonly applied in
-protein interaction prediction \cite{Bock:2001} \cite{Bock:2003},
-alignment \cite{Stamm:2013}, protein recognition \cite{Ding:2001},
-protein structure prediction \cite{Durham:2009}, or the prediction of
-protein functional families \cite{Cai:2003}. These applications
+protein interaction prediction \citep{Bock:2001} \citep{Bock:2003},
+alignment \citep{Stamm:2013}, protein recognition \citep{Ding:2001},
+protein structure prediction \citep{Durham:2009}, or the prediction of
+protein functional families \citep{Cai:2003}. These applications
 suggest that these properties significantly contribute to the
 stability of the protein-protein complexes. Each of these amino acid
 scales was normalized as follows: 
@@ -225,7 +225,7 @@ scale-based descriptor $P'_j$ with $j = 1, 2, \dots, 7$ , $n$ is the
 length of sequence S, and $lag = 1, 2, \dots, 30$  being the shift for
 which the auto-correlation is being calculated. $\overline{S_j}$ and
 $\sigma_{S_j}$ are the mean and standard deviation of the translated
-sequence, respectively. Ding \cite{Ding:2016} showed that a maximal
+sequence, respectively. Ding \citep{Ding:2016} showed that a maximal
 $lag$ of less than 30 tends to lose useful information while the
 larger values may induce noise. 
 
@@ -239,18 +239,18 @@ In order to create comprehensive training and testing data we tried to
 collect as many trustworthy PPI annotations as possible. We included
 data from various sources such as \texttt{Database of Human
   Interacting Proteins}\footnote{http://dip.doe-mbi.ucla.edu/} (DIP)
-\cite{Salwinski:2004}, \texttt{Human Protein Reference
+\citep{Salwinski:2004}, \texttt{Human Protein Reference
   Database}\footnote{http://www.hprd.org/} (HPRD)
-\cite{Keshava_Prasad:2009}, \texttt{Protein
-  Database}\footnote{www.rcsb.org} (PDB) \cite{Berman:2000}, and the
+\citep{Keshava_Prasad:2009}, \texttt{Protein
+  Database}\footnote{www.rcsb.org} (PDB) \citep{Berman:2000}, and the
 \nega\footnote{http://mips.helmholtz-muenchen.de/proj/ppi/negatome/}
-\cite{Blohm:2014}. We also included annotations retrieved from the
+\citep{Blohm:2014}. We also included annotations retrieved from the
 \kups \footnote{http://www.ittc.ku.edu/chenlab/kups/}   server
-\cite{Chen:2011} which mainly incorporates PPIs from
+\citep{Chen:2011} which mainly incorporates PPIs from
 \texttt{MINT}\footnote{https://mint.bio.uniroma2.it/}
-\cite{Licata:2012} and
+\citep{Licata:2012} and
 \texttt{IntAct}\footnote{https://www.ebi.ac.uk/intact/}
-\cite{Orchard:2014}. In addition to the negative annotations collected
+\citep{Orchard:2014}. In addition to the negative annotations collected
 from the \nega, the \kups\ server generated negative data-points based
 on the the following criteria: (1) proteins should be functional
 dissimilar, (2) proteins should be localized in different cellular
@@ -260,7 +260,7 @@ After intense manual curation and mapping of different names describing
 the exact same protein, we derived a total amount of 31,867 distinct
 human proteins. For this set, 73,681 positive PPIs were collected
 from the datasources previously mentioned. By means of \texttt{CD-hit}
-\cite{Li:2006, Fu:2012}, we reduced this set to 41,844 positive
+\citep{Li:2006, Fu:2012}, we reduced this set to 41,844 positive
 protein-protein pairs with at most 50\% sequence identity. For
 negative pairs, we collected over 1.5 million unique protein-protein
 pairs, from which we randomly selected a number of PPIs, that was
@@ -294,7 +294,7 @@ negative pairs from our test set.
 
 \subsection{Selection of learning method}
 Many implementations of various learning algorithms are
-available. By means of the \texttt{caret} R package \cite{Kuhn:2008},
+available. By means of the \texttt{caret} R package \citep{Kuhn:2008},
 the fine-tuning and comparison is relatively easy. We tested several
 artificial neural network implementations, support vector machines and
 tree-based methods. After identifying the random forest approach as
@@ -305,7 +305,7 @@ due to speed reasons.
 
 \subsection{Random forest classification}
 Random forest (RF) is an algorithm, which uses an ensemble of
-classification trees \cite{Breiman:2001}. Each classification tree is built by using a
+classification trees \citep{Breiman:2001}. Each classification tree is built by using a
 bootstrap sample of training data, and each split candidate set is a
 random subset of variables. RF uses both bagging (bootstrap
 aggregation) and random variable selection for tree building. Each
@@ -375,8 +375,8 @@ unwanted bias in different applications.
 \subsection{Comparison to other tools}
 
 To verify our achievements, we compared our program against publicly
-available tools such as \spps\ \cite{Liu:2012}, \tri\
-\cite{Perovic:2017}, and \lr\ \cite{Pan:2010}. Therefore, we used the
+available tools such as \spps\ \citep{Liu:2012}, \tri\
+\citep{Perovic:2017}, and \lr\ \citep{Pan:2010}. Therefore, we used the
 diminished test dataset, as described in the Methods section. 
 
 Since we re-evaluated \tool\  on the dimished testset, to ensure
@@ -407,8 +407,8 @@ whole testing data set.
   \hline
 \end{tabular}
 \caption{ Quality measures of \tool, compared to other publicly
-  available tools, such as \spps\ \cite{Liu:2012}, \tri\
-  \cite{Perovic:2017}, and \lr\ \cite{Pan:2010}.
+  available tools, such as \spps\ \citep{Liu:2012}, \tri\
+  \citep{Perovic:2017}, and \lr\ \citep{Pan:2010}.
   Listed are area under curve (AUC), specificity, sensitivity and accuracy.}
 \label{table:comparison}
 \end{table}
